@@ -33,7 +33,7 @@ def cmd_loop(args, client) -> None:
                         lookahead_min=args.lookahead, hot_ask=args.hot_ask,
                         hot_interval_s=args.hot_interval, live_interval_s=args.live_interval)
     result = run_loop(client, _config(args), sc, max_minutes=args.max_minutes)
-    print(f"loop finished: {result}")
+    print(f"loop finished: {result}  (billed Actions time is this, rounded up, plus about 20s of setup)")
 
 
 def cmd_settle(args, client) -> None:
@@ -65,9 +65,9 @@ def main() -> None:
     loop.add_argument("--window-before", type=int, default=180, help="minutes before a game's expected end to start watching")
     loop.add_argument("--window-after", type=int, default=90, help="minutes after the expected end to keep watching")
     loop.add_argument("--lookahead", type=int, default=30, help="wait for a window opening within this many minutes")
-    loop.add_argument("--hot-ask", type=float, default=85.0, help="ask (cents) that triggers the fastest scan rate")
-    loop.add_argument("--hot-interval", type=int, default=30, help="seconds between scans when a game is lopsided")
-    loop.add_argument("--live-interval", type=int, default=60, help="seconds between scans during a game window")
+    loop.add_argument("--hot-ask", type=float, default=90.0, help="ask (cents) that triggers the fastest scan rate")
+    loop.add_argument("--hot-interval", type=int, default=45, help="seconds between scans when a game is lopsided")
+    loop.add_argument("--live-interval", type=int, default=90, help="seconds between scans during a game window")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
     args = parser.parse_args()
 

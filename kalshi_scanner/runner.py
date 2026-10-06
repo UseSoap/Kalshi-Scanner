@@ -96,4 +96,5 @@ def run_loop(client, cfg: Config, sc: ScheduleConfig, max_minutes: float = 25.0,
             log("time budget reached; the next scheduled run continues from here")
             break
         sleep_fn(plan.sleep_s)
-    return {"cycles": cycles, "new_trades": trades, "last_mode": plan.mode}
+    elapsed = round((now_fn() - start).total_seconds() / 60.0, 1)
+    return {"cycles": cycles, "new_trades": trades, "last_mode": plan.mode, "elapsed_min": elapsed}
