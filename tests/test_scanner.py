@@ -72,12 +72,20 @@ def test_any_day_flag():
     assert len(evaluate(market(expected_expiration_time=TOMORROW), NOW, Config(same_day_only=False))) == 1
 
 
+# NO bids at 3c and 2c mean YES can be bought at 97c (deep) and 98c.
+DEEP_BOOK = {"orderbook": {"yes": [[96, 500]], "no": [[3, 400], [2, 400]]}}
+
+
 class FakeClient:
-    def __init__(self, by_series):
+    def __init__(self, by_series, book=DEEP_BOOK):
         self.by_series = by_series
+        self.book = book
 
     def list_markets(self, series_ticker, status):
         return iter(self.by_series.get(series_ticker, []))
+
+    def get_orderbook(self, ticker):
+        return self.book
 
 
 def test_scan_walks_each_series_and_dedupes():
@@ -99,3 +107,69 @@ def test_diagnostics_explain_rejections():
     assert diag["reasons"]["ends on another day"] == 1
     assert diag["reasons"]["ask outside price range"] >= 2
     assert max(diag["top"])[0] == 97.0
+
+
+# ---- order-book depth ----
+
+from kalshi_scanner.orderbook import fill_estimate, parse_book
+from kalshi_scanner.scanner import apply_depth
+
+
+def test_parse_book_cents_and_dollar_formats_and_unknown():
+    cents = parse_book({"orderbook": {"yes": [[96, 10]], "no": [[3, 5]]}})
+    dollars = parse_book({"orderbook_fp": {"yes_dollars": [["0.9600", "10.00"]], "no_dollars": [["0.0300", "5.00"]]}})
+    assert cents == dollars == {"yes": [(96.0, 10.0)], "no": [(3.0, 5.0)]}
+    assert parse_book({"orderbook": {"yes": None, "no": None}}) == {"yes": [], "no": []}   # empty book is readable
+    assert parse_book({"something": "else"}) is None and parse_book(None) is None
+
+
+def test_fill_estimate_walks_levels_and_averages():
+    book = {"yes": [], "no": [(3.0, 60.0), (2.0, 100.0)]}      # YES asks: 60 @ 97c, 100 @ 98c
+    est = fill_estimate(book, "yes", 100, 99.0)
+    assert est["depth_at_ask"] == 60.0
+    assert abs(est["vwap"] - (60 * 97 + 40 * 98) / 100) < 1e-9
+    assert fill_estimate(book, "yes", 200, 99.0)["vwap"] is None           # not enough size
+    assert fill_estimate(book, "yes", 100, 97.0)["vwap"] is None           # would need to pay above the cap
+
+
+def test_no_side_uses_yes_bids():
+    book = {"yes": [(96.0, 100.0)], "no": []}                  # NO can be bought at 4c, not 97c
+    assert fill_estimate(book, "no", 10, 99.0)["vwap"] == 4.0
+
+
+def candidate(client_book):
+    cand = evaluate(market(), NOW, Config())[0]
+    return apply_depth(FakeClient({}, client_book), cand, Config())
+
+
+def test_apply_depth_reprices_to_average_fill():
+    cand = candidate({"orderbook": {"yes": [], "no": [[3, 60], [2, 100]]}})
+    assert cand.depth_status == "ok" and cand.depth_at_ask == 60.0
+    assert abs(cand.fill_price - 97.4) < 1e-9
+    assert cand.fee_usd == order_fee(97.4, 100)
+
+
+def test_thin_and_unreadable_books_are_flagged():
+    assert candidate({"orderbook": {"yes": [], "no": [[3, 5]]}}).depth_status == "thin"
+    assert candidate({"unexpected": 1}).depth_status == "unknown"
+
+
+def test_only_fillable_candidates_become_paper_trades(tmp_path):
+    from kalshi_scanner.storage import load_trades, record_new_trades
+    good = candidate({"orderbook": {"yes": [], "no": [[3, 500]]}})
+    thin = candidate({"orderbook": {"yes": [], "no": [[3, 5]]}})
+    thin.ticker = "THIN"
+    unreadable = candidate({"x": 1})
+    unreadable.ticker = "UNREAD"
+    assert record_new_trades([good, thin, unreadable], tmp_path) == 1
+    trade = load_trades(tmp_path)[0]
+    assert trade["entry_price"] == "97.0" and trade["depth_at_ask"] == "500.0"
+
+
+def test_scan_reports_thin_books_in_diagnostics():
+    from kalshi_scanner.scanner import new_diag
+    diag = new_diag()
+    client = FakeClient({"KXMLBGAME": [market()]}, {"orderbook": {"yes": [], "no": [[3, 5]]}})
+    found = scan(client, Config(series=["KXMLBGAME"]), NOW, diag)
+    assert found[0].depth_status == "thin"
+    assert diag["reasons"]["thin book (not enough size at ask)"] == 1

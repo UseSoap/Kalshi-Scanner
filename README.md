@@ -10,8 +10,9 @@ Every 15 minutes a GitHub Action:
 
 1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
 2. **Scans** the configured sports series (default: MLB, NHL, NBA game winners) for contracts that end today (US Central) where one side's ask is 95-99¢ with a tight bid/ask spread.
-3. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per contract and side) in `data/trades.csv`, assuming a 100-contract market order, with Kalshi's fee applied.
-4. **Commits** the new data back to this repo.
+3. **Checks the order book** for each candidate. A paper trade is opened only if the full order (100 contracts) could fill at 99¢ or better. The entry price is the *average fill price* across the book, not the top-of-book ask. Thin books are logged but not traded.
+4. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per contract and side) in `data/trades.csv`, with Kalshi's fee applied at the fill price.
+5. **Commits** the new data back to this repo.
 
 ## First-time setup
 
@@ -33,7 +34,8 @@ prints hit rate vs. implied probability by price bucket and by sport, with a 95%
 - **Fees are per order, rounded up to the next cent.** 1 contract at 98¢ pays a full cent in fees, while 100 contracts pay about 0.2¢ each. The fee rate in `kalshi_scanner/fees.py` (0.07) should be checked against Kalshi's current fee schedule.
 - **Combining legs does not create edge.** Multiplying 95-99% legs only changes variance. The combo simulation here is an upper bound, because real Kalshi combo markets carry market-maker margin. Same-sport legs on one day can also be correlated.
 - **"Ends today" uses the game's expected end time**, not Kalshi's `close_time`, which can be days later on sports markets.
-- **Paper fills are optimistic.** Entries assume you buy at the quoted ask. Real fills on thin contracts can be worse.
+- **Paper fills are still somewhat optimistic.** The depth check removes thin books and prices in slippage, but the book can change in the minutes between scans, and a real order competes with other buyers. `--skip-depth` turns the check off (fills at the top ask), which flatters the results.
+- If the log warns that the **order book was unreadable**, no paper trade is opened for those candidates. Paste the log to Claude so the parser can be adjusted.
 - GitHub's cron timing is approximate, so scans can run a few minutes late or occasionally skip.
 
 ## Layout

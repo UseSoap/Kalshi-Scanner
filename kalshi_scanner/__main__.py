@@ -17,7 +17,8 @@ def _config(args) -> Config:
     series_list = [s.strip() for s in series.split(",") if s.strip()] if series else list(DEFAULT_SERIES)
     return Config(series=series_list, min_price=args.min_price, max_price=args.max_price,
                   max_spread=args.max_spread, contracts=args.contracts,
-                  timezone=args.timezone, same_day_only=not args.any_day)
+                  timezone=args.timezone, same_day_only=not args.any_day,
+                  check_depth=not args.skip_depth)
 
 
 def cmd_scan(args, client) -> None:
@@ -35,13 +36,17 @@ def cmd_scan(args, client) -> None:
         print("highest asks among today's contracts (ask/bid, ticker, side):")
         for ask, bid, ticker, side in sorted(diag["top"], key=lambda x: -x[0])[:8]:
             print(f"  {ask}c/{bid}c  {ticker} {side.upper()}")
+    if diag["reasons"].get("order book unreadable"):
+        print("WARNING: could not read the order book for some candidates, so no paper trade was opened "
+              "for them. Paste this log to Claude; the order-book parser may need adjusting.")
     if stats and not any(stats.values()):
         print("WARNING: no open markets returned for any series. The series tickers are probably "
               "wrong; run `python -m kalshi_scanner discover` and set KALSHI_SERIES.")
     print(f"scan: {len(found)} candidates, {added} new paper trades")
     for c in sorted(found, key=lambda c: -c.ask)[:15]:
-        print(f"  {c.ticker} {c.side.upper()} ask={c.ask}c spread={c.spread}c vol={c.volume} "
-              f"breakeven={c.breakeven_prob:.2%}")
+        fill = f"{c.fill_price:.2f}c" if c.fill_price is not None else "n/a"
+        print(f"  {c.ticker} {c.side.upper()} ask={c.ask}c fill={fill} depth@ask={c.depth_at_ask} "
+              f"spread={c.spread}c [{c.depth_status}] breakeven={c.breakeven_prob:.2%}")
 
 
 def cmd_settle(args, client) -> None:
@@ -66,6 +71,8 @@ def main() -> None:
     parser.add_argument("--max-spread", type=float, default=3.0)
     parser.add_argument("--contracts", type=int, default=100)
     parser.add_argument("--timezone", default="America/Chicago")
+    parser.add_argument("--skip-depth", action="store_true",
+                        help="do not check order-book depth (paper fills at the top ask, which is optimistic)")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
     args = parser.parse_args()
 

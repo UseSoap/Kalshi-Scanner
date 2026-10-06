@@ -63,5 +63,8 @@ class KalshiClient:
     def get_market(self, ticker: str) -> dict:
         return self._get(f"/markets/{ticker}")["market"]
 
+    def get_orderbook(self, ticker: str) -> dict:
+        return self._get(f"/markets/{ticker}/orderbook")
+
     def list_series(self, category: str = "Sports") -> list[dict]:
         return self._get("/series", {"category": category}).get("series", [])

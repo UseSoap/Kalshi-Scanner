@@ -7,7 +7,9 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
+from .client import KalshiError
 from .fees import breakeven_probability, win_loss
+from .orderbook import fill_estimate, parse_book
 
 # Best-recollection series tickers for game-winner markets. Run
 # `python -m kalshi_scanner discover` to list what Kalshi actually has and
@@ -28,6 +30,7 @@ class Config:
     fee_rate: float = 0.07
     timezone: str = "America/Chicago"
     same_day_only: bool = True
+    check_depth: bool = True      # fetch the order book and require the full order to fill
 
 
 @dataclass
@@ -49,6 +52,10 @@ class Candidate:
     win_usd: float
     loss_usd: float
     breakeven_prob: float
+    # Filled in by apply_depth(). entry price for paper P&L is fill_price (average over the book).
+    fill_price: float | None = None
+    depth_at_ask: float | None = None
+    depth_status: str = "unchecked"   # unchecked | ok | thin | unknown
 
 
 def _num(value):
@@ -165,6 +172,29 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
     return out
 
 
+def apply_depth(client, cand: Candidate, cfg: Config) -> Candidate:
+    """Check the order book and reprice the candidate at the average price a full order would get."""
+    try:
+        book = parse_book(client.get_orderbook(cand.ticker))
+    except KalshiError:
+        book = None
+    if book is None:
+        cand.depth_status = "unknown"
+        return cand
+    est = fill_estimate(book, cand.side, cand.contracts, cfg.max_price)
+    cand.depth_at_ask = round(est["depth_at_ask"], 2)
+    if est["vwap"] is None:
+        cand.depth_status = "thin"
+        return cand
+    fill = est["vwap"]
+    win, loss, fee = win_loss(fill, cand.contracts, cfg.fee_rate)
+    cand.fill_price = round(fill, 4)
+    cand.fee_usd, cand.win_usd, cand.loss_usd = fee, round(win, 4), round(loss, 4)
+    cand.breakeven_prob = round(breakeven_probability(fill, cand.contracts, cfg.fee_rate), 5)
+    cand.depth_status = "ok"
+    return cand
+
+
 def new_diag() -> dict:
     return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}}
 
@@ -182,7 +212,14 @@ def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = N
             market.setdefault("series_ticker", series)
             for cand in evaluate(market, now, cfg, diag):
                 key = (cand.ticker, cand.side)
-                if key not in seen:
-                    seen.add(key)
-                    found.append(cand)
+                if key in seen:
+                    continue
+                seen.add(key)
+                if cfg.check_depth:
+                    apply_depth(client, cand, cfg)
+                    if diag is not None and cand.depth_status == "thin":
+                        diag["reasons"]["thin book (not enough size at ask)"] += 1
+                    elif diag is not None and cand.depth_status == "unknown":
+                        diag["reasons"]["order book unreadable"] += 1
+                found.append(cand)
     return found

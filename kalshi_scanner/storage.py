@@ -15,7 +15,7 @@ DATA_DIR = Path(os.environ.get("KALSHI_DATA_DIR", "data"))
 SNAPSHOT_FIELDS = [f.name for f in fields(Candidate)]
 TRADE_FIELDS = [
     "trade_id", "first_seen", "ticker", "event_ticker", "series", "title", "side",
-    "entry_price", "bid", "spread", "volume", "open_interest", "expiry",
+    "entry_price", "best_ask", "depth_at_ask", "bid", "spread", "volume", "open_interest", "expiry",
     "contracts", "fee_usd", "status", "result", "won", "pnl_usd", "settled_at",
 ]
 
@@ -59,11 +59,17 @@ def save_trades(trades: list[dict], data_dir: Path | None = None) -> None:
 
 
 def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None) -> int:
-    """Open a paper trade the first time a (ticker, side) shows up. Returns count added."""
+    """Open a paper trade the first time a (ticker, side) shows up. Returns count added.
+
+    Only candidates whose full order could fill (depth_status "ok", or "unchecked" when the
+    depth check is switched off) become trades. Entry is the average fill price, not the top ask.
+    """
     trades = load_trades(data_dir)
     known = {t["trade_id"] for t in trades}
     added = 0
     for c in candidates:
+        if c.depth_status not in ("ok", "unchecked"):
+            continue
         trade_id = f"{c.ticker}|{c.side}"
         if trade_id in known:
             continue
@@ -72,7 +78,8 @@ def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None)
         trades.append({
             "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,
             "event_ticker": c.event_ticker, "series": c.series, "title": c.title,
-            "side": c.side, "entry_price": c.ask, "bid": c.bid if c.bid is not None else "",
+            "side": c.side, "entry_price": c.fill_price if c.fill_price is not None else c.ask,
+            "best_ask": c.ask, "depth_at_ask": c.depth_at_ask if c.depth_at_ask is not None else "", "bid": c.bid if c.bid is not None else "",
             "spread": c.spread if c.spread is not None else "", "volume": c.volume,
             "open_interest": c.open_interest, "expiry": c.expiry, "contracts": c.contracts,
             "fee_usd": c.fee_usd, "status": "open", "result": "", "won": "",
