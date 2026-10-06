@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 
 from . import combos, report, settle
 from .client import KalshiClient
-from .scanner import Config, DEFAULT_SERIES, scan
+from .scanner import Config, DEFAULT_SERIES, new_diag, scan
 from .storage import log_snapshots, record_new_trades
 
 
@@ -22,11 +22,19 @@ def _config(args) -> Config:
 
 def cmd_scan(args, client) -> None:
     cfg, now = _config(args), datetime.now(timezone.utc)
-    stats: dict = {}
-    found = scan(client, cfg, now, stats)
+    diag = new_diag()
+    found = scan(client, cfg, now, diag)
     log_snapshots(found, now)
     added = record_new_trades(found)
+    stats = diag["per_series"]
     print("markets seen per series: " + ", ".join(f"{k}={v}" for k, v in stats.items()))
+    print(f"ending today (local time): {diag['same_day']} markets")
+    if diag["reasons"]:
+        print("filtered out because: " + ", ".join(f"{k}={v}" for k, v in diag["reasons"].most_common()))
+    if diag["top"]:
+        print("highest asks among today's contracts (ask/bid, ticker, side):")
+        for ask, bid, ticker, side in sorted(diag["top"], key=lambda x: -x[0])[:8]:
+            print(f"  {ask}c/{bid}c  {ticker} {side.upper()}")
     if stats and not any(stats.values()):
         print("WARNING: no open markets returned for any series. The series tickers are probably "
               "wrong; run `python -m kalshi_scanner discover` and set KALSHI_SERIES.")

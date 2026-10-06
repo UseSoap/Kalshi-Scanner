@@ -85,3 +85,17 @@ def test_scan_walks_each_series_and_dedupes():
     client = FakeClient({"KXMLBGAME": [m, m], "KXNHLGAME": []})
     found = scan(client, Config(series=["KXMLBGAME", "KXNHLGAME"]), NOW)
     assert len(found) == 1 and found[0].series == "KXMLBGAME"
+
+
+def test_diagnostics_explain_rejections():
+    from kalshi_scanner.scanner import new_diag
+    diag = new_diag()
+    markets = [market(), market(ticker="B", expected_expiration_time=TOMORROW),
+               market(ticker="C", yes_bid=60, yes_ask=62, no_bid=38, no_ask=40)]
+    client = FakeClient({"KXMLBGAME": markets})
+    scan(client, Config(series=["KXMLBGAME"]), NOW, diag)
+    assert diag["per_series"] == {"KXMLBGAME": 3}
+    assert diag["same_day"] == 2
+    assert diag["reasons"]["ends on another day"] == 1
+    assert diag["reasons"]["ask outside price range"] >= 2
+    assert max(diag["top"])[0] == 97.0

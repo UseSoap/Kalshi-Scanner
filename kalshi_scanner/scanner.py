@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
@@ -102,25 +103,44 @@ def sides(market: dict):
         yield "no", no_ask, no_bid
 
 
-def evaluate(market: dict, now: datetime, cfg: Config) -> list[Candidate]:
-    if str(market.get("status", "")).lower() not in OPEN_STATUSES:
-        return []
-    expiry = market_expiry(market)
-    if expiry is None or expiry <= now:
-        return []
-    tz = ZoneInfo(cfg.timezone)
-    if cfg.same_day_only and expiry.astimezone(tz).date() != now.astimezone(tz).date():
-        return []
-    volume = int(_num(market.get("volume")) or 0)
-    if volume < cfg.min_volume:
+def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None) -> list[Candidate]:
+    """Return candidates for one market. If `diag` is given, record why markets were rejected."""
+
+    def reject(reason: str):
+        if diag is not None:
+            diag["reasons"][reason] += 1
         return []
 
+    if str(market.get("status", "")).lower() not in OPEN_STATUSES:
+        return reject("not open")
+    expiry = market_expiry(market)
+    if expiry is None:
+        return reject("no end time")
+    if expiry <= now:
+        return reject("end time already passed")
+    tz = ZoneInfo(cfg.timezone)
+    if cfg.same_day_only and expiry.astimezone(tz).date() != now.astimezone(tz).date():
+        return reject("ends on another day")
+    volume = int(_num(market.get("volume")) or 0)
+    if volume < cfg.min_volume:
+        return reject("volume too low")
+
+    all_sides = list(sides(market))
+    if diag is not None:
+        diag["same_day"] += 1
+        for side, ask, bid in all_sides:
+            diag["top"].append((ask, bid, market["ticker"], side))
+
     out = []
-    for side, ask, bid in sides(market):
+    for side, ask, bid in all_sides:
         if not (cfg.min_price <= ask <= cfg.max_price):
+            if diag is not None:
+                diag["reasons"]["ask outside price range"] += 1
             continue
         spread = round(ask - bid, 4) if bid is not None else None
         if spread is None or spread > cfg.max_spread:
+            if diag is not None:
+                diag["reasons"]["spread too wide or no bid"] += 1
             continue
         win, loss, fee = win_loss(ask, cfg.contracts, cfg.fee_rate)
         out.append(Candidate(
@@ -145,18 +165,22 @@ def evaluate(market: dict, now: datetime, cfg: Config) -> list[Candidate]:
     return out
 
 
-def scan(client, cfg: Config, now: datetime | None = None, stats: dict | None = None) -> list[Candidate]:
-    """Scan every configured series. If `stats` is given, it is filled with markets seen per series."""
+def new_diag() -> dict:
+    return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}}
+
+
+def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = None) -> list[Candidate]:
+    """Scan every configured series. If `diag` (see new_diag) is given, it is filled with diagnostics."""
     now = now or datetime.now(timezone.utc)
     found, seen = [], set()
     for series in cfg.series:
-        if stats is not None:
-            stats[series] = 0
+        if diag is not None:
+            diag["per_series"][series] = 0
         for market in client.list_markets(series_ticker=series, status="open"):
-            if stats is not None:
-                stats[series] += 1
+            if diag is not None:
+                diag["per_series"][series] += 1
             market.setdefault("series_ticker", series)
-            for cand in evaluate(market, now, cfg):
+            for cand in evaluate(market, now, cfg, diag):
                 key = (cand.ticker, cand.side)
                 if key not in seen:
                     seen.add(key)
