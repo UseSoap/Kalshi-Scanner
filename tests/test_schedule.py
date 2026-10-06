@@ -28,9 +28,9 @@ def test_plan_waits_when_a_window_is_about_to_open():
 
 def test_plan_live_then_hot_inside_window():
     assert make_plan(T0, [at(1)], 62.0, SC).sleep_s == 90
-    hot = make_plan(T0, [at(1)], 90.0, SC)
+    hot = make_plan(T0, [at(1)], 85.0, SC)
     assert hot.mode == "hot" and hot.sleep_s == 45
-    assert make_plan(T0, [at(1)], 89.0, SC).mode == "live"
+    assert make_plan(T0, [at(1)], 84.9, SC).mode == "live"
 
 
 def test_plan_keeps_watching_after_expected_end_for_overtime():
@@ -97,7 +97,7 @@ def test_loop_scans_fast_when_a_game_is_lopsided_and_trades_once(tmp_path, monke
     clock = Clock(T0)
     client = LoopClient([mk(ask=97)])
     result = drive(client, clock, 5, tmp_path, monkeypatch)
-    assert (SC.hot_interval_s, SC.live_interval_s, SC.hot_ask) == (45, 90, 90.0)
+    assert (SC.hot_interval_s, SC.live_interval_s, SC.hot_ask) == (45, 90, 85.0)
     assert set(clock.sleeps) == {45} and result["cycles"] == 7
     assert result["new_trades"] == 1 and len(load_trades(tmp_path / "data")) == 1
     snaps = (tmp_path / "data" / "snapshots" / "2026-10-06.csv").read_text().splitlines()

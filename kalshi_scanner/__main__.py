@@ -72,7 +72,7 @@ def main() -> None:
     loop.add_argument("--window-before", type=int, default=180, help="minutes before a game's expected end to start watching")
     loop.add_argument("--window-after", type=int, default=90, help="minutes after the expected end to keep watching")
     loop.add_argument("--lookahead", type=int, default=30, help="wait for a window opening within this many minutes")
-    loop.add_argument("--hot-ask", type=float, default=90.0, help="ask (cents) that triggers the fastest scan rate")
+    loop.add_argument("--hot-ask", type=float, default=85.0, help="ask (cents) that triggers the fastest scan rate")
     loop.add_argument("--hot-interval", type=int, default=45, help="seconds between scans when a game is lopsided")
     loop.add_argument("--live-interval", type=int, default=90, help="seconds between scans during a game window")
     parser.add_argument("--multi-per-game", action="store_true",

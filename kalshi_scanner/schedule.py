@@ -22,7 +22,7 @@ class ScheduleConfig:
     window_before_min: int = 180    # start watching this long before the expected end (MLB runs ~3h)
     window_after_min: int = 90      # keep watching after it: overtime / extra innings run long
     lookahead_min: int = 30         # stay alive for a window that opens within this long
-    hot_ask: float = 90.0           # cents; any contract this high means a game is getting lopsided
+    hot_ask: float = 85.0           # cents; any contract this high means a game is getting lopsided (set below the 90c entry floor)
     hot_interval_s: int = 45
     live_interval_s: int = 90
     wait_interval_s: int = 300
