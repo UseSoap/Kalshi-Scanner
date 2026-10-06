@@ -3,10 +3,11 @@ name: scan
 # Each run starts a "loop" that scans every 30-60 seconds while games are in their watch
 # windows, waits if a window is about to open, and exits early when nothing is on. The cron
 # entries below only decide when a run may *start*; the loop itself decides how hard to work.
+# Minutes are :07/:37 on purpose: GitHub delays or drops scheduled runs at :00 and :30 when it is busy.
 on:
   schedule:
-    - cron: "*/30 16-23,0-6 * * *"   # game hours: 11 AM - 1:59 AM Central (CDT), every 30 min
-    - cron: "0 7-15 * * *"           # overnight/morning: hourly check (exits within seconds when idle)
+    - cron: "7,37 16-23,0-6 * * *"   # game hours: 11 AM - 1:59 AM Central (CDT), every 30 min at :07 and :37
+    - cron: "7 7-15 * * *"           # overnight/morning: hourly check (exits within seconds when idle)
   workflow_dispatch:                  # press "Run workflow" to start one manually
 
 permissions:
