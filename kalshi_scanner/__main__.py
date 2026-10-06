@@ -22,9 +22,14 @@ def _config(args) -> Config:
 
 def cmd_scan(args, client) -> None:
     cfg, now = _config(args), datetime.now(timezone.utc)
-    found = scan(client, cfg, now)
+    stats: dict = {}
+    found = scan(client, cfg, now, stats)
     log_snapshots(found, now)
     added = record_new_trades(found)
+    print("markets seen per series: " + ", ".join(f"{k}={v}" for k, v in stats.items()))
+    if stats and not any(stats.values()):
+        print("WARNING: no open markets returned for any series. The series tickers are probably "
+              "wrong; run `python -m kalshi_scanner discover` and set KALSHI_SERIES.")
     print(f"scan: {len(found)} candidates, {added} new paper trades")
     for c in sorted(found, key=lambda c: -c.ask)[:15]:
         print(f"  {c.ticker} {c.side.upper()} ask={c.ask}c spread={c.spread}c vol={c.volume} "

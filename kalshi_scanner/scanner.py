@@ -145,11 +145,16 @@ def evaluate(market: dict, now: datetime, cfg: Config) -> list[Candidate]:
     return out
 
 
-def scan(client, cfg: Config, now: datetime | None = None) -> list[Candidate]:
+def scan(client, cfg: Config, now: datetime | None = None, stats: dict | None = None) -> list[Candidate]:
+    """Scan every configured series. If `stats` is given, it is filled with markets seen per series."""
     now = now or datetime.now(timezone.utc)
     found, seen = [], set()
     for series in cfg.series:
+        if stats is not None:
+            stats[series] = 0
         for market in client.list_markets(series_ticker=series, status="open"):
+            if stats is not None:
+                stats[series] += 1
             market.setdefault("series_ticker", series)
             for cand in evaluate(market, now, cfg):
                 key = (cand.ticker, cand.side)
