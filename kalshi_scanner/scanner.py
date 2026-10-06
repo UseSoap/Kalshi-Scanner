@@ -1,0 +1,159 @@
+"""Find near-certain, same-day sports contracts and describe them."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
+from .fees import breakeven_probability, win_loss
+
+# Best-recollection series tickers for game-winner markets. Run
+# `python -m kalshi_scanner discover` to list what Kalshi actually has and
+# override with the KALSHI_SERIES environment variable or --series.
+DEFAULT_SERIES = ["KXMLBGAME", "KXNHLGAME", "KXNBAGAME"]
+
+OPEN_STATUSES = {"open", "active"}
+
+
+@dataclass
+class Config:
+    series: list[str] = field(default_factory=lambda: list(DEFAULT_SERIES))
+    min_price: float = 95.0       # cents; minimum ask on the favored side
+    max_price: float = 99.0       # cents; above this there is no room for profit
+    max_spread: float = 3.0       # cents; skip contracts nobody is quoting tightly
+    min_volume: int = 0
+    contracts: int = 100          # order size assumed when computing fees/P&L
+    fee_rate: float = 0.07
+    timezone: str = "America/Chicago"
+    same_day_only: bool = True
+
+
+@dataclass
+class Candidate:
+    ts: str
+    ticker: str
+    event_ticker: str
+    series: str
+    title: str
+    side: str
+    ask: float
+    bid: float | None
+    spread: float | None
+    volume: int
+    open_interest: int
+    expiry: str
+    contracts: int
+    fee_usd: float
+    win_usd: float
+    loss_usd: float
+    breakeven_prob: float
+
+
+def _num(value):
+    if value is None or value == "":
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def price_cents(market: dict, name: str):
+    """Read a price in cents, preferring sub-penny `<name>_dollars` fields when present."""
+    dollars = _num(market.get(f"{name}_dollars"))
+    if dollars is not None:
+        return round(dollars * 100.0, 4)
+    return _num(market.get(name))
+
+
+def parse_ts(value: str | None):
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def market_expiry(market: dict):
+    """When the outcome is expected to be known.
+
+    `expected_expiration_time` reflects the game; `close_time` on sports markets can sit
+    days or weeks later, so it is only a fallback.
+    """
+    return parse_ts(market.get("expected_expiration_time")) or parse_ts(market.get("close_time"))
+
+
+def sides(market: dict):
+    """Yield (side, ask_cents, bid_cents) for each side that has an ask."""
+    yes_bid = price_cents(market, "yes_bid")
+    yes_ask = price_cents(market, "yes_ask")
+    no_bid = price_cents(market, "no_bid")
+    no_ask = price_cents(market, "no_ask")
+    if no_ask is None and yes_bid is not None:
+        no_ask = round(100.0 - yes_bid, 4)
+    if no_bid is None and yes_ask is not None:
+        no_bid = round(100.0 - yes_ask, 4)
+    if yes_ask is not None and yes_ask > 0:
+        yield "yes", yes_ask, yes_bid
+    if no_ask is not None and no_ask > 0:
+        yield "no", no_ask, no_bid
+
+
+def evaluate(market: dict, now: datetime, cfg: Config) -> list[Candidate]:
+    if str(market.get("status", "")).lower() not in OPEN_STATUSES:
+        return []
+    expiry = market_expiry(market)
+    if expiry is None or expiry <= now:
+        return []
+    tz = ZoneInfo(cfg.timezone)
+    if cfg.same_day_only and expiry.astimezone(tz).date() != now.astimezone(tz).date():
+        return []
+    volume = int(_num(market.get("volume")) or 0)
+    if volume < cfg.min_volume:
+        return []
+
+    out = []
+    for side, ask, bid in sides(market):
+        if not (cfg.min_price <= ask <= cfg.max_price):
+            continue
+        spread = round(ask - bid, 4) if bid is not None else None
+        if spread is None or spread > cfg.max_spread:
+            continue
+        win, loss, fee = win_loss(ask, cfg.contracts, cfg.fee_rate)
+        out.append(Candidate(
+            ts=now.astimezone(timezone.utc).isoformat(timespec="seconds"),
+            ticker=market["ticker"],
+            event_ticker=market.get("event_ticker", ""),
+            series=(market.get("series_ticker") or market.get("event_ticker", "").split("-")[0]),
+            title=market.get("title", ""),
+            side=side,
+            ask=ask,
+            bid=bid,
+            spread=spread,
+            volume=volume,
+            open_interest=int(_num(market.get("open_interest")) or 0),
+            expiry=expiry.astimezone(timezone.utc).isoformat(timespec="seconds"),
+            contracts=cfg.contracts,
+            fee_usd=fee,
+            win_usd=round(win, 4),
+            loss_usd=round(loss, 4),
+            breakeven_prob=round(breakeven_probability(ask, cfg.contracts, cfg.fee_rate), 5),
+        ))
+    return out
+
+
+def scan(client, cfg: Config, now: datetime | None = None) -> list[Candidate]:
+    now = now or datetime.now(timezone.utc)
+    found, seen = [], set()
+    for series in cfg.series:
+        for market in client.list_markets(series_ticker=series, status="open"):
+            market.setdefault("series_ticker", series)
+            for cand in evaluate(market, now, cfg):
+                key = (cand.ticker, cand.side)
+                if key not in seen:
+                    seen.add(key)
+                    found.append(cand)
+    return found

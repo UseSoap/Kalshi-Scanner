@@ -1,1 +1,49 @@
 # Kalshi-Scanner
+
+A **paper-trading** scanner for near-certain Kalshi sports contracts. It places no orders and needs no Kalshi credentials. Its job is to answer one question with real data before any money is risked:
+
+> When a same-day sports contract is priced at 95-99¢, does it actually win more often than the price implies, after fees?
+
+## What it does
+
+Every 15 minutes a GitHub Action:
+
+1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
+2. **Scans** the configured sports series (default: MLB, NHL, NBA game winners) for contracts that end today (US Central) where one side's ask is 95-99¢ with a tight bid/ask spread.
+3. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per contract and side) in `data/trades.csv`, assuming a 100-contract market order, with Kalshi's fee applied.
+4. **Commits** the new data back to this repo.
+
+## First-time setup
+
+1. In this repo go to **Settings > Actions > General** and make sure Actions are allowed, and that workflow permissions are set to **Read and write**.
+2. Go to the **Actions** tab, pick **scan**, and press **Run workflow**. Open the run and read the log.
+3. **Check the series tickers.** The defaults (`KXMLBGAME`, `KXNHLGAME`, `KXNBAGAME`) are my best recollection of Kalshi's naming. If the log says `0 candidates` on a day with games, run `python -m kalshi_scanner discover` (locally or in Colab) to list the real series, then set a repo variable named `KALSHI_SERIES` under **Settings > Secrets and variables > Actions > Variables**, for example `KXMLBGAME,KXNHLGAME,KXNBAGAME`.
+4. Let it run for a few weeks, then open `notebooks/analysis.ipynb` in Google Colab (instructions are in the first cell).
+
+## Reading the results
+
+```
+python -m kalshi_scanner report
+```
+
+prints hit rate vs. implied probability by price bucket and by sport, with a 95% confidence interval, plus a **synthetic combo simulation** (stack one favorite per game until the combined odds are about 50%, once per day). Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
+
+## Things to know
+
+- **Fees are per order, rounded up to the next cent.** 1 contract at 98¢ pays a full cent in fees, while 100 contracts pay about 0.2¢ each. The fee rate in `kalshi_scanner/fees.py` (0.07) should be checked against Kalshi's current fee schedule.
+- **Combining legs does not create edge.** Multiplying 95-99% legs only changes variance. The combo simulation here is an upper bound, because real Kalshi combo markets carry market-maker margin. Same-sport legs on one day can also be correlated.
+- **"Ends today" uses the game's expected end time**, not Kalshi's `close_time`, which can be days later on sports markets.
+- **Paper fills are optimistic.** Entries assume you buy at the quoted ask. Real fills on thin contracts can be worse.
+- GitHub's cron timing is approximate, so scans can run a few minutes late or occasionally skip.
+
+## Layout
+
+```
+kalshi_scanner/   client, scanner, fees, settlement, report, combo simulator
+tests/            mock-based tests (python -m pytest)
+data/             snapshots and paper trades, committed by the Action
+notebooks/        Colab analysis notebook
+.github/workflows/scan.yml
+```
+
+Live trading is intentionally **not** implemented. If the paper results show a real edge, it would be added later with Kalshi's demo environment first, API keys stored only in GitHub/Colab secrets, dry-run by default, and hard caps on position size and daily loss.
