@@ -1,9 +1,13 @@
 name: scan
 
+# Each run starts a "loop" that scans every 30-60 seconds while games are in their watch
+# windows, waits if a window is about to open, and exits early when nothing is on. The cron
+# entries below only decide when a run may *start*; the loop itself decides how hard to work.
 on:
   schedule:
-    - cron: "*/15 * * * *"   # GitHub treats this as approximate; runs can be delayed several minutes
-  workflow_dispatch:          # lets you press "Run workflow" manually
+    - cron: "*/30 16-23,0-6 * * *"   # game hours: 11 AM - 1:59 AM Central (CDT), every 30 min
+    - cron: "0 7-15 * * *"           # overnight/morning: hourly check (exits within seconds when idle)
+  workflow_dispatch:                  # press "Run workflow" to start one manually
 
 permissions:
   contents: write
@@ -15,7 +19,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -26,13 +30,14 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Settle finished games, then scan for new candidates
-        run: python -m kalshi_scanner run
+      - name: Settle finished games, then scan (adaptive loop)
+        run: python -m kalshi_scanner loop --max-minutes 27
         env:
           # Optional override, e.g. "KXMLBGAME,KXNHLGAME,KXNBAGAME". Set under Settings > Variables.
           KALSHI_SERIES: ${{ vars.KALSHI_SERIES }}
 
       - name: Commit new data
+        if: always()
         run: |
           git config user.name "kalshi-scanner-bot"
           git config user.email "kalshi-scanner-bot@users.noreply.github.com"

@@ -6,8 +6,9 @@ A **paper-trading** scanner for near-certain Kalshi sports contracts. It places 
 
 ## What it does
 
-Every 15 minutes a GitHub Action:
+A GitHub Action starts every 30 minutes during game hours (hourly overnight) and runs an adaptive loop:
 
+0. **Adapts its pace to the games.** Kalshi gives each game's *expected end time*, so each game gets a watch window from 3 hours before that to 90 minutes after (overtime and extra innings run long). Inside a window it scans every 60 seconds, or every 30 seconds once any contract is priced 85¢+ (a game is getting lopsided). If a window opens within 30 minutes it waits; if nothing is on, it exits within seconds so it stops using compute. Tune with `--window-before`, `--window-after`, `--hot-ask`, `--hot-interval`, `--live-interval`.
 1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
 2. **Scans** the configured sports series (default: MLB, NHL, NBA game winners) for contracts that end today (US Central) where one side's ask is 95-99¢ with a tight bid/ask spread.
 3. **Checks the order book** for each candidate. A paper trade is opened only if the full order (100 contracts) could fill at 99¢ or better. The entry price is the *average fill price* across the book, not the top-of-book ask. Thin books are logged but not traded.
@@ -36,7 +37,9 @@ prints hit rate vs. implied probability by price bucket and by sport, with a 95%
 - **"Ends today" uses the game's expected end time**, not Kalshi's `close_time`, which can be days later on sports markets.
 - **Paper fills are still somewhat optimistic.** The depth check removes thin books and prices in slippage, but the book can change in the minutes between scans, and a real order competes with other buyers. `--skip-depth` turns the check off (fills at the top ask), which flatters the results.
 - If the log warns that the **order book was unreadable**, no paper trade is opened for those candidates. Paste the log to Claude so the parser can be adjusted.
-- GitHub's cron timing is approximate, so scans can run a few minutes late or occasionally skip.
+- GitHub's cron timing is approximate, so a run can start a few minutes late, leaving short gaps between 27-minute loops.
+- **GitHub Actions minutes are limited on private repos** (as I understand it, 2,000 per month on the free plan; check Settings > Billing). Scanning every minute through evening games can use far more than that. Public repos get free minutes, and nothing in this repo is secret (no credentials are stored). Otherwise, run `python -m kalshi_scanner loop --max-minutes 0` on any always-on computer.
+- Markets that Kalshi still lists as open up to 3 hours after a game's expected end are scanned too, since games run long.
 
 ## Layout
 

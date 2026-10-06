@@ -1,4 +1,4 @@
-"""Command line: python -m kalshi_scanner [run|scan|settle|report|discover]"""
+"""Command line: python -m kalshi_scanner [loop|run|scan|settle|report|discover]"""
 
 from __future__ import annotations
 
@@ -8,8 +8,9 @@ from datetime import datetime, timezone
 
 from . import combos, report, settle
 from .client import KalshiClient
-from .scanner import Config, DEFAULT_SERIES, new_diag, scan
-from .storage import log_snapshots, record_new_trades
+from .runner import run_loop, scan_cycle, verbose_lines
+from .scanner import Config, DEFAULT_SERIES
+from .schedule import ScheduleConfig
 
 
 def _config(args) -> Config:
@@ -22,31 +23,17 @@ def _config(args) -> Config:
 
 
 def cmd_scan(args, client) -> None:
-    cfg, now = _config(args), datetime.now(timezone.utc)
-    diag = new_diag()
-    found = scan(client, cfg, now, diag)
-    log_snapshots(found, now)
-    added = record_new_trades(found)
-    stats = diag["per_series"]
-    print("markets seen per series: " + ", ".join(f"{k}={v}" for k, v in stats.items()))
-    print(f"ending today (local time): {diag['same_day']} markets")
-    if diag["reasons"]:
-        print("filtered out because: " + ", ".join(f"{k}={v}" for k, v in diag["reasons"].most_common()))
-    if diag["top"]:
-        print("highest asks among today's contracts (ask/bid, ticker, side):")
-        for ask, bid, ticker, side in sorted(diag["top"], key=lambda x: -x[0])[:8]:
-            print(f"  {ask}c/{bid}c  {ticker} {side.upper()}")
-    if diag["reasons"].get("order book unreadable"):
-        print("WARNING: could not read the order book for some candidates, so no paper trade was opened "
-              "for them. Paste this log to Claude; the order-book parser may need adjusting.")
-    if stats and not any(stats.values()):
-        print("WARNING: no open markets returned for any series. The series tickers are probably "
-              "wrong; run `python -m kalshi_scanner discover` and set KALSHI_SERIES.")
-    print(f"scan: {len(found)} candidates, {added} new paper trades")
-    for c in sorted(found, key=lambda c: -c.ask)[:15]:
-        fill = f"{c.fill_price:.2f}c" if c.fill_price is not None else "n/a"
-        print(f"  {c.ticker} {c.side.upper()} ask={c.ask}c fill={fill} depth@ask={c.depth_at_ask} "
-              f"spread={c.spread}c [{c.depth_status}] breakeven={c.breakeven_prob:.2%}")
+    found, diag, added = scan_cycle(client, _config(args), datetime.now(timezone.utc))
+    for line in verbose_lines(found, diag, added):
+        print(line)
+
+
+def cmd_loop(args, client) -> None:
+    sc = ScheduleConfig(window_before_min=args.window_before, window_after_min=args.window_after,
+                        lookahead_min=args.lookahead, hot_ask=args.hot_ask,
+                        hot_interval_s=args.hot_interval, live_interval_s=args.live_interval)
+    result = run_loop(client, _config(args), sc, max_minutes=args.max_minutes)
+    print(f"loop finished: {result}")
 
 
 def cmd_settle(args, client) -> None:
@@ -64,7 +51,7 @@ def cmd_discover(args, client) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="kalshi_scanner")
-    parser.add_argument("command", choices=["run", "scan", "settle", "report", "discover"], nargs="?", default="run")
+    parser.add_argument("command", choices=["loop", "run", "scan", "settle", "report", "discover"], nargs="?", default="run")
     parser.add_argument("--series", help="comma-separated series tickers (or KALSHI_SERIES env var)")
     parser.add_argument("--min-price", type=float, default=95.0)
     parser.add_argument("--max-price", type=float, default=99.0)
@@ -73,6 +60,14 @@ def main() -> None:
     parser.add_argument("--timezone", default="America/Chicago")
     parser.add_argument("--skip-depth", action="store_true",
                         help="do not check order-book depth (paper fills at the top ask, which is optimistic)")
+    loop = parser.add_argument_group("loop mode (adaptive scheduling)")
+    loop.add_argument("--max-minutes", type=float, default=25, help="stop after this long; 0 = until idle")
+    loop.add_argument("--window-before", type=int, default=180, help="minutes before a game's expected end to start watching")
+    loop.add_argument("--window-after", type=int, default=90, help="minutes after the expected end to keep watching")
+    loop.add_argument("--lookahead", type=int, default=30, help="wait for a window opening within this many minutes")
+    loop.add_argument("--hot-ask", type=float, default=85.0, help="ask (cents) that triggers the fastest scan rate")
+    loop.add_argument("--hot-interval", type=int, default=30, help="seconds between scans when a game is lopsided")
+    loop.add_argument("--live-interval", type=int, default=60, help="seconds between scans during a game window")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
     args = parser.parse_args()
 
@@ -85,6 +80,8 @@ def main() -> None:
     client = KalshiClient()
     if args.command == "discover":
         cmd_discover(args, client)
+    elif args.command == "loop":
+        cmd_loop(args, client)
     elif args.command == "scan":
         cmd_scan(args, client)
     elif args.command == "settle":

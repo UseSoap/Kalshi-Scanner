@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from .client import KalshiError
@@ -30,6 +30,7 @@ class Config:
     fee_rate: float = 0.07
     timezone: str = "America/Chicago"
     same_day_only: bool = True
+    expiry_grace_min: int = 180   # accept still-open markets this long past the expected end (overtime, delays)
     check_depth: bool = True      # fetch the order book and require the full order to fill
 
 
@@ -123,8 +124,10 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
     expiry = market_expiry(market)
     if expiry is None:
         return reject("no end time")
-    if expiry <= now:
-        return reject("end time already passed")
+    if diag is not None and now - timedelta(hours=6) < expiry < now + timedelta(hours=36):
+        diag["expiries"].add(expiry.replace(second=0, microsecond=0))
+    if expiry <= now - timedelta(minutes=cfg.expiry_grace_min):
+        return reject("end time long past")
     tz = ZoneInfo(cfg.timezone)
     if cfg.same_day_only and expiry.astimezone(tz).date() != now.astimezone(tz).date():
         return reject("ends on another day")
@@ -196,7 +199,7 @@ def apply_depth(client, cand: Candidate, cfg: Config) -> Candidate:
 
 
 def new_diag() -> dict:
-    return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}}
+    return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}, "expiries": set()}
 
 
 def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = None) -> list[Candidate]:
