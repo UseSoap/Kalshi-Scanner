@@ -11,10 +11,43 @@ from .client import KalshiError
 from .fees import breakeven_probability, win_loss
 from .orderbook import fill_estimate, parse_book
 
-# Best-recollection series tickers for game-winner markets. Run
-# `python -m kalshi_scanner discover` to list what Kalshi actually has and
-# override with the KALSHI_SERIES environment variable or --series.
-DEFAULT_SERIES = ["KXMLBGAME", "KXNHLGAME", "KXNBAGAME"]
+# Best-recollection series tickers for game-winner markets. I could not reach Kalshi's API
+# to verify them, so run `python -m kalshi_scanner discover` to list what Kalshi actually has
+# and override with the KALSHI_SERIES environment variable or --series. A ticker that does not
+# exist (or a league that is out of season) simply returns no markets; it breaks nothing.
+SPORT_LABELS = {
+    "KXMLBGAME": "MLB",
+    "KXNHLGAME": "NHL",
+    "KXNBAGAME": "NBA",
+    "KXNFLGAME": "NFL",
+    "KXNCAAFGAME": "College football",
+    "KXNCAAMBGAME": "College basketball (M)",
+    "KXWNBAGAME": "WNBA",
+    "KXMLSGAME": "MLS",
+    "KXEPLGAME": "Premier League",
+    "KXLALIGAGAME": "La Liga",
+    "KXSERIEAGAME": "Serie A",
+    "KXBUNDESLIGAGAME": "Bundesliga",
+    "KXLIGUE1GAME": "Ligue 1",
+    "KXUCLGAME": "Champions League",
+    "KXATPMATCH": "Tennis (ATP)",
+    "KXWTAMATCH": "Tennis (WTA)",
+    "KXUFCFIGHT": "UFC",
+}
+DEFAULT_SERIES = list(SPORT_LABELS)
+
+
+def sport_of(series: str) -> str:
+    """Human-readable sport/league for a series ticker (falls back to the ticker itself)."""
+    series = (series or "").upper()
+    if series in SPORT_LABELS:
+        return SPORT_LABELS[series]
+    name = series[2:] if series.startswith("KX") else series
+    for suffix in ("GAME", "MATCH", "FIGHT"):
+        if name.endswith(suffix) and len(name) > len(suffix):
+            return name[: -len(suffix)]
+    return name or "unknown"
+
 
 OPEN_STATUSES = {"open", "active"}
 
@@ -22,16 +55,18 @@ OPEN_STATUSES = {"open", "active"}
 @dataclass
 class Config:
     series: list[str] = field(default_factory=lambda: list(DEFAULT_SERIES))
-    min_price: float = 95.0       # cents; minimum ask on the favored side
+    min_price: float = 90.0       # cents; minimum ask on the favored side
     max_price: float = 99.0       # cents; above this there is no room for profit
-    max_spread: float = 3.0       # cents; skip contracts nobody is quoting tightly
+    max_spread: float = 5.0       # cents; skip contracts nobody is quoting tightly
     min_volume: int = 0
-    contracts: int = 100          # order size assumed when computing fees/P&L
+    contracts: int = 100          # largest paper order; fills as many as the book allows, up to this
+    min_contracts: int = 5        # smallest fill worth recording; below this the book is "thin"
+    max_slippage: float = 2.0     # cents; never pay more than the quoted ask plus this
     fee_rate: float = 0.07
     timezone: str = "America/Chicago"
     same_day_only: bool = True
     expiry_grace_min: int = 180   # accept still-open markets this long past the expected end (overtime, delays)
-    check_depth: bool = True      # fetch the order book and require the full order to fill
+    check_depth: bool = True      # fetch the order book and size the order to what can fill
 
 
 @dataclass
@@ -53,10 +88,12 @@ class Candidate:
     win_usd: float
     loss_usd: float
     breakeven_prob: float
-    # Filled in by apply_depth(). entry price for paper P&L is fill_price (average over the book).
+    # Filled in by apply_depth(). entry price for paper P&L is fill_price (average over the book),
+    # and `contracts` becomes the size that could actually fill (up to Config.contracts).
     fill_price: float | None = None
     depth_at_ask: float | None = None
     depth_status: str = "unchecked"   # unchecked | ok | thin | unknown
+    fillable: int | None = None       # contracts fillable within the slippage limit, capped at Config.contracts
 
 
 def _num(value):
@@ -176,7 +213,12 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
 
 
 def apply_depth(client, cand: Candidate, cfg: Config) -> Candidate:
-    """Check the order book and reprice the candidate at the average price a full order would get."""
+    """Check the order book and size the paper order to what could actually fill.
+
+    The order takes as many contracts as the book offers, up to `cfg.contracts`, without
+    paying more than the quoted ask plus `cfg.max_slippage` (and never above `cfg.max_price`).
+    It is repriced at the average fill price. Fewer than `cfg.min_contracts` fillable is "thin".
+    """
     try:
         book = parse_book(client.get_orderbook(cand.ticker))
     except KalshiError:
@@ -184,12 +226,15 @@ def apply_depth(client, cand: Candidate, cfg: Config) -> Candidate:
     if book is None:
         cand.depth_status = "unknown"
         return cand
-    est = fill_estimate(book, cand.side, cand.contracts, cfg.max_price)
+    limit = min(cfg.max_price, cand.ask + cfg.max_slippage)
+    est = fill_estimate(book, cand.side, cfg.contracts, limit)
     cand.depth_at_ask = round(est["depth_at_ask"], 2)
-    if est["vwap"] is None:
+    cand.fillable = est["filled"]
+    if est["vwap"] is None or est["filled"] < cfg.min_contracts:
         cand.depth_status = "thin"
         return cand
     fill = est["vwap"]
+    cand.contracts = est["filled"]
     win, loss, fee = win_loss(fill, cand.contracts, cfg.fee_rate)
     cand.fill_price = round(fill, 4)
     cand.fee_usd, cand.win_usd, cand.loss_usd = fee, round(win, 4), round(loss, 4)
@@ -221,7 +266,7 @@ def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = N
                 if cfg.check_depth:
                     apply_depth(client, cand, cfg)
                     if diag is not None and cand.depth_status == "thin":
-                        diag["reasons"]["thin book (not enough size at ask)"] += 1
+                        diag["reasons"][f"thin book (under {cfg.min_contracts} contracts fillable)"] += 1
                     elif diag is not None and cand.depth_status == "unknown":
                         diag["reasons"]["order book unreadable"] += 1
                 found.append(cand)

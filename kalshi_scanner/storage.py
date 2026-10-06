@@ -8,13 +8,13 @@ from dataclasses import asdict, fields
 from datetime import datetime
 from pathlib import Path
 
-from .scanner import Candidate
+from .scanner import Candidate, sport_of
 
 DATA_DIR = Path(os.environ.get("KALSHI_DATA_DIR", "data"))
 
 SNAPSHOT_FIELDS = [f.name for f in fields(Candidate)]
 TRADE_FIELDS = [
-    "trade_id", "first_seen", "ticker", "event_ticker", "series", "title", "side",
+    "trade_id", "first_seen", "ticker", "event_ticker", "series", "sport", "title", "side",
     "entry_price", "best_ask", "depth_at_ask", "bid", "spread", "volume", "open_interest", "expiry",
     "contracts", "fee_usd", "status", "result", "won", "pnl_usd", "settled_at",
 ]
@@ -61,8 +61,9 @@ def save_trades(trades: list[dict], data_dir: Path | None = None) -> None:
 def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None) -> int:
     """Open a paper trade the first time a (ticker, side) shows up. Returns count added.
 
-    Only candidates whose full order could fill (depth_status "ok", or "unchecked" when the
-    depth check is switched off) become trades. Entry is the average fill price, not the top ask.
+    Only candidates with enough size to fill (depth_status "ok", or "unchecked" when the
+    depth check is switched off) become trades. The trade is sized to what could fill, and the
+    entry is the average fill price, not the top ask.
     """
     trades = load_trades(data_dir)
     known = {t["trade_id"] for t in trades}
@@ -77,7 +78,7 @@ def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None)
         added += 1
         trades.append({
             "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,
-            "event_ticker": c.event_ticker, "series": c.series, "title": c.title,
+            "event_ticker": c.event_ticker, "series": c.series, "sport": sport_of(c.series), "title": c.title,
             "side": c.side, "entry_price": c.fill_price if c.fill_price is not None else c.ask,
             "best_ask": c.ask, "depth_at_ask": c.depth_at_ask if c.depth_at_ask is not None else "", "bid": c.bid if c.bid is not None else "",
             "spread": c.spread if c.spread is not None else "", "volume": c.volume,

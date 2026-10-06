@@ -37,6 +37,9 @@ def verbose_lines(found, diag, added) -> list[str]:
     stats = diag["per_series"]
     lines = ["markets seen per series: " + ", ".join(f"{k}={v}" for k, v in stats.items()),
              f"ending today (local time): {diag['same_day']} markets"]
+    empty = [k for k, v in stats.items() if not v]
+    if empty and len(empty) < len(stats):
+        lines.append("series with no open markets (off-season, or the ticker is wrong): " + ", ".join(empty))
     if diag["reasons"]:
         lines.append("filtered out because: " + ", ".join(f"{k}={v}" for k, v in diag["reasons"].most_common()))
     if diag["top"]:
@@ -52,7 +55,8 @@ def verbose_lines(found, diag, added) -> list[str]:
     lines.append(f"scan: {len(found)} candidates, {added} new paper trades")
     for c in sorted(found, key=lambda c: -c.ask)[:15]:
         fill = f"{c.fill_price:.2f}c" if c.fill_price is not None else "n/a"
-        lines.append(f"  {c.ticker} {c.side.upper()} ask={c.ask}c fill={fill} depth@ask={c.depth_at_ask} "
+        size = f"x{c.contracts}" if c.depth_status == "ok" else f"fillable={c.fillable}"
+        lines.append(f"  {c.ticker} {c.side.upper()} ask={c.ask}c fill={fill} {size} depth@ask={c.depth_at_ask} "
                      f"spread={c.spread}c [{c.depth_status}] breakeven={c.breakeven_prob:.2%}")
     return lines
 

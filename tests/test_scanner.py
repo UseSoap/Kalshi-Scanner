@@ -57,7 +57,7 @@ def test_rejects_other_day_closed_wide_spread_and_out_of_range():
     assert evaluate(market(expected_expiration_time=TOMORROW), NOW, Config()) == []
     assert evaluate(market(status="closed"), NOW, Config()) == []
     assert evaluate(market(yes_bid=90), NOW, Config()) == []             # 7c spread
-    assert evaluate(market(yes_ask=94, yes_bid=93), NOW, Config()) == []  # below 95c
+    assert evaluate(market(yes_ask=89, yes_bid=88), NOW, Config()) == []  # below 90c
     assert evaluate(market(yes_ask=100, yes_bid=99), NOW, Config()) == []  # above 99c
     assert evaluate(market(expected_expiration_time="2026-10-06T12:00:00Z"), NOW, Config()) == []  # already ended
 
@@ -66,6 +66,12 @@ def test_falls_back_to_close_time():
     m = market(close_time=TONIGHT)
     del m["expected_expiration_time"]
     assert len(evaluate(m, NOW, Config())) == 1
+
+
+def test_ninety_cent_floor_and_five_cent_spread_are_accepted():
+    assert [c.ask for c in evaluate(market(yes_ask=90, yes_bid=88), NOW, Config())] == [90.0]
+    assert len(evaluate(market(yes_ask=97, yes_bid=92), NOW, Config())) == 1      # exactly 5c
+    assert evaluate(market(yes_ask=97, yes_bid=91), NOW, Config()) == []          # 6c
 
 
 def test_any_day_flag():
@@ -126,10 +132,21 @@ def test_parse_book_cents_and_dollar_formats_and_unknown():
 def test_fill_estimate_walks_levels_and_averages():
     book = {"yes": [], "no": [(3.0, 60.0), (2.0, 100.0)]}      # YES asks: 60 @ 97c, 100 @ 98c
     est = fill_estimate(book, "yes", 100, 99.0)
-    assert est["depth_at_ask"] == 60.0
+    assert est["depth_at_ask"] == 60.0 and est["filled"] == 100
     assert abs(est["vwap"] - (60 * 97 + 40 * 98) / 100) < 1e-9
-    assert fill_estimate(book, "yes", 200, 99.0)["vwap"] is None           # not enough size
-    assert fill_estimate(book, "yes", 100, 97.0)["vwap"] is None           # would need to pay above the cap
+
+
+def test_fill_estimate_fills_the_largest_size_available():
+    book = {"yes": [], "no": [(3.0, 60.0), (2.0, 100.0)]}
+    est = fill_estimate(book, "yes", 500, 99.0)                  # asks for more than exists
+    assert est["filled"] == 160
+    assert abs(est["vwap"] - (60 * 97 + 100 * 98) / 160) < 1e-9
+    est = fill_estimate(book, "yes", 100, 97.0)                  # price cap excludes the 98c level
+    assert est["filled"] == 60 and est["vwap"] == 97.0
+    est = fill_estimate(book, "yes", 100, 96.0)                  # nothing within the cap
+    assert est["filled"] == 0 and est["vwap"] is None
+    assert fill_estimate({"yes": [], "no": []}, "yes", 100, 99.0) == {"depth_at_ask": 0.0, "filled": 0, "vwap": None}
+    assert fill_estimate({"yes": [], "no": [(3.0, 7.9)]}, "yes", 100, 99.0)["filled"] == 7   # whole contracts only
 
 
 def test_no_side_uses_yes_bids():
@@ -145,31 +162,71 @@ def candidate(client_book):
 def test_apply_depth_reprices_to_average_fill():
     cand = candidate({"orderbook": {"yes": [], "no": [[3, 60], [2, 100]]}})
     assert cand.depth_status == "ok" and cand.depth_at_ask == 60.0
+    assert cand.contracts == 100 and cand.fillable == 100
     assert abs(cand.fill_price - 97.4) < 1e-9
     assert cand.fee_usd == order_fee(97.4, 100)
 
 
+def test_apply_depth_sizes_the_order_to_what_can_fill():
+    cand = candidate({"orderbook": {"yes": [], "no": [[3, 37]]}})        # only 37 contracts at 97c
+    assert cand.depth_status == "ok" and cand.contracts == 37 and cand.fillable == 37
+    assert cand.fill_price == 97.0
+    assert cand.fee_usd == order_fee(97.0, 37)
+    capped = candidate({"orderbook": {"yes": [], "no": [[3, 5000]]}})
+    assert capped.contracts == 100                                         # never above Config.contracts
+
+
+def test_slippage_limit_stops_the_walk():
+    # Quoted ask 97c, so the limit is 99c at the default 2c slippage and both levels are reachable.
+    # With 1c slippage the limit is 98c, which excludes the 99c level.
+    book = {"orderbook": {"yes": [], "no": [[3, 10], [1, 50]]}}            # 10 @ 97c, 50 @ 99c
+    assert candidate(book).contracts == 60
+    cand = evaluate(market(), NOW, Config(max_slippage=1.0))[0]
+    apply_depth(FakeClient({}, book), cand, Config(max_slippage=1.0))
+    assert cand.contracts == 10 and cand.fill_price == 97.0
+
+
 def test_thin_and_unreadable_books_are_flagged():
-    assert candidate({"orderbook": {"yes": [], "no": [[3, 5]]}}).depth_status == "thin"
+    assert candidate({"orderbook": {"yes": [], "no": [[3, 4]]}}).depth_status == "thin"   # under min_contracts (5)
+    assert candidate({"orderbook": {"yes": [], "no": [[3, 5]]}}).depth_status == "ok"     # exactly min_contracts
+    thin = candidate({"orderbook": {"yes": [], "no": [[3, 4]]}})
+    assert thin.fillable == 4 and thin.fill_price is None
     assert candidate({"unexpected": 1}).depth_status == "unknown"
 
 
 def test_only_fillable_candidates_become_paper_trades(tmp_path):
     from kalshi_scanner.storage import load_trades, record_new_trades
     good = candidate({"orderbook": {"yes": [], "no": [[3, 500]]}})
-    thin = candidate({"orderbook": {"yes": [], "no": [[3, 5]]}})
+    thin = candidate({"orderbook": {"yes": [], "no": [[3, 4]]}})
     thin.ticker = "THIN"
     unreadable = candidate({"x": 1})
     unreadable.ticker = "UNREAD"
     assert record_new_trades([good, thin, unreadable], tmp_path) == 1
     trade = load_trades(tmp_path)[0]
     assert trade["entry_price"] == "97.0" and trade["depth_at_ask"] == "500.0"
+    assert trade["contracts"] == "100" and trade["sport"] == "MLB"
+
+
+def test_trade_is_sized_to_the_fill_and_fee_matches(tmp_path):
+    from kalshi_scanner.storage import load_trades, record_new_trades
+    record_new_trades([candidate({"orderbook": {"yes": [], "no": [[3, 37]]}})], tmp_path)
+    trade = load_trades(tmp_path)[0]
+    assert trade["contracts"] == "37" and float(trade["fee_usd"]) == order_fee(97.0, 37)
 
 
 def test_scan_reports_thin_books_in_diagnostics():
     from kalshi_scanner.scanner import new_diag
     diag = new_diag()
-    client = FakeClient({"KXMLBGAME": [market()]}, {"orderbook": {"yes": [], "no": [[3, 5]]}})
+    client = FakeClient({"KXMLBGAME": [market()]}, {"orderbook": {"yes": [], "no": [[3, 4]]}})
     found = scan(client, Config(series=["KXMLBGAME"]), NOW, diag)
     assert found[0].depth_status == "thin"
-    assert diag["reasons"]["thin book (not enough size at ask)"] == 1
+    assert diag["reasons"]["thin book (under 5 contracts fillable)"] == 1
+
+
+def test_sport_labels_and_default_leagues():
+    from kalshi_scanner.scanner import DEFAULT_SERIES, sport_of
+    assert sport_of("KXMLBGAME") == "MLB" and sport_of("kxnflgame") == "NFL"
+    assert sport_of("KXCRICKETMATCH") == "CRICKET" and sport_of("KXFOOBAR") == "FOOBAR"
+    assert {"KXMLBGAME", "KXNHLGAME", "KXNBAGAME", "KXNFLGAME", "KXNCAAFGAME", "KXEPLGAME",
+            "KXATPMATCH", "KXUFCFIGHT"} <= set(DEFAULT_SERIES)
+    assert len(DEFAULT_SERIES) == len(set(DEFAULT_SERIES))

@@ -18,6 +18,7 @@ def _config(args) -> Config:
     series_list = [s.strip() for s in series.split(",") if s.strip()] if series else list(DEFAULT_SERIES)
     return Config(series=series_list, min_price=args.min_price, max_price=args.max_price,
                   max_spread=args.max_spread, contracts=args.contracts,
+                  min_contracts=args.min_contracts, max_slippage=args.max_slippage,
                   timezone=args.timezone, same_day_only=not args.any_day,
                   check_depth=not args.skip_depth)
 
@@ -41,7 +42,8 @@ def cmd_settle(args, client) -> None:
 
 
 def cmd_discover(args, client) -> None:
-    keywords = ("MLB", "NHL", "NBA", "NFL", "NCAA")
+    keywords = ("MLB", "NHL", "NBA", "NFL", "NCAA", "WNBA", "MLS", "EPL", "PREMIER", "LIGA", "SERIE",
+                "BUNDES", "LIGUE", "CHAMPIONS", "UCL", "ATP", "WTA", "UFC", "TENNIS")
     rows = [s for s in client.list_series("Sports")
             if any(k in (s.get("ticker", "") + s.get("title", "")).upper() for k in keywords)]
     for s in sorted(rows, key=lambda s: s.get("ticker", "")):
@@ -53,10 +55,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="kalshi_scanner")
     parser.add_argument("command", choices=["loop", "run", "scan", "settle", "report", "discover"], nargs="?", default="run")
     parser.add_argument("--series", help="comma-separated series tickers (or KALSHI_SERIES env var)")
-    parser.add_argument("--min-price", type=float, default=95.0)
+    parser.add_argument("--min-price", type=float, default=90.0, help="lowest ask (cents) to log")
     parser.add_argument("--max-price", type=float, default=99.0)
-    parser.add_argument("--max-spread", type=float, default=3.0)
-    parser.add_argument("--contracts", type=int, default=100)
+    parser.add_argument("--max-spread", type=float, default=5.0)
+    parser.add_argument("--contracts", type=int, default=100,
+                        help="largest paper order; each trade fills as many as the book allows, up to this")
+    parser.add_argument("--min-contracts", type=int, default=5,
+                        help="smallest fill worth recording; thinner books are skipped")
+    parser.add_argument("--max-slippage", type=float, default=2.0,
+                        help="never pay more than the quoted ask plus this many cents")
     parser.add_argument("--timezone", default="America/Chicago")
     parser.add_argument("--skip-depth", action="store_true",
                         help="do not check order-book depth (paper fills at the top ask, which is optimistic)")

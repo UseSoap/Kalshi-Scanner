@@ -39,19 +39,24 @@ def parse_book(payload: dict | None):
 def fill_estimate(book: dict, side: str, contracts: int, max_price: float) -> dict:
     """Walk the asks for `side`, cheapest first, never paying more than `max_price` cents.
 
-    Returns best-ask depth, how many contracts could fill, and the average fill price
-    (None if the full order cannot be filled within max_price).
+    Fills as many whole contracts as the book allows, up to `contracts`. Returns the size
+    at the best ask, how many contracts could fill, and the average fill price for exactly
+    those contracts (None if nothing could fill within `max_price`).
     """
     opposing = book["no" if side == "yes" else "yes"]
     asks = sorted(((100.0 - price, qty) for price, qty in opposing), key=lambda level: level[0])
     depth_at_best = asks[0][1] if asks else 0.0
-    remaining, cost = float(contracts), 0.0
+
+    available = sum(qty for price, qty in asks if price <= max_price)
+    filled = int(min(float(contracts), available) + 1e-9)
+    if filled <= 0:
+        return {"depth_at_ask": depth_at_best, "filled": 0, "vwap": None}
+
+    remaining, cost = float(filled), 0.0
     for price, qty in asks:
-        if price > max_price or remaining <= 0:
+        if price > max_price or remaining <= 1e-9:
             break
         take = min(qty, remaining)
         cost += take * price
         remaining -= take
-    filled = contracts - remaining
-    vwap = cost / contracts if remaining <= 1e-9 else None
-    return {"depth_at_ask": depth_at_best, "filled": filled, "vwap": vwap}
+    return {"depth_at_ask": depth_at_best, "filled": filled, "vwap": cost / filled}
