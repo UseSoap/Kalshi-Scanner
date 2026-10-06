@@ -58,23 +58,36 @@ def save_trades(trades: list[dict], data_dir: Path | None = None) -> None:
     tmp.replace(path)
 
 
-def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None) -> int:
+def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None,
+                      one_per_event: bool = True) -> int:
     """Open a paper trade the first time a (ticker, side) shows up. Returns count added.
 
     Only candidates with enough size to fill (depth_status "ok", or "unchecked" when the
     depth check is switched off) become trades. The trade is sized to what could fill, and the
     entry is the average fill price, not the top ask.
+
+    With `one_per_event` (the default) a game gets at most one paper trade. Several contracts
+    in one game (a soccer win/draw/loss set, or both sides of a game that flips) move together,
+    so counting each as its own trade would overstate the sample size. When several qualify at
+    once, the highest-priced one (then the larger fill) is taken, and a game that already has a
+    trade is skipped. Skipped candidates still appear in the snapshots.
     """
     trades = load_trades(data_dir)
     known = {t["trade_id"] for t in trades}
+    events = {t["event_ticker"] for t in trades if t.get("event_ticker")}
     added = 0
-    for c in candidates:
+    ranked = sorted(candidates, key=lambda c: (-(c.fill_price if c.fill_price is not None else c.ask), -c.contracts))
+    for c in ranked:
         if c.depth_status not in ("ok", "unchecked"):
             continue
         trade_id = f"{c.ticker}|{c.side}"
         if trade_id in known:
             continue
+        if one_per_event and c.event_ticker and c.event_ticker in events:
+            continue
         known.add(trade_id)
+        if c.event_ticker:
+            events.add(c.event_ticker)
         added += 1
         trades.append({
             "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,

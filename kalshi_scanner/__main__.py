@@ -20,7 +20,7 @@ def _config(args) -> Config:
                   max_spread=args.max_spread, contracts=args.contracts,
                   min_contracts=args.min_contracts, max_slippage=args.max_slippage,
                   timezone=args.timezone, same_day_only=not args.any_day,
-                  check_depth=not args.skip_depth)
+                  check_depth=not args.skip_depth, one_trade_per_event=not args.multi_per_game)
 
 
 def cmd_scan(args, client) -> None:
@@ -75,6 +75,8 @@ def main() -> None:
     loop.add_argument("--hot-ask", type=float, default=90.0, help="ask (cents) that triggers the fastest scan rate")
     loop.add_argument("--hot-interval", type=int, default=45, help="seconds between scans when a game is lopsided")
     loop.add_argument("--live-interval", type=int, default=90, help="seconds between scans during a game window")
+    parser.add_argument("--multi-per-game", action="store_true",
+                        help="allow several paper trades in one game (they are correlated, so this inflates the sample size)")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
     args = parser.parse_args()
 

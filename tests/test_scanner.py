@@ -230,3 +230,59 @@ def test_sport_labels_and_default_leagues():
     assert {"KXMLBGAME", "KXNHLGAME", "KXNBAGAME", "KXNFLGAME", "KXNCAAFGAME", "KXEPLGAME",
             "KXATPMATCH", "KXUFCFIGHT"} <= set(DEFAULT_SERIES)
     assert len(DEFAULT_SERIES) == len(set(DEFAULT_SERIES))
+
+
+# ---- one paper trade per game ----
+
+def soccer_candidates(*asks):
+    """Candidates for different contracts of one game (e.g. team A / draw / team B)."""
+    out = []
+    for i, ask in enumerate(asks):
+        m = market(ticker=f"KXMLSGAME-26OCT06CHIVAN-X{i}", event_ticker="KXMLSGAME-26OCT06CHIVAN",
+                   yes_ask=ask, yes_bid=ask - 1, no_bid=100 - ask, no_ask=101 - ask)
+        cand = evaluate(m, NOW, Config())[0]
+        apply_depth(FakeClient({}, {"orderbook": {"yes": [], "no": [[100 - ask, 500]]}}), cand, Config())
+        out.append(cand)
+    return out
+
+
+def test_one_trade_per_game_takes_the_highest_priced_contract(tmp_path):
+    from kalshi_scanner.storage import load_trades, record_new_trades
+    cands = soccer_candidates(92, 97, 94)             # three contracts, same game
+    assert record_new_trades(cands, tmp_path) == 1
+    trades = load_trades(tmp_path)
+    assert [t["ticker"] for t in trades] == ["KXMLSGAME-26OCT06CHIVAN-X1"]     # the 97c one
+
+
+def test_a_game_with_a_trade_ignores_later_contracts(tmp_path):
+    from kalshi_scanner.storage import load_trades, record_new_trades
+    first, later = soccer_candidates(92, 98)
+    assert record_new_trades([first], tmp_path) == 1
+    assert record_new_trades([later], tmp_path) == 0                           # same game, even at a better price
+    assert len(load_trades(tmp_path)) == 1 and load_trades(tmp_path)[0]["ticker"].endswith("X0")
+
+
+def test_different_games_still_each_get_a_trade(tmp_path):
+    from kalshi_scanner.storage import record_new_trades
+    a, = soccer_candidates(97)
+    b, = soccer_candidates(97)
+    b.ticker, b.event_ticker = "KXMLSGAME-26OCT06OTHER-X0", "KXMLSGAME-26OCT06OTHER"
+    assert record_new_trades([a, b], tmp_path) == 2
+
+
+def test_one_per_game_can_be_switched_off(tmp_path):
+    from kalshi_scanner.storage import record_new_trades
+    assert record_new_trades(soccer_candidates(92, 97, 94), tmp_path, one_per_event=False) == 3
+
+
+def test_scan_cycle_applies_the_config_flag(tmp_path, monkeypatch):
+    from kalshi_scanner import storage
+    from kalshi_scanner.runner import scan_cycle
+    monkeypatch.setattr(storage, "DATA_DIR", tmp_path)
+    markets = [market(ticker=f"T{i}", event_ticker="SAME-GAME", yes_ask=a, yes_bid=a - 1, no_bid=100 - a, no_ask=101 - a)
+               for i, a in enumerate((93, 96))]
+    client = FakeClient({"KXMLBGAME": markets}, {"orderbook": {"yes": [], "no": [[3, 500], [7, 500]]}})
+    _, _, added = scan_cycle(client, Config(series=["KXMLBGAME"]), NOW)
+    assert added == 1
+    _, _, added = scan_cycle(client, Config(series=["KXMLBGAME"], one_trade_per_event=False), NOW)
+    assert added == 1                                                           # the other contract, now allowed

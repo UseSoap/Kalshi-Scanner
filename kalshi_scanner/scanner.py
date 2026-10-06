@@ -67,6 +67,7 @@ class Config:
     same_day_only: bool = True
     expiry_grace_min: int = 180   # accept still-open markets this long past the expected end (overtime, delays)
     check_depth: bool = True      # fetch the order book and size the order to what can fill
+    one_trade_per_event: bool = True   # one paper trade per game; correlated contracts are not extra samples
 
 
 @dataclass

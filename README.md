@@ -12,7 +12,7 @@ A GitHub Action starts every 30 minutes during game hours (hourly overnight) and
 1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
 2. **Scans** the configured sports series for contracts that end today (US Central) where one side's ask is 90-99¢ and the bid/ask spread is 5¢ or less. The default series cover MLB, NHL, NBA, NFL, college football, men's college basketball, WNBA, MLS, the Premier League, La Liga, Serie A, the Bundesliga, Ligue 1, the Champions League, ATP and WTA tennis, and UFC. Leagues that are out of season just return no markets.
 3. **Checks the order book** for each candidate and sizes the paper order to what could actually fill: as many contracts as the book offers, up to 100, without paying more than the quoted ask plus 2¢ (and never above 99¢). The entry price is the *average fill price* across the levels used, not the top-of-book ask. If fewer than 5 contracts could fill, the book is "thin" and the candidate is logged but not traded. Tune with `--contracts`, `--min-contracts` and `--max-slippage`.
-4. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per contract and side) in `data/trades.csv`, with the sport recorded and Kalshi's fee applied at the fill price and size.
+4. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per game) in `data/trades.csv`, with the sport recorded and Kalshi's fee applied at the fill price and size.
 5. **Commits** the new data back to this repo.
 
 ## First-time setup
@@ -32,6 +32,7 @@ prints, in order: a **fills table** (paper fills by sport and entry-price bucket
 
 ## Things to know
 
+- **One paper trade per game.** Contracts in the same game move together (a soccer game has win, draw and loss contracts, and a game that flips can qualify on both sides), so counting each as a trade would overstate the sample size and make the confidence intervals look too tight. When several qualify at once the highest-priced one is taken; a game that already has a trade is skipped. Every candidate is still logged in the snapshots. `--multi-per-game` turns the rule off.
 - **Fees are per order, rounded up to the next cent.** 1 contract at 98¢ pays a full cent in fees, while 100 contracts pay about 0.2¢ each. Because fills are now sized to the book, small fills carry proportionally heavier fees, so read hit rate vs. implied first and treat ROI on small fills as pessimistic. The fee rate in `kalshi_scanner/fees.py` (0.07) should be checked against Kalshi's current fee schedule.
 - **Combining legs does not create edge.** Multiplying 95-99% legs only changes variance. The combo simulation here is an upper bound, because real Kalshi combo markets carry market-maker margin. Same-sport legs on one day can also be correlated.
 - **"Ends today" uses the game's expected end time**, not Kalshi's `close_time`, which can be days later on sports markets.

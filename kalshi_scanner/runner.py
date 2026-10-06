@@ -30,7 +30,7 @@ def scan_cycle(client, cfg: Config, now: datetime, last_logged: dict | None = No
                 last_logged[key] = now
                 to_log.append(c)
     log_snapshots(to_log, now)
-    return found, diag, record_new_trades(found)
+    return found, diag, record_new_trades(found, one_per_event=cfg.one_trade_per_event)
 
 
 def verbose_lines(found, diag, added) -> list[str]:
