@@ -6,7 +6,7 @@ A **paper-trading** scanner for near-certain Kalshi sports contracts. It places 
 
 ## What it does
 
-A GitHub Action starts every 30 minutes during game hours (hourly overnight) and runs an adaptive loop:
+A GitHub Action runs an adaptive loop. It chains itself: when a 27-minute loop ends while games are still being watched, its last step dispatches the next run, which queues behind it and starts as soon as it finishes. A cron entry every 30 minutes during game hours (hourly overnight) acts as a watchdog that restarts the chain after it goes idle or breaks. Each loop:
 
 0. **Adapts its pace to the games.** Kalshi gives each game's *expected end time*, so each game gets a watch window from 3 hours before that to 90 minutes after (overtime and extra innings run long). Inside a window it scans every 90 seconds, or every 45 seconds once any contract is priced 85¢+ (a game is getting lopsided; this sits below the 90¢ entry floor so scanning is already fast when a favorite crosses it). If a window opens within 30 minutes it waits; if nothing is on, it exits within seconds so it stops using compute. Tune with `--window-before`, `--window-after`, `--hot-ask`, `--hot-interval`, `--live-interval`.
 1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
@@ -39,9 +39,9 @@ prints, in order: a **fills table** (paper fills by sport and entry-price bucket
 - **The 90-93¢ and 93-95¢ buckets are a wider net than the original question.** They are there to get more trades and to show where, if anywhere, the hit rate beats the price. Judge each bucket on its own.
 - **Paper fills are still somewhat optimistic.** The depth check removes thin books and prices in slippage, but the book can change in the minutes between scans, and a real order competes with other buyers. `--skip-depth` turns the check off (fills at the top ask), which flatters the results.
 - If the log warns that the **order book was unreadable**, no paper trade is opened for those candidates. Paste the log to Claude so the parser can be adjusted.
-- **GitHub's schedule is best-effort.** Runs can start late or occasionally be skipped, which is why the cron minutes are :07 and :37 instead of :00 and :30 (the busiest times). If a scheduled run seems missing, check the Actions tab for runs with the `schedule` trigger, and press **Run workflow** to start one by hand.
-- GitHub's cron timing is approximate, so a run can start a few minutes late, leaving short gaps between 27-minute loops.
-- **GitHub Actions minutes are limited on private repos** (as I understand it, 2,000 per month on the free plan; check Settings > Billing). Scanning every minute through evening games can use far more than that, and watching many leagues keeps game windows open for more of the day. Public repos get free minutes, and nothing in this repo is secret (no credentials are stored). Otherwise, run `python -m kalshi_scanner loop --max-minutes 0` on any always-on computer.
+- **GitHub's cron is best-effort, so the chain does the real work.** Scheduled runs are often late or dropped, which is why the loop re-dispatches itself (`workflow_dispatch` started with the built-in `GITHUB_TOKEN` is allowed to trigger a run; other events are not). The cron minutes are :07 and :37 instead of :00 and :30 (the busiest times). The chain stops by itself when no game is in or near a watch window, and the cron wakes it up before the next one. If the chain breaks (the loop crashed, or the API was down), the next cron run restarts it, or press **Run workflow**.
+- Only one run waits in the queue at a time, so a cron run and a chained run never pile up. A cron run that gets replaced in the queue by the chained run shows as cancelled in the Actions tab; that is expected.
+- **GitHub Actions minutes are limited on private repos** (as I understand it, 2,000 per month on the free plan; check Settings > Billing), and a chained loop uses them continuously through game hours. This repo is public, so minutes are free, and nothing in it is secret (no credentials are stored). If it goes private, switch to an always-on computer running `python -m kalshi_scanner loop --max-minutes 0`.
 - Markets that Kalshi still lists as open up to 3 hours after a game's expected end are scanned too, since games run long.
 
 ## Layout

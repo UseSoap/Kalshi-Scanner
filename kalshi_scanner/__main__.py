@@ -35,6 +35,23 @@ def cmd_loop(args, client) -> None:
                         hot_interval_s=args.hot_interval, live_interval_s=args.live_interval)
     result = run_loop(client, _config(args), sc, max_minutes=args.max_minutes)
     print(f"loop finished: {result}  (billed Actions time is this, rounded up, plus about 20s of setup)")
+    again = wants_another_run(result)
+    print(f"chain: {'start another run' if again else 'nothing more to watch, stopping'}")
+    # In GitHub Actions this becomes `steps.<id>.outputs.again`, which the workflow uses to re-dispatch itself.
+    out_path = os.environ.get("GITHUB_OUTPUT")
+    if out_path:
+        with open(out_path, "a") as fh:
+            fh.write(f"again={'true' if again else 'false'}\n")
+
+
+def wants_another_run(result: dict) -> bool:
+    """True when the loop stopped only because its time budget ran out, not because nothing is on.
+
+    run_loop ends in mode "idle" when there are no games in or near a watch window. Any other
+    last mode (live, hot, waiting) means games are still being watched, so a fresh run should
+    pick up where this one stopped.
+    """
+    return result.get("last_mode") != "idle"
 
 
 def cmd_settle(args, client) -> None:

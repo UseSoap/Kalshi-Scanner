@@ -114,3 +114,30 @@ def test_loop_waits_for_an_upcoming_window(tmp_path, monkeypatch):
     clock = Clock(datetime(2026, 10, 6, 21, 45, tzinfo=timezone.utc))   # window opens at 22:00Z
     result = drive(LoopClient([mk(ask=62)]), clock, 25, tmp_path, monkeypatch)
     assert clock.sleeps[0] == 300 and result["cycles"] > 1
+
+
+# ---- self-chaining: does the loop say whether another run is needed? ----
+
+def test_idle_loop_does_not_chain_but_budget_stop_does(tmp_path, monkeypatch):
+    from kalshi_scanner.__main__ import wants_another_run
+    idle = drive(LoopClient([mk(end="2026-10-07T06:00:00Z")]), Clock(T0), 25, tmp_path, monkeypatch)
+    assert idle["last_mode"] == "idle" and not wants_another_run(idle)
+    busy = drive(LoopClient([mk(ask=62)]), Clock(T0), 5, tmp_path, monkeypatch)    # stops on time budget mid-game
+    assert busy["last_mode"] == "live" and wants_another_run(busy)
+
+
+def test_cmd_loop_writes_the_github_output(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from kalshi_scanner import __main__ as cli
+    args = SimpleNamespace(window_before=180, window_after=90, lookahead=30, hot_ask=85.0,
+                           hot_interval=45, live_interval=90, max_minutes=1)
+    monkeypatch.setattr(cli, "_config", lambda a: Config(series=["KXNHLGAME"]))
+    out = tmp_path / "gh_output"
+    monkeypatch.setenv("GITHUB_OUTPUT", str(out))
+    for mode, expected in (("live", "again=true\n"), ("idle", "again=false\n")):
+        out.write_text("")
+        monkeypatch.setattr(cli, "run_loop", lambda *a, _m=mode, **k: {"last_mode": _m, "cycles": 1})
+        cli.cmd_loop(args, client=None)
+        assert out.read_text() == expected
+    monkeypatch.delenv("GITHUB_OUTPUT")
+    cli.cmd_loop(args, client=None)                      # no env var (local run): must not raise

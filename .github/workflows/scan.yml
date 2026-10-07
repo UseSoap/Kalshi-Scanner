@@ -1,9 +1,15 @@
 name: scan
 
-# Each run starts a "loop" that scans every 30-60 seconds while games are in their watch
-# windows, waits if a window is about to open, and exits early when nothing is on. The cron
-# entries below only decide when a run may *start*; the loop itself decides how hard to work.
-# Minutes are :07/:37 on purpose: GitHub delays or drops scheduled runs at :00 and :30 when it is busy.
+# Each run starts a "loop" that scans every 45-90 seconds while games are in their watch
+# windows, waits if a window is about to open, and exits early when nothing is on.
+#
+# Self-chaining: GitHub's cron is best-effort and often drops runs, so it is only a watchdog.
+# When a loop ends because its 27-minute budget ran out (games are still being watched), the
+# last step dispatches this workflow again. The new run queues behind the current one (see
+# `concurrency`) and starts as soon as it finishes, so coverage is near-continuous. When the
+# loop ends because nothing is on ("idle"), it does not chain, and the cron restarts things
+# before the next game window. Minutes are :07/:37 on purpose: GitHub delays or drops
+# scheduled runs at :00 and :30 when it is busy.
 on:
   schedule:
     - cron: "7,37 16-23,0-6 * * *"   # game hours: 11 AM - 1:59 AM Central (CDT), every 30 min at :07 and :37
@@ -11,7 +17,8 @@ on:
   workflow_dispatch:                  # press "Run workflow" to start one manually
 
 permissions:
-  contents: write
+  contents: write   # commit data
+  actions: write    # dispatch the next run of this workflow
 
 concurrency:
   group: scan
@@ -32,6 +39,7 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Settle finished games, then scan (adaptive loop)
+        id: scan
         run: python -m kalshi_scanner loop --max-minutes 27
         env:
           # Optional override, e.g. "KXMLBGAME,KXNHLGAME,KXNBAGAME". Set under Settings > Variables.
@@ -51,3 +59,12 @@ jobs:
             git pull --rebase
             git push
           fi
+
+      # Runs after the commit so the next run checks out the data this one just pushed.
+      # Skipped when the loop crashed (no output) or found nothing to watch; the cron restarts it.
+      - name: Chain the next run
+        if: always() && steps.scan.outputs.again == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run scan.yml --ref "${{ github.ref_name }}"
