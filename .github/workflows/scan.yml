@@ -3,18 +3,20 @@ name: scan
 # Each run starts a "loop" that scans every 45-90 seconds while games are in their watch
 # windows, waits if a window is about to open, and exits early when nothing is on.
 #
-# Self-chaining: GitHub's cron is best-effort and often drops runs, so it is only a watchdog.
-# When a loop ends because its 27-minute budget ran out (games are still being watched), the
-# last step dispatches this workflow again. The new run queues behind the current one (see
-# `concurrency`) and starts as soon as it finishes, so coverage is near-continuous. When the
-# loop ends because nothing is on ("idle"), it does not chain, and the cron restarts things
-# before the next game window. Minutes are :07/:37 on purpose: GitHub delays or drops
-# scheduled runs at :00 and :30 when it is busy.
+# Self-chaining: when a loop ends because its 27-minute budget ran out (games are still being
+# watched), the last step dispatches this workflow again. The new run queues behind the current
+# one (see `concurrency`) and starts as soon as it finishes, so coverage is near-continuous.
+# When the loop ends because nothing is on ("idle"), it does not chain.
+#
+# Starting runs: GitHub's own cron is best-effort and often drops runs, so the primary trigger
+# is an external scheduler (cron-job.org, timezone America/Chicago) that calls this workflow's
+# `workflow_dispatch` API at :02 and :32 during game hours (11 AM - 1:59 AM Central) and at :02
+# hourly overnight. The single cron entry below is only a failsafe in case that service fails.
+# Its minute is :47 on purpose: GitHub delays or drops scheduled runs at :00 and :30 when busy.
 on:
   schedule:
-    - cron: "7,37 16-23,0-6 * * *"   # game hours: 11 AM - 1:59 AM Central (CDT), every 30 min at :07 and :37
-    - cron: "7 7-15 * * *"           # overnight/morning: hourly check (exits within seconds when idle)
-  workflow_dispatch:                  # press "Run workflow" to start one manually
+    - cron: "47 * * * *"             # failsafe: hourly; an idle run exits within seconds
+  workflow_dispatch:                  # started by cron-job.org, the chain, or the "Run workflow" button
 
 permissions:
   contents: write   # commit data
