@@ -3,11 +3,6 @@ name: scan
 # Each run starts a "loop" that scans every 45-90 seconds while games are in their watch
 # windows, waits if a window is about to open, and exits early when nothing is on.
 #
-# Self-chaining: when a loop ends because its 27-minute budget ran out (games are still being
-# watched), the last step dispatches this workflow again. The new run queues behind the current
-# one (see `concurrency`) and starts as soon as it finishes, so coverage is near-continuous.
-# When the loop ends because nothing is on ("idle"), it does not chain.
-#
 # Starting runs: GitHub's own cron is best-effort and often drops runs, so the primary trigger
 # is an external scheduler (cron-job.org, timezone America/Chicago) that calls this workflow's
 # `workflow_dispatch` API at :02 and :32 during game hours (11 AM - 1:59 AM Central) and at :02
@@ -16,11 +11,10 @@ name: scan
 on:
   schedule:
     - cron: "47 * * * *"             # failsafe: hourly; an idle run exits within seconds
-  workflow_dispatch:                  # started by cron-job.org, the chain, or the "Run workflow" button
+  workflow_dispatch:                  # started by cron-job.org or the "Run workflow" button
 
 permissions:
   contents: write   # commit data
-  actions: write    # dispatch the next run of this workflow
 
 concurrency:
   group: scan
@@ -41,7 +35,6 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Settle finished games, then scan (adaptive loop)
-        id: scan
         run: python -m kalshi_scanner loop --max-minutes 27
         env:
           # Optional override, e.g. "KXMLBGAME,KXNHLGAME,KXNBAGAME". Set under Settings > Variables.
@@ -61,12 +54,3 @@ jobs:
             git pull --rebase
             git push
           fi
-
-      # Runs after the commit so the next run checks out the data this one just pushed.
-      # Skipped when the loop crashed (no output) or found nothing to watch; the cron restarts it.
-      - name: Chain the next run
-        if: always() && steps.scan.outputs.again == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: gh workflow run scan.yml --ref "${{ github.ref_name }}"
