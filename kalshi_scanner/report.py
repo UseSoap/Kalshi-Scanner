@@ -102,7 +102,13 @@ def fills_table(trades: list[dict]) -> list[str]:
 
 
 def _money(x: float) -> str:
-    return f"-${abs(x):,.2f}" if x < 0 else f"${x:,.2f}"
+    x = round(x, 2) + 0.0          # collapses -0.001 to 0.0 so it never prints as "$-0.00"
+    return f"(${abs(x):,.2f})" if x < 0 else f"${x:,.2f}"
+
+
+def _pct(x: float) -> str:
+    x = round(x, 4) + 0.0
+    return f"({abs(x):.2%})" if x < 0 else f"{x:.2%}"
 
 
 def _fmt(label: str, s: dict, width: int = 24) -> str:
@@ -110,7 +116,7 @@ def _fmt(label: str, s: dict, width: int = 24) -> str:
         return f"{label:<{width}} n=0"
     return (f"{label:<{width}} n={s['n']:<4} hit={s['hit_rate']:.1%} "
             f"(95% CI {s['ci_low']:.1%}-{s['ci_high']:.1%})  implied={s['avg_implied']:.1%}  "
-            f"pnl={_money(s['pnl_usd'])}  roi={s['roi']:.2%}")
+            f"pnl={_money(s['pnl_usd'])}  roi={_pct(s['roi'])}")
 
 
 def render(data_dir: Path | None = None) -> str:

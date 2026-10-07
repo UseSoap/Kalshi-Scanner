@@ -61,6 +61,12 @@ def simulate(trades: list[dict], target_prob: float = 0.5, tz_name: str = "Ameri
     return results
 
 
+def _signed(x: float) -> str:
+    """Negatives in parentheses; positives get a trailing space so the columns line up."""
+    x = round(x, 2) + 0.0
+    return f"({abs(x):.2f})" if x < 0 else f"{x:.2f} "
+
+
 def render(data_dir: Path | None = None, target_prob: float = 0.5) -> str:
     results = simulate(load_trades(data_dir), target_prob)
     if not results:
@@ -71,8 +77,8 @@ def render(data_dir: Path | None = None, target_prob: float = 0.5) -> str:
     pnl = sum(r["pnl_per_dollar"] for r in results)
     lines = [f"Combo simulation (target ~{target_prob:.0%}, one combo/day, no fees, no combo margin):",
              f"  days={n}  hit={wins}/{n} ({wins / n:.1%})  avg implied={avg_implied:.1%}  "
-             f"pnl per $1/day = {pnl:+.2f}", ""]
+             f"pnl per $1/day = {_signed(pnl)}", ""]
     for r in results[-10:]:
         lines.append(f"  {r['day']}  legs={r['legs']:<3} implied={r['implied_prob']:.1%}  "
-                     f"{'WON ' if r['won'] else 'LOST'}  {r['pnl_per_dollar']:+.2f}")
+                     f"{'WON ' if r['won'] else 'LOST'}  {_signed(r['pnl_per_dollar'])}")
     return "\n".join(lines)
