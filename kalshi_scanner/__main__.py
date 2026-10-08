@@ -60,8 +60,21 @@ def cmd_settle(args, client) -> None:
 
 
 def cmd_discover(args, client) -> None:
-    keywords = ("MLB", "NHL", "NBA", "NFL", "NCAA", "WNBA", "MLS", "EPL", "PREMIER", "LIGA", "SERIE",
-                "BUNDES", "LIGUE", "CHAMPIONS", "UCL", "ATP", "WTA", "UFC", "TENNIS")
+    keywords = (
+        # already scanned
+        "MLB", "NHL", "NBA", "NFL", "NCAA", "WNBA", "MLS", "EPL", "PREMIER", "LIGA", "SERIE",
+        "BUNDES", "LIGUE", "CHAMPIONS", "UCL", "ATP", "WTA", "UFC", "TENNIS",
+        # golf
+        "GOLF", "PGA", "MASTERS", "DP WORLD", "RYDER",
+        # more soccer
+        "EUROPA", "CONFERENCE", "EREDIVISIE", "LIGAMX", "LIGA MX", "CHAMPIONSHIP", "SAUDI",
+        "LIBERTADORES", "NATIONS LEAGUE", "WORLD CUP", "QUALIF", "SOCCER",
+        # overseas baseball (plays overnight US time), cricket
+        "KBO", "NPB", "CRICKET", "IPL",
+        # tennis tiers, college and other combat/racing/esports
+        "CHALLENGER", "ITF", "BOXING", "PFL", "F1", "FORMULA", "NASCAR", "INDYCAR",
+        "ESPORT", "LEAGUE OF LEGENDS", "COUNTER-STRIKE", "DOTA", "VALORANT",
+    )
     rows = [s for s in client.list_series("Sports")
             if any(k in (s.get("ticker", "") + s.get("title", "")).upper() for k in keywords)]
     for s in sorted(rows, key=lambda s: s.get("ticker", "")):
