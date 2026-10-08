@@ -38,6 +38,17 @@ def log_snapshots(candidates: list[Candidate], now: datetime, data_dir: Path | N
     _append_rows(path, SNAPSHOT_FIELDS, [asdict(c) for c in candidates])
 
 
+def load_snapshots(data_dir: Path | None = None) -> list[dict]:
+    """Every logged candidate row from data/snapshots/*.csv, oldest file first."""
+    folder = (data_dir or DATA_DIR) / "snapshots"
+    rows: list[dict] = []
+    if folder.exists():
+        for path in sorted(folder.glob("*.csv")):
+            with path.open(newline="") as fh:
+                rows.extend(csv.DictReader(fh))
+    return rows
+
+
 def load_trades(data_dir: Path | None = None) -> list[dict]:
     path = (data_dir or DATA_DIR) / "trades.csv"
     if not path.exists():

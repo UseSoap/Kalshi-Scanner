@@ -28,7 +28,17 @@ A GitHub Action runs an adaptive loop. An external scheduler (cron-job.org) star
 python -m kalshi_scanner report
 ```
 
-prints, in order: a **fills table** (paper fills by sport and entry-price bucket, open and settled, with average size), then hit rate vs. implied probability **by price bucket, by sport, and by sport within each price bucket**, each with a 95% confidence interval, plus a **synthetic combo simulation** (stack one favorite per game until the combined odds are about 50%, once per day). Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
+prints, in order:
+
+- **Data freshness** (when the last trade, settlement and candidate were logged) and **open positions** (money at risk and what resolves next).
+- A **fills table**: paper fills by sport and entry-price bucket, open and settled, with average size.
+- **ALL SETTLED**, with the **break-even hit rate after fees** and the **edge** (hit rate minus break-even, in percentage points), plus a one-line verdict on whether the 95% confidence interval clears break-even. Every table below uses the same columns, and negative numbers show in parentheses.
+- **Win/loss size** (average win vs. average loss, profit factor), **results by game day** (daily and cumulative P&L, max drawdown, current streak), and **how much data is enough** (trades needed to prove a 1, 2 or 3 point edge, and to confirm the observed rate).
+- The same table **by price bucket, by sport, by sport within each bucket**, then **by side bought, by bid/ask spread, and by entry time** relative to the game's listed end.
+- **Fill quality** (entry price vs. the quote that flagged the trade, partial fills, fees, spread) and the **scan funnel** (contracts seen, fillable, traded, skipped).
+- A **synthetic combo simulation** (stack one favorite per game until the combined odds are about 50%, once per day).
+
+Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
 
 ## Things to know
 
@@ -47,7 +57,7 @@ prints, in order: a **fills table** (paper fills by sport and entry-price bucket
 ## Layout
 
 ```
-kalshi_scanner/   client, scanner, order book, fees, settlement, report, combo simulator
+kalshi_scanner/   client, scanner, order book, fees, settlement, report (+ insights: extra stats), combo simulator
 tests/            mock-based tests (python -m pytest)
 data/             snapshots and paper trades, committed by the Action
 notebooks/        Colab analysis notebook
