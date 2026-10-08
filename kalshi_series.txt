@@ -1,0 +1,2404 @@
+/content/kalshi-scanner
+KXA10REG                     A10 Regular Season Champions
+KXAACREG                     AAC Regular Season Champions
+KXACBGAME                    Spain Liga ACB Game
+KXACBSPREAD                  Spain Liga ACB Spread
+KXACBTOTAL                   Spain Liga ACB Total
+KXACCREG                     ACC Regular Season Champions
+KXAFC                        AFC Championship
+KXAFCCLGAME                  AFC Champions League Game
+KXAFRICAF1                   Africa F1 grand prix
+KXARCHIVETEST                Testing Series
+KXARGLNBGAME                 Liga Nacional de Basquetbol Game
+KXARGPREMDIVBTTS             Argentina Premier Division BTTS
+KXARGPREMDIVSPREAD           Argentina Premier Division Spread
+KXARGPREMDIVTOTAL            Argentina Premier Division Total
+KXASIACUPCRICKET             Asia Cup Winner
+KXATP                        Men's Tournament Winner
+KXATP1RANK                   ATP #1 Ranked Player
+KXATPACES                    ATP Tennis Aces
+KXATPADVANCE                 ATP Stage Qualifiers
+KXATPAMT                     ATP Tour Abierto Mexican Telcel presentado por HSBC
+KXATPANYSET                  ATP Any Set Winner
+KXATPCHALLENGERDOUBLES       ATP Challenger Doubles Match
+KXATPCHALLENGERMATCH         Challenger ATP 
+KXATPCOMPETE                 ATP Player to Compete
+KXATPDOUBLES                 ATP Doubles Tennis Match
+KXATPEXACTMATCH              ATP Exact Match Score
+KXATPEXACTSETS               testing
+KXATPFINALS                  ATP Finals Winner
+KXATPFINALSQUAL              Will Player Qualify for ATP Finals?
+KXATPGAME                    ATP Tennis Winner
+KXATPGAMESPREAD              ATP Game Spread
+KXATPGAMETOTAL               ATP Total Games
+KXATPGRANDSLAM               ATP Grand Slam
+KXATPGRANDSLAMFIELD          ATP Grand Slam Field Winner
+KXATPGSPREAD                 ATP Game Spread
+KXATPGTOTAL                  ATP Total Games
+KXATPGWINNER                 ATP Game Winner
+KXATPIT                      ATP Italian Open
+KXATPIWO                     Indian Wells Open
+KXATPMAD                     ATP Madrid
+KXATPMATCH                   ATP Tennis Match
+KXATPMC                      ATP Monte Carlo
+KXATPMCO                     Movistar Chile Open
+KXATPMEN                     Mens ATP Tournament Winner
+KXATPMIA                     ATP Miami
+KXATPNATSTAGE                How many players from country reach stage of tournament?
+KXATPNATWINNER               Nationality of Tennis Tournament Winner 
+KXATPNEXTGEN                 ATP Next Gen Finals
+KXATPNOVAK25                 When will Novak win his 25th Major?
+KXATPRANK                    ATP #1 Ranked Player
+KXATPRETIRE                  Will Djokovic Retire?
+KXATPRETURN                  ATP Player to Return by Date
+KXATPROUND                   Will player reach round?
+KXATPS1GWINNER               ATP set 1 game winner
+KXATPS2GWINNER               ATP set 2 game winner
+KXATPS3GWINNER               ATP set 3 game winner
+KXATPS4GWINNER               ATP set 4 game winner
+KXATPS5GWINNER               ATP set 5 game winner
+KXATPSETSWEEP                Winner without dropping a set
+KXATPSETWINNER               ATP Set Winner
+KXATPSSPREAD                 ATP Set Spread
+KXATPT5RANK                  Top 5 Ranked Player ATP
+KXATPTIEBREAK                Tiebreak to occur in Match
+KXATPTOTALSETS               ATP Total Sets
+KXATPWDDF                    ATP Tour Dubai Duty Free
+KXATPWTA                     Men and Women Tournament Winners
+KXAUSTINMAJOR                Rennsport at 2025 Esports World Cup
+KXBALLONDORNATION            Ballon d'Or nationality
+KXBATTLEOFSEXES              Battle of the Sexes Tennis Match
+KXBBLGAME                    Bundesliga Basketball Game
+KXBBSERIEA2GAME              Italy Serie A2 Game
+KXBBSERIEAGAME               Italy Serie A Game
+KXBBSERIEASPREAD             Italy Serie A Spread
+KXBBSERIEATOTAL              Italy Serie A Total
+KXBBSERIEBGAME               Italy Serie B Basketball Game
+KXBBWSERIEAGAME              Italy Serie A (W) Game
+KXBIG10REG                   Big Ten Regular Season Champions
+KXBIG12REG                   Big 12 Regular Season Champions
+KXBIGEASTREG                 Big East Regular Season Champions
+KXBOLPDIVGAME                Bolivia Premier Division Game
+KXBOXING                     Boxing Match Champion
+KXBOXING1MIN                 Boxing 1 Minute Fight
+KXBOXINGDISTANCE             Boxing Fight to Go the Distance
+KXBOXINGFIGHT                Boxing fight winner
+KXBOXINGKNOCKOUT             Boxing Knockout
+KXBOXINGMOV                  Boxing Method of Victory
+KXBOXINGROUNDS               Boxing Total Rounds
+KXBOXINGVICROUND             Boxing Victory in Round
+KXBRASILEIROBGAME            Brasileiro Serie B Game
+KXBRASILEIROCGAME            Brasileiro Serie C Game
+KXBRASILEIROGAME             Brasileiro Serie A Game
+KXBRASILEIROSPREAD           Brasileiro Serie A Game
+KXBRASILEIROTOP              Brasileiro Serie A
+KXBUNDESLIGA                 BUNDESLIGA
+KXBUNDESLIGA1H               Bundesliga First Half Winner
+KXBUNDESLIGA1HBTTS           1st Half BTTS
+KXBUNDESLIGA1HSCORE          1st Half Correct Score
+KXBUNDESLIGA1HSPREAD         1st Half Spread
+KXBUNDESLIGA1HTOTAL          1st Half Total
+KXBUNDESLIGA2ADVANCE         To Advance
+KXBUNDESLIGA2BTTS            BTTS
+KXBUNDESLIGA2GAME            Bundesliga 2 Game
+KXBUNDESLIGA2H               2nd Half Winner
+KXBUNDESLIGA2HBTTS           2nd Half BTTS
+KXBUNDESLIGA2HSPREAD         2nd Half Spread
+KXBUNDESLIGA2HTOTAL          2nd Half Total
+KXBUNDESLIGA2SPREAD          Spread
+KXBUNDESLIGA2TOTAL           Point Total
+KXBUNDESLIGAADVANCE          To Advance
+KXBUNDESLIGABTTS             Bundesliga BTTS
+KXBUNDESLIGACORNERS          Total Corners
+KXBUNDESLIGAFIRSTGOAL        First Goal
+KXBUNDESLIGAFTTS             First Team to Score
+KXBUNDESLIGAGAME             Bundesliga Game
+KXBUNDESLIGAGOAL             Goalscorer
+KXBUNDESLIGALAST             Bundesliga Last Place Finisher
+KXBUNDESLIGALEADER           Bundesliga Leader
+KXBUNDESLIGAMOV              Method of Victory
+KXBUNDESLIGAPOINTMARGIN      Bundesliga Champion Winning Margin
+KXBUNDESLIGARELEGATION       Bundesliga Relegation
+KXBUNDESLIGASCORE            Correct Score
+KXBUNDESLIGASPREAD           Bundesliga Spread
+KXBUNDESLIGATCORNERS         Team Corners
+KXBUNDESLIGATEAMPOINTS       Team Points
+KXBUNDESLIGATEAMTOTAL        Team Total
+KXBUNDESLIGATOP              Bundesliga Top Finishers
+KXBUNDESLIGATOP4             Bundesliga Top 4 Finishers
+KXBUNDESLIGATOTAL            Bundesliga Total
+KXCANPLGAME                  Canadian Premier League
+KXCARDPRESENCEUFCWH          UFC White House event
+KXCHALLENGERMATCH            Challenger ATP 
+KXCHAMPTOUR                  PGA Champions Tour
+KXCHLLDPGAME                 Chile Liga de Primera Game
+KXCITYCHAMPS                 City Major Sports Championships
+KXCITYMLBEXPAND              MLB expansion
+KXCITYNBAEXPAND              Cities NBA expand
+KXCLUBWC                     Club World Cup Championship
+KXCLUBWCHOST                 Club World Cup Host
+KXCOACHOUTMLB                Baseball Managers Out
+KXCOACHOUTMLBDATE            MLB Coach Out Date
+KXCOACHOUTNBA                NBA Coach Out
+KXCOACHOUTNBADATE            NBA Coach Out Date
+KXCOACHOUTNCAAFB             NCAAFB Coaches Out
+KXCOACHOUTNFL                NFL Coach Out
+KXCOACHOUTNFLFIRST           First NFL Coach Out
+KXCONCACAFCCUPGAME           CONCACAF Champions Cup Game
+KXCONCACAFNL                 CONCACAF Nations League
+KXCONCACAFNLGAME             CONCACAF Nations League Game
+KXCONFREALIGNMENT            Conference Realignment
+KXCONMEBOLLIB                CONMEBOL Libertadores
+KXCONMEBOLLIBGAME            CONMEBOL Libertadores Game
+KXCOUNTYCHAMPMATCH           County Championship Cricket Match
+KXCPL                        Caribbean Premier League Champion
+KXCPLMATCH                   Caribbean Premier League Match
+KXCPLTEAMTOTAL               Caribbean Premier League Team Total Runs
+KXCRICKETODIMATCH            Cricket ODI Match
+KXCRICKETT20IMATCH           Cricket T20I Match
+KXCRICKETTESTMATCH           Cricket Test Match
+KXCRICKETWOMENODIMATCH       Cricket Women ODI Match
+KXCRICKETWOMENT20IMATCH      Cricket Women T20I Match
+KXCRICKETWOMENTESTMATCH      Cricket Women Test Match
+KXCS2GAME                    Counter-Strike 2 Game
+KXCS2MAP                     Counter-Strike 2 Map Winner 
+KXCS2QUALIFIER               CS2 Qualifier
+KXCS2QUALIFIERS              CS2 Qualifier
+KXCS2QUALIFY                 CS2 Qualifier
+KXCSGOGAME                   Counter-Strike 2 Games
+KXDANISHSUPERLIGAGAME        Danish Superliga Game
+KXDAVISCUP                   Davis Cup Champions
+KXDBBFGAME                   Denmark Basketligaen Game
+KXDDFMENSINGLES              Dubai Duty Free Tennis Championships
+KXDDFWOMENSINGLES            Dubai Duty Free Tennis Championships
+KXDENSUPERLIGA               Danish Superliga Champion
+KXDENSUPERLIGAADVANCE        To Advance
+KXDENSUPERLIGABTTS           BTTS
+KXDENSUPERLIGAGAME           Danish Superliga Game
+KXDENSUPERLIGASPREAD         Spread
+KXDENSUPERLIGATOTAL          Point Total
+KXDIMAYORGAME                Liga DIMAYOR Game
+KXDOTA2                      Dota 2 Tournament Winner
+KXDOTA2GAME                  Dota 2 Game
+KXDOTA2GAME3WAY              Dota 2 Game
+KXDOTA2MAP                   Dota 2 Map Winner
+KXDOTA2MBH                   Most Banned Hero
+KXDOTA2MPH                   Most Picked Hero
+KXDOTA2SPREAD                Dota 2 Spread
+KXDOTA2TOTALMAPS             Dota 2 Total Maps
+KXDPWORLDTOUR                DP World Tour Tournament Winner
+KXDPWORLDTOURMAKECUT         DP World Tour To Make Cut
+KXDPWORLDTOURR1LEAD          DP World Tour R1 Leader
+KXDPWORLDTOURR2LEAD          DP World Tour R2 Leader
+KXDPWORLDTOURR3LEAD          DP World Tour R3 Leader
+KXDPWTH2H                    golf tournament matchup
+KXDUNKMAN                    Dunkman World Championships Winner
+KXDWCSCARDKO                 Contender Series Card Knockouts
+KXECULP                      Ecuador Liga Pro
+KXECULPGAME                  Ecuador Liga Pro Game
+KXEFLCHAMPIONSHIP            EFL Championship League Winner
+KXEFLCHAMPIONSHIP1H          1st Half Winner
+KXEFLCHAMPIONSHIP1HBTTS      1st Half BTTS
+KXEFLCHAMPIONSHIP1HSPREAD    1st Half Spread
+KXEFLCHAMPIONSHIP1HTOTAL     1st Half Total
+KXEFLCHAMPIONSHIPADVANCE     EFL Championship Advance
+KXEFLCHAMPIONSHIPBTTS        BTTS
+KXEFLCHAMPIONSHIPGAME        EFL Championship Game
+KXEFLCHAMPIONSHIPSPREAD      EFL Championship Spread
+KXEFLCHAMPIONSHIPTEAMTOTAL   Team Total
+KXEFLCHAMPIONSHIPTOTAL       EFL Championship Total
+KXEFLCUPGAME                 EFL Cup Game
+KXEGYPL                      Egyptian Premier League 
+KXEGYPLGAME                  Egyptian Premier League Game
+KXELITESERIENADVANCE         To Advance
+KXELITESERIENBTTS            BTTS
+KXELITESERIENGAME            Eliteserien Game
+KXELITESERIENSPREAD          Spread
+KXELITESERIENTOTAL           Point Total
+KXEPL1H                      Premier League First Half Winner
+KXEPL1HBTTS                  EPL 1st Half BTTS
+KXEPL1HSCORE                 1st Half Correct Score
+KXEPL1HSPREAD                EPL 1st Half Spread
+KXEPL1HTOTAL                 EPL 1st Half Total
+KXEPL2H                      2nd Half Winner
+KXEPL2HBTTS                  2nd Half BTTS
+KXEPL2HSPREAD                2nd Half Spread
+KXEPL2HTOTAL                 2nd Half Total
+KXEPLADVANCE                 To Advance
+KXEPLANYGOAL                 EPL Anytime Goalscorer
+KXEPLAST                     EPL Assists
+KXEPLBTTS                    EPL Both Teams to Score
+KXEPLCORNERS                 EPL Corners
+KXEPLFIRSTGOAL               EPL 1st Goalscorer
+KXEPLFTTS                    First Team to Score
+KXEPLGAME                    English Premier League Game
+KXEPLGOAL                    EPL Goalscorer
+KXEPLH2H                     EPL H2H Results
+KXEPLH2HFINISH               EPL H2H Finishing Position
+KXEPLLAST                    EPL Last Place Finisher
+KXEPLLEADER                  EPL Leader
+KXEPLPOINTMARGIN             English Premier League Champion Winning Margin
+KXEPLPOY                     EPL Player Of The Year 
+KXEPLRELEGATION              English Premier League Relegation
+KXEPLSCORE                   Correct Score
+KXEPLSEASONSTAT              EPL Season Stats
+KXEPLSOA                     EPL Score or Assist
+KXEPLSPREAD                  English Premier League Spread
+KXEPLTCORNERS                EPL Team Corners
+KXEPLTEAMPOINTS              Team Points
+KXEPLTEAMTOTAL               Team Total
+KXEPLTESTIMAGE               test
+KXEPLTOP                     EPL Top Finishers
+KXEPLTOP2                    Top 2 Finishers
+KXEPLTOP4                    EPL top 4 teams
+KXEPLTOP6                    Top 6 Finishers
+KXEPLTOTAL                   English Premier League Total Goals
+KXEREDIVISIE                 Eredivisie League Winner
+KXEREDIVISIE1H               1st Half Winner
+KXEREDIVISIE1HBTTS           1st Half BTTS
+KXEREDIVISIE1HSPREAD         1st Half Spread
+KXEREDIVISIE1HTOTAL          1st Half Total
+KXEREDIVISIEADVANCE          To Advance
+KXEREDIVISIEBTTS             BTTS
+KXEREDIVISIEGAME             Eredivisie Game
+KXEREDIVISIESPREAD           Eredivisie Spread
+KXEREDIVISIETEAMTOTAL        Team Total
+KXEREDIVISIETOTAL            Eredivisie Total
+KXEREDIVISIEWGAME            Eredivisie Vrouwen Game
+KXESOCCERGAME                eSoccer Game
+KXESPORTSTEST                TESTING
+KXESPSUPERCUPGAME            Spain Super Cup Game
+KXEUROCUPGAME                EuroCup Basketball Game
+KXEWCAPEXLEGENDS             Apex Legends at 2025 Esports World Cup
+KXEWCCALLOFDUTYBLOPS6        Call of Duty: Black Ops 6 at 2025 Esports World Cup
+KXEWCCHESS                   Chess – Esports World Cup winner
+KXEWCCHESS2025               Chess – Esports World Cup Winner?
+KXEWCCS2                     ESPORTS WORLD CUP COUNTER STRIKE 2
+KXEWCDOTA2                   Dota 2 at 2025 Esports World Cup
+KXEWCEASPORTSFC              EA SPORTS FC 25 at 2025 Esports World Cup WINNER
+KXEWCFATALFURY               FATAL FURY: City of the Wolves at 2025 Esports World Cup
+KXEWCFREEFIRE                Free Fire at 2025 Esports World Cup
+KXEWCHONOROFKINGS            Honor of Kings World Cup at 2025 Esports World Cup
+KXEWCLEAGUEOFLEGENDS         League of Legends featured at 2025 Esports World Cup
+KXEWCMLBB                    Mobile Legends: Bang Bang Mid Season Cup at 2025 Esports World Cup
+KXEWCMOBILELEGENDSBBWOMENS   Mobile Legends: Bang Bang Women's Invitational at 2025 Esports World Cup
+KXEWCPUBGBATTLEG             PUBG: BATTLEGROUNDS at 2025 Esports World Cup
+KXEWCRAINBOW6SEIGE           Rainbow Six at 2025 Esports World Cup WINNER
+KXEWCRB6                     Rainbow Six at 2025 Esports World Cup
+KXEWCRSS                     Rainbow Six at 2025 Esports World Cup
+KXEWCSTARCRAFTII             StarCraft II at 2025 Esports World Cup
+KXEWCTEAMFIGHTTACTICS        Teamfight Tactics featured at 2025 Esports World Cup
+KXEWCVALORANT                VALORANT featured at 2025 Esports World Cup
+KXEXHIBITIONMEN              Men's Tennis Exhibition Match
+KXEXHIBITIONWOMEN            Women's Tennis Exhibition Match
+KXF1                         Formula 1
+KXF1ACTION                   FIA Action of the Year Award
+KXF1BIGGESTMOVER             F1 Biggest Mover
+KXF1CHINA                    F1 team from China
+KXF1CONSTRUCTORS             Formula 1 Constructors
+KXF1DELAY                    F1 Delay
+KXF1FASTESTLAP               F1 Fastest Lap
+KXF1FASTLAP                  F1 Fastest Lap
+KXF1H2H                      F1 Head-to-Head
+KXF1NEXTTEAM                 F1 Next Team
+KXF1OCCUR                    Formula 1 Event Occurrence
+KXF1POLE                     F1 Pole Position
+KXF1POLEPOSITION             Qualify in Pole Position
+KXF1QUALIFY                  Formula 1 Qualify
+KXF1RACE                     F1 Race
+KXF1RACEPODIUM               F1 Race Podium Finisher
+KXF1RACESPRINT               F1 Sprint Race
+KXF1RACETOP10                F1 Race Top 10 Finishers
+KXF1RACETOP5                 F1 Race Top 5 Finishers
+KXF1RACETOPX                 F1 Race Top Finishers
+KXF1RETIRE                   F1 Retire
+KXF1SPRINTFASTLAP            F1 Sprint Race Fastest Lap
+KXF1SPRINTPOLE               F1 Sprint Qualifying Pole Position
+KXF1SPRINTTOP10              F1 Sprint Race Top 10 Finishers
+KXF1SPRINTTOP5               F1 Sprint Race Top 5 Finishers
+KXF1SPRINTTOPCONSTRUCTOR     F1 Sprint Race Top Constructor
+KXF1TOP10                    F1 Top 10 Finishers
+KXF1TOP5                     F1 Top 5 Finishers
+KXF1TOPCONSTRUCTOR           F1 Top Constructor
+KXFACUPGAME                  FA Cup Game
+KXFIBACHAMPGAME              FIBA Champions League Game
+KXFIBACHAMPLEAGUEGAME        FIBA Champions League Game
+KXFIBACHAMPSPREAD            FIBA Champions League Spread
+KXFIBACHAMPTOTAL             FIBA Champions League Total
+KXFIBAECUPGAME               FIBA Europe Cup Game
+KXFIDECANDIDATES             FIDE Candidates qualifiers
+KXFIDECHESSCHAMPION          FIDE Chess Championship
+KXFINCUPGAME                 Suomen Cup Game
+KXFIRSTPICKNBA               NBA first pick
+KXFRASUPERCUPGAME            France Super Cup Game
+KXFROCUPGAME                 Faroe Islands Cup Game
+KXFROPLGAME                  Faroe Islands Premier League Game
+KXGEOGUESSR                  GeoGuessr World Championship Winner
+KXGER3LGAME                  German 3. Liga Game
+KXGOLF                       Golf Tournament Winner
+KXGOLFCAT                    a
+KXGOLFH2H                    Golf Head-to-Head
+KXGOLFMAJOR                  Will golfer win a major by 2030?
+KXGOLFMAJORFUT               How many majors will golfer win by 2036?
+KXGOLFMAJORS                 Golf Majors Won
+KXGOLFNEXTWIN                Next Tournament Win
+KXGOLFTENNISMAJORS           More Major Wins, Tennis vs Golf
+KXGOLFTOURN                  Golf Tournament Winner
+KXGRECUPGAME                 Greek Cup Game
+KXHOLEINONE                  Golf Hole in One
+KXHUNDRED                    Hundred Men's Cricket Champion
+KXHUNDREDMATCH               The Hundred Cricket Match
+KXIBPLGAME                   Men's Iceland Basketball Premier League Game
+KXIIHF                       Who will win IIHF championship?
+KXIIHFCHAMP                  IIHF World Championship winner
+KXINDYCARBIGGESTMOVER        IndyCar Biggest Mover
+KXINDYCARFASTLAP             IndyCar Fastest Lap
+KXINDYCARPOLE                IndyCar Pole Position
+KXINDYCARRACE                IndyCar Race
+KXINDYCARSERIES              IndyCar Series Champion
+KXINDYCARTOP10               IndyCar Top 10 Finishers
+KXINDYCARTOP3                IndyCar Top 3 Finishers
+KXINDYCARTOP5                IndyCar Top 5 Finishers
+KXINTERCONCUPGAME            Intercontinental Cup Match
+KXIPL                        IPL Winner
+KXIPLFINAL                   IPL Final Qualifiers
+KXIPLFINALS                  IPL Final Qualifiers
+KXIPLFIRST10                 IPL First 10 Overs Winner
+KXIPLFIRST15                 IPL First 15 Overs Winner
+KXIPLFIRST6                  IPL First 6 Overs Winner
+KXIPLFOUR                    IPL Total Fours
+KXIPLGAME                    Indian Premier League Cricket Game
+KXIPLORANGECAP               IPL Orange Cap Winner
+KXIPLPLAYOFF                 IPL Cricket Playoff Qualifiers
+KXIPLPURPLECAP               IPL Purple Cap Winner
+KXIPLSIX                     IPL Total Sixes
+KXIPLTEAMTOTAL               IPL Team Total Runs
+KXIPLTOTAL                   IPL Total Runs
+KXISRNLCUPGAME               National League Cup Game
+KXISRNLGAME                  Liga Leumit Game
+KXISRPLCUPGAME               Premier League Cup Game
+KXISRPLGAME                  Israeli Premier League Game
+KXISRSCUPGAME                State Cup Game
+KXISRSUPCUPGAME              Super Cup Game
+KXITASUPERCUPGAME            Italy Super Cup Game
+KXITFDOUBLES                 ITF Doubles Match
+KXITFMATCH                   ITF Men's Match
+KXITFWDOUBLES                ITF Women's Doubles Match
+KXITFWMATCH                  ITF Women's Match
+KXITTFMENMATCH               ITTF Table Tennis
+KXJOINCLUB                   Soccer Join Club
+KXJOINLEAGUE                 Soccer Join League
+KXKBO                        KBO Champion
+KXKBOGAME                    KBO Game
+KXKBORFI                     KBO First Inning Run
+KXKBOSPREAD                  KBO Spread
+KXKBOTOTAL                   KBO Total Runs
+KXKNVBCUPGAME                KNVB Cup Game
+KXKXECULPGAME                delete
+KXKXNCAAFTOPCFPPOLL          College Football CFP Poll
+KXKXUFCWOMBANTAMWEIGHTTITLE  UFC Women Bantamweight Title Holder
+KXLALIGA                     LA LIGA
+KXLALIGA1H                   La Liga First Half Winner
+KXLALIGA1HBTTS               1st Half BTTS
+KXLALIGA1HSCORE              1st Half Correct Score
+KXLALIGA1HSPREAD             1st Half Spread
+KXLALIGA1HTOTAL              1st Half Total
+KXLALIGA2ADVANCE             To Advance
+KXLALIGA2BTTS                BTTS
+KXLALIGA2GAME                LaLiga 2 Game
+KXLALIGA2H                   2nd Half Winner
+KXLALIGA2HBTTS               2nd Half BTTS
+KXLALIGA2HSPREAD             2nd Half Spread
+KXLALIGA2HTOTAL              2nd Half Total
+KXLALIGA2PROMO               La Liga 2 Promotion
+KXLALIGA2SPREAD              Spread
+KXLALIGA2TOTAL               Point Total
+KXLALIGAADVANCE              To Advance
+KXLALIGABTTS                 La Liga BTTS
+KXLALIGACORNERS              Total Corners
+KXLALIGAFIRSTGOAL            First Goal
+KXLALIGAFTTS                 First Team to Score
+KXLALIGAGAME                 La Liga Game
+KXLALIGAGOAL                 Goalscorer
+KXLALIGALAST                 La Liga Last Place Finisher
+KXLALIGALEADER               La Liga Leader
+KXLALIGAMOV                  Method of Victory
+KXLALIGAPOINTMARGIN          La Liga Champion Winning Margin
+KXLALIGARELEGATION           La Liga Relegation
+KXLALIGASCORE                Correct Score
+KXLALIGASPREAD               La Liga Spread
+KXLALIGATCORNERS             Team Corners
+KXLALIGATEAMPOINTS           Team Points
+KXLALIGATEAMTOTAL            Team Total
+KXLALIGATOP                  La Liga Top Finishers
+KXLALIGATOP4                 La Liga Top 4 Finishers
+KXLALIGATOTAL                La Liga Total
+KXLAVERCUPMATCH              Laver Cup Tennis Match
+KXLAXGAME                    NCAA Lacrosse Game
+KXLBPGAME                    Colombia LBP Basketball Game
+KXLEADERMLBAVG               MLB Batting Average Leader
+KXLEADERMLBDOUBLES           MLB Doubles Leader
+KXLEADERMLBERA               MLB ERA Leader
+KXLEADERMLBHITS              MLB Hits Leader
+KXLEADERMLBHR                MLB Home Runs Leader
+KXLEADERMLBKS                Pro Baseball Strikeouts Leader
+KXLEADERMLBOPS               MLB OPS Leader
+KXLEADERMLBRBI               MLB RBIs Leader
+KXLEADERMLBRUNS              MLB Runs Leader
+KXLEADERMLBSAVES             MLB Saves Leader
+KXLEADERMLBSTEALS            MLB Steals Leader
+KXLEADERMLBSTRIKEOUTS        MLB Strikeouts Leader
+KXLEADERMLBTRIPLES           MLB Triples Leader
+KXLEADERMLBWAR               MLB WAR Leader
+KXLEADERMLBWINS              MLB Wins Leader
+KXLEADERNBA3PT               NBA 3PG Leader
+KXLEADERNBAAST               NBA APG Leader
+KXLEADERNBABLK               NBA BPG Leader
+KXLEADERNBAPTS               NBA PPG Leader
+KXLEADERNBAREB               NBA RPG Leader
+KXLEADERNBASTL               NBA SPG Leader
+KXLEADERNFLAPYDS             Pro Football All-Purpose Yards Leader
+KXLEADERNFLINT               NFL leader interceptions
+KXLEADERNFLPINT              Pro Football Pass INT 
+KXLEADERNFLPTDS              NFL leader passing TDs
+KXLEADERNFLPYDS              NFL leader passing yards
+KXLEADERNFLRTDS              NFL leader receiving TDs
+KXLEADERNFLRUSHTDS           NFL leader rushing TDs
+KXLEADERNFLRUSHYDS           NFL leader rushing yards
+KXLEADERNFLRYDS              NFL leader receiving yards
+KXLEADERNFLSACKS             NFL Sacks Leader
+KXLEADERUCLGOALS             UCL Top Goalscorer
+KXLEADERWNBA3PT              WNBA Total 3-Pointers Made Leader
+KXLEADERWNBAAST              WNBA APG Leader
+KXLEADERWNBAPTS              WNBA PPG Leader
+KXLEADERWNBAREB              WNBA RPG Leader
+KXLEAGUE                     League of Legends World Championship
+KXLEAGUESCUPGAME             Leagues Cup Game
+KXLEAGUEWORLDS               League of Legends Worlds
+KXLIGAEXP1H                  1st Half Winner
+KXLIGAEXP1HBTTS              1st Half BTTS
+KXLIGAEXP1HSPREAD            1st Half Spread
+KXLIGAEXP1HTOTAL             1st Half Total
+KXLIGAEXPADVANCE             To Advance
+KXLIGAEXPBTTS                BTTS
+KXLIGAEXPGAME                Liga Expansion Game
+KXLIGAEXPSPREAD              Spread
+KXLIGAEXPTEAMTOTAL           Team Total
+KXLIGAEXPTOTAL               Point Total
+KXLIGAMX                     Liga MX Winner
+KXLIGAMX1H                   1st Half Winner
+KXLIGAMX1HBTTS               1st Half BTTS
+KXLIGAMX1HSCORE              1st Half Correct Score
+KXLIGAMX1HSPREAD             1st Half Spread
+KXLIGAMX1HTOTAL              1st Half Total
+KXLIGAMX2H                   2nd Half Winner
+KXLIGAMX2HBTTS               2nd Half BTTS
+KXLIGAMX2HSPREAD             2nd Half Spread
+KXLIGAMX2HTOTAL              2nd Half Total
+KXLIGAMXADVANCE              Liga MX Advance
+KXLIGAMXBTTS                 Liga MX BTTS
+KXLIGAMXCORNERS              Total Corners
+KXLIGAMXFIRSTGOAL            First Goal
+KXLIGAMXFTTS                 First Team to Score
+KXLIGAMXGAME                 Liga MX Game
+KXLIGAMXGOAL                 Goalscorer
+KXLIGAMXLEADER               Liga MX Leader
+KXLIGAMXMOV                  Method of Victory
+KXLIGAMXSCORE                Correct Score
+KXLIGAMXSPREAD               Liga MX Game
+KXLIGAMXTCORNERS             Team Corners
+KXLIGAMXTEAMTOTAL            Team Total
+KXLIGAMXTOP                  Liga MX Top Finishers
+KXLIGAMXTOTAL                Liga MX Total
+KXLIGAPORTUGAL               Liga Portugal Winner
+KXLIGAPORTUGAL1H             1st Half Winner
+KXLIGAPORTUGAL1HBTTS         1st Half BTTS
+KXLIGAPORTUGAL1HSPREAD       1st Half Spread
+KXLIGAPORTUGAL1HTOTAL        1st Half Total
+KXLIGAPORTUGALADVANCE        To Advance
+KXLIGAPORTUGALBTTS           BTTS
+KXLIGAPORTUGALGAME           Liga Portugal Game
+KXLIGAPORTUGALSPREAD         Spread
+KXLIGAPORTUGALTEAMTOTAL      Team Total
+KXLIGAPORTUGALTOTAL          Point Total
+KXLIGUE1                     LIGUE 1
+KXLIGUE11H                   Ligue 1 First Half Winner
+KXLIGUE11HBTTS               1st Half BTTS
+KXLIGUE11HSCORE              1st Half Correct Score
+KXLIGUE11HSPREAD             1st Half Spread
+KXLIGUE11HTOTAL              1st Half Total
+KXLIGUE12H                   2nd Half Winner
+KXLIGUE12HBTTS               2nd Half BTTS
+KXLIGUE12HSPREAD             2nd Half Spread
+KXLIGUE12HTOTAL              2nd Half Total
+KXLIGUE1ADVANCE              To Advance
+KXLIGUE1BTTS                 Ligue 1 BTTS
+KXLIGUE1CORNERS              Total Corners
+KXLIGUE1FIRSTGOAL            First Goal
+KXLIGUE1FTTS                 First Team to Score
+KXLIGUE1GAME                 Ligue 1 Game
+KXLIGUE1GOAL                 Goalscorer
+KXLIGUE1LAST                 Ligue 1 Last Place Finisher
+KXLIGUE1LEADER               Ligue 1 Leader
+KXLIGUE1MOV                  Method of Victory
+KXLIGUE1POINTMARGIN          Ligue 1 Champion Winning Margin
+KXLIGUE1RELEGATION           Ligue 1 Relegation
+KXLIGUE1SCORE                Correct Score
+KXLIGUE1SPREAD               Ligue 1 Spread
+KXLIGUE1TCORNERS             Team Corners
+KXLIGUE1TEAMPOINTS           Team Points
+KXLIGUE1TEAMTOTAL            Team Total
+KXLIGUE1TOP                  Ligue 1 Top Finishers
+KXLIGUE1TOP4                 Ligue 1 Top 4 Finishers
+KXLIGUE1TOTAL                Ligue 1 Total
+KXLIGUE2BTTS                 BTTS
+KXLIGUE2GAME                 Ligue 2 Game
+KXLIGUE2SPREAD               Spread
+KXLIGUE2TOTAL                Point Total
+KXLIGUILLAQUAL               Liga MX
+KXLIVCOMPETE                 Golfers to Compete in a LIV Event
+KXLIVOCCUR                   LIV Golf Event Occurrence 
+KXLNBPGAME                   LNBP Basketball Game
+KXLOL                        League of Legends
+KXLOLAWARD                   League of Legends Award
+KXLOLGAME                    League of Legends Game
+KXLOLGAMES                   League of Legends Games
+KXLOLMAP                     League of Legends Map Winner
+KXLOLQUALIFIERS              League of Legends Qualifiers
+KXLOLSPREAD                  League of Legends Spread
+KXLOLTOTAL                   League of Legends Total Maps Played
+KXLOLTOTALMAPS               League of Legends Total Maps
+KXLPGADAYWINNER              Day winner of LPGA event
+KXLPGAR1LEAD                 LPGA Round 1 Leader
+KXLPGAR2LEAD                 LPGA Round 2 Leader
+KXLPGAR3LEAD                 Round 3 LPGA Leader
+KXLPGATOUR                   PGA Tour
+KXLPL                        Lanka Premier League Champion
+KXLPLMATCH                   Lanka Premier League Match
+KXLVAVIRGAME                 Latvian Virsliga Game
+KXMANCITYPREMTITLE           Premier League Titles Stripped
+KXMARMAD3D                   Men's March Madness Triple Double
+KXMARMADCONF                 March Madness Conference
+KXMARMADCONFWIN              March Madness Conference Winner
+KXMASTERS                    Masters Tournament
+KXMASTERSCUT                 Masters Cut
+KXMCMEN                      ATP Monte-Carlo Winner
+KXMCMMEN                     ATP Monte-Carlo Masters Winner
+KXMENWORLDCUP                Men's World Cup winner
+KXMIXEDDOUBLESMATCH          Mixed Doubles Tennis Match
+KXMLB                        World Series
+KXMLB100LOSS                 Pro Baseball 100 losses
+KXMLB500                     MLB teams at .500
+KXMLBAL                      MLB American League Championship
+KXMLBALCENT                  American League Central Winner
+KXMLBALCPOTY                 Pro Baseball American League Comeback Player of the Year
+KXMLBALCSMVP                 Pro Baseball American League Championship Series MVP
+KXMLBALCSQUAL                ALCS Qualifiers
+KXMLBALCY                    Pro Baseball American League Cy Young
+KXMLBALEAST                  American League East Winner
+KXMLBALHAARON                Pro Baseball American League Hank Aaron
+KXMLBALLSTAR                 Pro Baseball All-Stars
+KXMLBALLSTARHR               Pro Baseball All-Star Game Total Home Runs
+KXMLBALMOTY                  Pro Baseball American League Manager of the Year
+KXMLBALMVP                   Pro Baseball American League MVP
+KXMLBALRELOTY                Pro Baseball American League Reliever of the Year
+KXMLBALROTY                  Pro Baseball American League Rookie of the Year
+KXMLBALWEST                  American League West Winner
+KXMLBASGAME                  Professional Baseball All-Star Game
+KXMLBASGHIT                  All Star Game Hits
+KXMLBASGHR                   All Star Game Home Runs
+KXMLBASGKS                   All Star Game Strikesouts
+KXMLBASGMVP                  Pro Baseball All-Star Game MVP
+KXMLBAWARDCOMBO              Pro Baseball Award Combo
+KXMLBAWARDFIN                Pro Baseball Award Finalists
+KXMLBBESTRECORD              Pro Baseball Best Record
+KXMLBBGAME                   Mobile Legends Bang Bang Game
+KXMLBCHAMPDIVISION           Pro Baseball Champion Division
+KXMLBCHAMPLEAGUE             Pro Baseball Championship League
+KXMLBCOACH                   Pro Baseball Next Manager
+KXMLBDEBUT                   Pro Baseball Debut
+KXMLBDELAY                   Pro Baseball Weather Delay
+KXMLBDIVWINNER               MLB divisions
+KXMLBDRAFTPICK               Pro Baseball Draft Pick
+KXMLBDRAFTTOP                Pro Baseball Top Pick
+KXMLBEOTY                    Pro Baseball Executive of the Year
+KXMLBERA                     Pro Baseball Earned Runs
+KXMLBEXTRAS                  MLB Extra Innings
+KXMLBF3                      First 3 Innings Winner
+KXMLBF5                      First 5 Innings Winner
+KXMLBF5SPREAD                First 5 Innings Spread
+KXMLBF5TOTAL                 First 5 Innings Total
+KXMLBF7                      First 7 Innings Winner
+KXMLBFASTPITCH               Fastest Pitch of season
+KXMLBFOD                     Field of Dreams Teams
+KXMLBFODTEAMS                Field of Dreams Teams
+KXMLBFTGAME                  Pro Baseball Futures Game
+KXMLBGAME                    Professional Baseball Game
+KXMLBGG                      Pro Baseball Gold Glove
+KXMLBHA                      Pro Baseball Hits Allowed
+KXMLBHIT                     Pro Baseball Hits
+KXMLBHR                      Pro Baseball Home Runs
+KXMLBHRDERBY                 Pro Baseball Homerun Derby
+KXMLBHRDERBY500              500+ Foot HRs at the Home Run Derby
+KXMLBHRDERBYDISTANCE         Pro Baseball Home Run Derby Longest Distance
+KXMLBHRDERBYFIN              Pro Baseball Home Run Derby Finals Qualifiers
+KXMLBHRDERBYFORECAST         Home Run Derby Finals Forecast
+KXMLBHRDERBYLONGEST          Pro Baseball Home Run Derby Player to Hit Longest
+KXMLBHRDERBYMATCHUP          Pro Baseball Home Run Derby Final Matchup
+KXMLBHRDERBYOU               Pro Baseball Home Run Derby Over/Under Home Runs
+KXMLBHRDERBYQUAL             Pro Baseball Home Run Derby Selections
+KXMLBHRDERBYR1LEAD           Round 1 Leader
+KXMLBHRDERBYSEMI             Pro Baseball Home Run Derby Semifinals Qualifiers
+KXMLBHRDERBYTOT              Home Run Derby Total Home Runs
+KXMLBHRDERBYVELO             Highest Exit Velocity Home run
+KXMLBHRR                     Pro Baseball Hits Runs RBIs
+KXMLBINNINGTOTAL             Pro Baseball Inning Total
+KXMLBINNINGWIN               Pro Baseball Inning Win
+KXMLBKS                      Pro Baseball Strikeouts
+KXMLBLEADERPLAYOFF           Pro Baseball Playoff Leader
+KXMLBLSTREAK                 Longest Losing Streak
+KXMLBMATCHUP                 Pro Baseball Playoff Matchups
+KXMLBNEXTHR                  Pro Baseball Next Homerun
+KXMLBNEXTTEAM                Pro Baseball Next Team
+KXMLBNL                      MLB National League Championship
+KXMLBNLCENT                  National League Central Winner
+KXMLBNLCPOTY                 National League Comeback Player of the Year
+KXMLBNLCSMVP                 Pro Baseball National League Championship Series MVP
+KXMLBNLCSQUAL                NLCS Qualifiers
+KXMLBNLCY                    Pro Baseball National League Cy Young
+KXMLBNLEAST                  National League East Winner
+KXMLBNLHAARON                Pro Baseball American League Hank Aaron
+KXMLBNLMOTY                  Pro Baseball National League Manager of the Year
+KXMLBNLMVP                   Pro Baseball National League MVP
+KXMLBNLRELOTY                Pro Baseball National League Reliever of the Year
+KXMLBNLROTY                  Pro Baseball National League Rookie of the Year
+KXMLBNLWEST                  National League West Winner
+KXMLBOPENINGDAY              Pro Baseball Opening Day
+KXMLBOUTS                    Pro Baseball Outs Recorded
+KXMLBPITCH                   Pro Baseball Player to Pitch
+KXMLBPITCHEROTM              Pro Baseball Pitcher of the Month
+KXMLBPLAYEROTM               Pro Baseball Player of the Month
+KXMLBPLAYEROTW               Pro Baseball Player of the Week
+KXMLBPLAYOFFHOST             MLB Playoff Games Hosted
+KXMLBPLAYOFFHRS              Pro Baseball Playoff Home Runs
+KXMLBPLAYOFFS                Pro Baseball Playoff Qualifiers
+KXMLBRBI                     Pro Baseball RBIs
+KXMLBRETURN                  Pro Baseball Player Return
+KXMLBRFI                     Pro Baseball Run in First Inning
+KXMLBSB                      Pro Baseball Stolen Bases
+KXMLBSEASONGAMES             Pro Baseball Games Played in a Season
+KXMLBSEASONHR                Pro Baseball Season Home Runs
+KXMLBSEEDWIN                 Pro Baseball Seed Win
+KXMLBSERIES                  Pro Baseball Series Winner
+KXMLBSERIESEXACT             Professional Baseball Series Exact Result
+KXMLBSERIESGAMES             Pro Baseball Series Total Games
+KXMLBSERIESGAMETOTAL         Professional Baseball Series Total Games
+KXMLBSERIESSCORE             Pro Baseball Series Exact Score
+KXMLBSERIESSPREAD            Pro Baseball Series Game Spread
+KXMLBSISTREAK                Pro Baseball Scoreless Innings Streak
+KXMLBSPREAD                  Pro Baseball Spread
+KXMLBSS                      Pro Baseball Silver Slugger
+KXMLBSTARTER                 MLB Starting Pitcher
+KXMLBSTAT                    Pro Baseball Season Stat
+KXMLBSTATCOUNT               Pro Baseball Season Stat
+KXMLBSTGAME                  Pro Baseball Spring Training game
+KXMLBTB                      Pro Baseball Total Bases
+KXMLBTEAMSALE                Pro Baseball Team Sale
+KXMLBTEAMSTAT                Pro Baseball Team Stat
+KXMLBTEAMTOTAL               Pro Baseball Team Total
+KXMLBTOTAL                   Pro Baseball Total Points
+KXMLBTRADE                   Pro Baseball Trades
+KXMLBTRIPLECROWN             Pro Baseball Triple Crown
+KXMLBWA                      Pro Baseball Walks
+KXMLBWALK                    Pro Baseball Walks
+KXMLBWALKOFFS                Pro Baseball Walk-Off Home Runs
+KXMLBWINS-ATH                Pro baseball wins A's
+KXMLBWINS-ATL                Pro baseball wins Atlanta
+KXMLBWINS-AZ                 Pro baseball wins Arizona
+KXMLBWINS-BAL                Pro baseball wins Baltimore
+KXMLBWINS-BOS                Pro baseball wins Boston
+KXMLBWINS-CHC                Pro baseball wins Chicago C
+KXMLBWINS-CIN                Pro baseball wins Cincinnati
+KXMLBWINS-CLE                Pro baseball wins Cleveland
+KXMLBWINS-COL                Pro baseball wins Colorado
+KXMLBWINS-CWS                Pro baseball wins Chicago W
+KXMLBWINS-DET                Pro baseball wins Detroit
+KXMLBWINS-HOU                Pro baseball wins Houston
+KXMLBWINS-KC                 Pro baseball wins Kansas City
+KXMLBWINS-LAA                Pro baseball wins Los Angeles A
+KXMLBWINS-LAD                Pro baseball wins Los Angeles D
+KXMLBWINS-MIA                Pro baseball wins Miami
+KXMLBWINS-MIL                Pro baseball wins Milwaukee
+KXMLBWINS-MIN                Pro baseball wins Minnesota
+KXMLBWINS-NYM                Pro baseball wins New York M
+KXMLBWINS-NYY                Pro baseball wins New York Y
+KXMLBWINS-PHI                Pro baseball wins Philadelphia
+KXMLBWINS-PIT                Pro baseball wins Pittsburgh
+KXMLBWINS-SD                 Pro baseball wins San Diego
+KXMLBWINS-SEA                Pro baseball wins Seattle
+KXMLBWINS-SF                 Pro baseball wins San Francisco
+KXMLBWINS-STL                Pro baseball wins St. Louis
+KXMLBWINS-TB                 Pro baseball wins Tampa Bay
+KXMLBWINS-TEX                Pro baseball wins Texas
+KXMLBWINS-TOR                Pro baseball wins Toronto
+KXMLBWINS-WSH                Pro baseball wins Washington
+KXMLBWORLD                   World Baseball Classic
+KXMLBWORSTRECORD             Pro Baseball Best Record
+KXMLBWS                      MLB World Series
+KXMLBWSMVP                   Pro Baseball Championship MVP
+KXMLBWSTREAK                 Longest Winning Streak
+KXMLC                        Major League Cricket Champion
+KXMLS1H                      1st Half Winner
+KXMLS1HBTTS                  1st Half BTTS
+KXMLS1HSCORE                 1st Half Correct Score
+KXMLS1HSPREAD                1st Half Spread
+KXMLS1HTOTAL                 1st Half Total
+KXMLS2H                      2nd Half Winner
+KXMLS2HBTTS                  2nd Half BTTS
+KXMLS2HSPREAD                2nd Half Spread
+KXMLS2HTOTAL                 2nd Half Total
+KXMLSADVANCE                 MLS To Advance
+KXMLSASTADVANCE              To Advance
+KXMLSASTBTTS                 BTTS
+KXMLSASTGAME                 MLS All Star Game
+KXMLSASTSPREAD               Spread
+KXMLSASTTOTAL                Point Total
+KXMLSBTTS                    MLS BTTS
+KXMLSCORNERS                 Total Corners
+KXMLSCUP                     MLS Cup champion
+KXMLSEAST                    MLS Western Conference winner?
+KXMLSFIRSTGOAL               First Goal
+KXMLSFTTS                    First Team to Score
+KXMLSGAME                    Major League Soccer Game
+KXMLSGOAL                    Goalscorer
+KXMLSJOIN                    MLS Transfers
+KXMLSLEADER                  MLS Leader
+KXMLSMOV                     Method of Victory
+KXMLSSCORE                   Correct Score
+KXMLSSKILLS                  MLS Skills Challenge Winner
+KXMLSSPREAD                  MLS Spread
+KXMLSTCORNERS                Team Corners
+KXMLSTEAMTOTAL               Team Total
+KXMLSTOTAL                   MLS Total
+KXMLSWEST                    MLS Western Conference winner?
+KXMWORLDCUP                  Men's World Cup winner
+KXMWREG                      Mountain West Regular Season Champions
+KXNASCAR                     NASCAR Cup Series playoffs
+KXNASCARAUTOPARTSSERIES      NASCAR Auto Parts Series Champion
+KXNASCARBIGGESTMOVER         NASCAR Biggest Mover
+KXNASCARCHALLENGE            NASCAR In-Season Challenge
+KXNASCARCUPCHAMP             Nascar Cup Series Championship
+KXNASCARCUPSEASON            NASCAR Cup Series Regular Season Champion
+KXNASCARCUPSERIES            NASCAR Cup Series Champion
+KXNASCARFASTLAP              NASCAR Fastest Lap
+KXNASCARH2H                  NASCAR Head-to-Head
+KXNASCARPOLE                 NASCAR Pole Position
+KXNASCARRACE                 NASCAR Race
+KXNASCARRACEOLD              NASCAR Race winner
+KXNASCARTOP10                NASCAR Top 10 Finishers
+KXNASCARTOP20                NASCAR Top 20 Finishers
+KXNASCARTOP3                 NASCAR Podium Finishers
+KXNASCARTOP5                 NASCAR Top 5 Finishers
+KXNASCARTOPMANU              NASCAR Top Manufacturer
+KXNASCARTOPTEAM              NASCAR Top Team
+KXNASCARTRUCKSERIES          NASCAR Truck Series Champion
+KXNBA                        Pro Basketball Champion
+KXNBA1H                      NBA 1st Half Winner
+KXNBA1HSPREAD                NBA 1st Half Spread
+KXNBA1HTEAMTOTAL             NBA 1st Half Team Total
+KXNBA1HTOTAL                 NBA 1st Half Total
+KXNBA1HWINNER                Pro Baskeball 1st Half Winner
+KXNBA1Q                      NBA 1st Quarter Winner
+KXNBA1QSPREAD                NBA 1st Quarter Spread
+KXNBA1QTEAMTOTAL             NBA 1st Quarter Team Total
+KXNBA1QTOTAL                 NBA 1st Quarter Total
+KXNBA1QWINNER                NBA 1st Quarter Winner
+KXNBA1STTEAM                 All-NBA 1st Team
+KXNBA1STTEAMDEF              NBA All-Defensive 1st Team
+KXNBA2D                      NBA Player Double Double
+KXNBA2H                      NBA 2nd Half Winner
+KXNBA2HSPREAD                NBA 2nd Half Spread
+KXNBA2HTEAMTOTAL             NBA 2nd Half Team Total
+KXNBA2HTOTAL                 NBA 2nd Half Total
+KXNBA2HWINNER                Pro Basketball 2nd Half Winner
+KXNBA2NDTEAM                 All-NBA 2nd Team
+KXNBA2NDTEAMDEF              NBA All-Defensive 2nd Team
+KXNBA2Q                      2nd Quarter Winner
+KXNBA2QSPREAD                NBA 2nd Quarter Spread
+KXNBA2QTEAMTOTAL             NBA 2nd Quarter Team Total
+KXNBA2QTOTAL                 NBA 1st Quarter Total
+KXNBA2QWINNER                NBA 2nd Quarter Winner
+KXNBA30COMEBACK              NBA 3-0 Series Comeback
+KXNBA3D                      NBA Player Triple Double
+KXNBA3PEAT                   Pro Basketball Three-Peat Champion
+KXNBA3PT                     NBA Player Threes
+KXNBA3PTALLGAMES             Pro Basketball 3-Pointers in Every Game
+KXNBA3PTCONTEST              NBA 3-Point Contest Winner
+KXNBA3Q                      3rd Quarter Winner
+KXNBA3QSPREAD                NBA 3rd Quarter Spread
+KXNBA3QTEAMTOTAL             NBA 3rd Quarter Team Total
+KXNBA3QTOTAL                 NBA 3rd Quarter Total
+KXNBA3QWINNER                NBA 3rd Quarter Winner
+KXNBA3RDTEAM                 All-NBA 3rd Team
+KXNBA4Q                      4th Quarter Winner
+KXNBA4QSPREAD                NBA 4th Quarter Spread
+KXNBA4QTEAMTOTAL             NBA 4th Quarter Team Total
+KXNBA4QTOTAL                 NBA 4th Quarter Total
+KXNBA4QWINNER                NBA 4th Quarter Winner
+KXNBAALLSTAR                 NBA All-Star game
+KXNBAALLSTARGAME             NBA All-Star Game Winner
+KXNBAALLSTARMVP              NBA All-Star Game MVP
+KXNBAALLSTARS                NBA All-Stars
+KXNBAAPOLOGY                 Pro Basketball Apology
+KXNBAAST                     NBA Player Assists
+KXNBAATLANTIC                Pro Basketball Atlantic Division Winner
+KXNBAAWARDFIN                NBA Award Finalists
+KXNBABENCHPTS                NBA Bench Points
+KXNBABLK                     NBA Player Blocks
+KXNBACELEBRITY3PT            NBA Celebrity 3PT Contest
+KXNBACELEBRITYGAME           Pro Basketball All-Star Celebrity Game
+KXNBACENTRAL                 Pro Basketball Central Division Winner
+KXNBACITYEXPAND              NBA City Franchise Expansion
+KXNBACLUTCH                  NBA Clutch Player of the Year
+KXNBACOACHOUT                Pro Basketball Coaches Out
+KXNBACOMPETE                 Pro Basketball Player to Compete
+KXNBACONF                    Pro Basketball Conference to Win the Championship
+KXNBACOY                     NBA Coach of the Year
+KXNBACUP                     Pro Basketball Cup Champion
+KXNBACUP1STTEAM              NBA Cup All-Tournament Team
+KXNBACUPGROUP                NBA Cup Group Winner
+KXNBACUPGROUPWIN             NBA Cup Group to Win
+KXNBACUPMVP                  NBA Cup Tournament MVP
+KXNBACUPQUAL                 Pro Basketball Cup Qualifiers
+KXNBADPOY                    NBA Defensive Player of the Year
+KXNBADRAFT1                  NBA Draft First Pick
+KXNBADRAFT10                 NBA Draft Tenth Pick
+KXNBADRAFT2                  NBA Draft Second Pick
+KXNBADRAFT3                  NBA Draft Third Pick
+KXNBADRAFT4                  NBA Draft Fourth Pick
+KXNBADRAFT5                  NBA Draft Fifth Pick
+KXNBADRAFT6                  NBA Draft Sixth Pick
+KXNBADRAFT7                  NBA Draft Seventh Pick
+KXNBADRAFT8                  NBA Draft Eighth Pick
+KXNBADRAFT9                  NBA Draft Ninth Pick
+KXNBADRAFTCAT                Pro Basketball Draft Category
+KXNBADRAFTCOMP               Pro Basketball Draft Comparison
+KXNBADRAFTCONF               Pro Basketball Players Drafted by Conference
+KXNBADRAFTINT                Pro Basketball International Players Drafted
+KXNBADRAFTMATCHUP            Pro Basketball Draft Matchup
+KXNBADRAFTOU                 Pro Basketball Players Draft Position
+KXNBADRAFTPICK               Pro Basketball Draft Pick
+KXNBADRAFTTEAM               Pro Basketball Team to Draft
+KXNBADRAFTTOP                Pro Basketball Top Draft
+KXNBADRAFTTOP10              NBA Draft Top 10 Pick
+KXNBADRAFTTOP15              NBA Draft Top 15 Pick
+KXNBADRAFTTOP20              NBA Draft Top 20 Pick
+KXNBADRAFTTOP25              NBA Draft Top 25 Pick
+KXNBADRAFTTOP30              NBA Draft Top 30 Pick
+KXNBADRAFTTOP5               NBA Draft Top 5 Pick
+KXNBADRAFTTRADE              Pro Basketball Draft Trade
+KXNBAEAST                    Pro Basketball Eastern Conference Champion
+KXNBAEAST1SEED               NBA Eastern Conference 1 Seed
+KXNBAECFQUAL                 NBA Eastern Conference Finals Qualifiers
+KXNBAEFINMVP                 NBA Eastern Conference Finals MVP
+KXNBAEXEC                    NBA Executive of the Year
+KXNBAEXTENSION               NBA Player Contract Extension
+KXNBAFINALSEXACT             Pro Basketball Championship Series Score
+KXNBAFINALSMVP               Finals MVP
+KXNBAFINALSVIEWER            NBA finals viewership
+KXNBAFINALSVIEWERGAME7       NBA finals viewership
+KXNBAFINBLOWOUT              Pro Basketball Finals Blowout
+KXNBAFINMVP                  NBA Finals MVP
+KXNBAFIRSTBASKET             Pro Basketball First Basket
+KXNBAFIRSTOPPONENT           Pro Basketball First Opponent of the Season
+KXNBAFRANCHISECOST           NBA Franchise Cost
+KXNBAFRANCHISEOWNER          NBA Franchise Owner
+KXNBAFTM                     NBA Player Free Throws Made
+KXNBAGAME                    NBA Game
+KXNBAGAME7                   NBA Series that Go to a Game 7
+KXNBAGAMEHIGHSCORE           NBA Highest Scoring Game of the Season
+KXNBAGAMES                   NBA games
+KXNBAGAMESPECIALS            Pro Basketball Game Specials
+KXNBAH2H3PT                  NBA Head-to-Head Three Pointers
+KXNBAH2HBENCHPTS             NBA Head-to-Head Bench Points
+KXNBAH2HPRA                  NBA Head-to-Head Points, Rebounds and Assists
+KXNBAH2HPTS                  NBA Head-to-Head Points
+KXNBAH2HTEAM3PT              NBA H2H Team Three Pointers
+KXNBAH2HWINS                 NBA Head to Head Win Total
+KXNBAHALLOFFAME              Pro Basketball Hall of Fame
+KXNBAHOMECLINCH              Pro Basketball Series Winner to Clinch at Home
+KXNBAHUSTLE                  NBA Hustle Award
+KXNBAJOINCONF                Pro Basketball Join Conference
+KXNBALASVEGAS                Las Vegas NBA team
+KXNBALOTTERY                 NBA Draft Lottery Picks
+KXNBALOTTERYODDS             NBA Lottery Winner Odds
+KXNBAMATCHUP                 NBA Matchup
+KXNBAMIMP                    NBA Most Improved Player
+KXNBAMOSTWINS                Pro Basketball Highest Win Total
+KXNBAMVP                     NBA MVP
+KXNBAMVPDPOY                 Pro Basketball Player to Win MVP and DPOY
+KXNBANEWCHAMP                NBA First-Time Champion
+KXNBANEWCHAMPION             Pro Basketball New Champion
+KXNBANEXTCONTRACT            Pro Basketball Next Contract Size
+KXNBANEXTGOVERNOR            Pro Basketball Next Governor
+KXNBANEXTTEAM                Pro Basketball Next Team
+KXNBANEXTTEAMCONF            Pro Basketball Next Team Conference
+KXNBANEXTTEAMOUTLET          Pro Basketball Outlet to Announce Next Team
+KXNBANORTHWEST               Pro Basketball Northwest Division Winner
+KXNBAOT                      NBA Overtime
+KXNBAOVERTIME                NBA Overtime
+KXNBAPA                      Pro Basketball Player Points + Assists
+KXNBAPACIFIC                 Pro Basketball Pacific Division Winner
+KXNBAPARTNERSHIP             NBA Player Partnership Deal
+KXNBAPIADVANCE               NBA Play-In Team to Advance
+KXNBAPICKTRADE               Pro Basketball Pick Trade
+KXNBAPLAYERDEAL              Next Pro Basketball Brand Deal
+KXNBAPLAYERHIGHSCORE         NBA Highest Scoring Performance in Regular Season
+KXNBAPLAYERSPECIALS          Pro Basketball Player Specials
+KXNBAPLAYIN                  Which Team Will Make the Play-In Tournament
+KXNBAPLAYOFF                 Pro Basketball Playoff Qualifier
+KXNBAPLAYOFF3D               NBA Playoff Triple-Double
+KXNBAPLAYOFFPTS              NBA Playoffs Player Points
+KXNBAPLAYOFFWINS             NBA Playoff Wins by Team
+KXNBAPLAYTOGETHER            Pro Basketball Players to Play Together
+KXNBAPOLOSE                  Pro Basketball Playoff Losses
+KXNBAPOSTASREC               NBA Best Record Post-All-Star Break
+KXNBAPR                      Pro Basketball Player Points + Rebounds
+KXNBAPRA                     NBA Player Points + Rebounds + Assists
+KXNBAPREPACK2ML              2 ML Basketball Combo
+KXNBAPREPACK3ML              3ML Basketball Combo
+KXNBAPTS                     NBA Player Points
+KXNBAPTSALLGAMES             Pro Basketball Points in Every Game
+KXNBAPTSLEADER               NBA Game Points Leader
+KXNBARA                      Pro Basketball Player Rebounds + Assists
+KXNBARACE                    NBA Race to Points
+KXNBAREB                     NBA Player Rebounds
+KXNBARECORD                  Pro Basketball Best/Worst Regular Season Record
+KXNBARELOCATION              Pro Basketball Team Relocation
+KXNBARETIRE                  NBA Retirement
+KXNBARETURN                  Pro Basketball Player to Return
+KXNBARISINGSTARS             Pro Basketball Rising Stars Tournament
+KXNBAROOKIE1STTEAM           NBA All-Rookie 1st Team
+KXNBAROOKIE2NDTEAM           NBA All-Rookie 2nd Team
+KXNBAROY                     NBA Rookie of the Year
+KXNBARULE                    Pro Basketball Rule
+KXNBASEATTLE                 Seattle NBA team
+KXNBASEED                    NBA Playoff Seed
+KXNBASERIES                  NBA Series Winner
+KXNBASERIES3PMLEADER         Pro Basketball Series 3-Pointers Made Leader
+KXNBASERIESASTLEADER         Pro Basketball Series Assists Leader
+KXNBASERIESCOMEBACK          Pro Basketball Series Comeback
+KXNBASERIESGAMES             NBA Series Total Games
+KXNBASERIESGCOMEBACK         Pro Basketball Series Game Comeback
+KXNBASERIESOT                Pro Basketball Series Overtime
+KXNBASERIESPTS               Pro Basketball Series Player Points
+KXNBASERIESPTSLEADER         Pro Basketball Series Points Leader
+KXNBASERIESPTSSPREAD         Pro Basketball Series Points Spread
+KXNBASERIESREBLEADER         Pro Basketball Series Rebounds Leader
+KXNBASERIESROADWIN           NBA Series 1st Road Win
+KXNBASERIESROADWINS          Pro Basketball Series Total Road Wins
+KXNBASERIESSCORE             NBA Series Exact Score
+KXNBASERIESSPREAD            NBA Series Game Spread
+KXNBASERIESTOTALPTS          Pro Basketball Series Total Points
+KXNBASHOOTINGSTARS           Pro Basketball Shooting Stars Contest
+KXNBASIXTH                   NBA Sixth Man of the Year
+KXNBASJC                     NBA Social Justice Champion
+KXNBASLAMDUNK                NBA Slam Dunk Contest Winner
+KXNBASOUTHEAST               Pro Basketball Southeast Division Winner
+KXNBASOUTHWEST               Pro Basketball Southwest Division Winner
+KXNBASPORTSMANSHIP           NBA Sportsmanship Award
+KXNBASPREAD                  NBA Spread
+KXNBASTADIUM                 NBA Stadium Completion
+KXNBASTAKESALE               NBA Team Ownership Stake Sale Agreement
+KXNBASTARTERS                Pro Basketball Starting Lineup
+KXNBASTATAVG                 NBA Player Stat Average
+KXNBASTATLEADER              NBA Regular Season League Leader
+KXNBASTL                     NBA Player Steals
+KXNBASTOCK                   NBA Player Steals + Blocks
+KXNBASTOCKS                  NBA Player Steals and Blocks
+KXNBASUMMER                  Pro Basketball Summer League Champion
+KXNBASUMMER1HSPREAD          Pro Basketball Summer League 1st Half Spread
+KXNBASUMMER1HTOTAL           Pro Basketball Summer League 1st Half Total
+KXNBASUMMER1HWINNER          Pro Basketball Summer League 1st Half Winner
+KXNBASUMMERGAME              Pro Basketball Summer League Game
+KXNBASUMMERMVP               Pro Basketball Summer League MVP
+KXNBASUMMERPTS               Pro Basketball Summer Player Points
+KXNBASUMMERSPREAD            Pro Basketball Summer League Spread
+KXNBASUMMERTOTAL             Pro Basketball Summer League Total
+KXNBASWEEP                   NBA Teams to Have a Series Sweep
+KXNBATEAM                    NBA team
+KXNBATEAMANNOUNCE            Pro Basketball New Team Announce
+KXNBATEAMMATE                NBA Teammate of the Year
+KXNBATEAMSALE                Pro Basketball Team to be Sold
+KXNBATEAMTOTAL               NBA Team Total
+KXNBATEAMWINSTREAK           NBA Team with the Longest Winning Streak
+KXNBATOJOINCBA               NBA Players to Join the CBA
+KXNBATOP3                    Pro Basketball Draft Lottery Top 3
+KXNBATOP5ROTY                Top 5 NBA draft ROTY
+KXNBATOPPICK                 Pro Basketball Draft Lottery Winner
+KXNBATOTAL                   NBA Total
+KXNBATRADE                   Pro Basketball Trade
+KXNBAUNBEATEN                NBA Playoffs Team to go Undefeated
+KXNBAUPSET                   NBA Number of Upsets per Round
+KXNBAWCFQUAL                 NBA Western Conference Finals Qualifiers
+KXNBAWEST                    Pro Basketball Western Conference Champion
+KXNBAWEST1SEED               NBA Western Conference 1 Seed
+KXNBAWFINMVP                 NBA Western Conference Finals MVP
+KXNBAWHATTEND                Pro Basketball White House Attend
+KXNBAWINMARGIN               NBA Win Margin
+KXNBAWINRECORD               OKC NBA Win Record
+KXNBAWINS                    Pro Basketball Win Totals
+KXNBAWINSTREAK               NBA Longest Win Streak
+KXNBAXMASOPPONENT            Pro Basketball Christmas Day Opponent
+KXNCAABACC                   ACC Men's Basketball Tournament
+KXNCAABASEBALL               College Baseball Champion
+KXNCAABBCONF                 College Baseball Conference Tournament
+KXNCAABBFINAL                College Baseball Final Qualifiers
+KXNCAABBGAME                 College Baseball Game
+KXNCAABBGS                   College Baseball Golden Spikes Award
+KXNCAABBHR                   College Baseball Homeruns
+KXNCAABBIG10                 Big Ten Men's Basketball Tournament
+KXNCAABBIG12                 Big 12 Men's Basketball Tournament
+KXNCAABBIGEAST               Big East Men's Basketball Tournament
+KXNCAABBIGTEN                Big Ten Men's Basketball Tournament
+KXNCAABBPLAYOFFS             College Baseball Playoff Qualifiers
+KXNCAABBREG                  Regional Winner
+KXNCAABBSPREAD               College Baseball Spread
+KXNCAABBTOTAL                College Baseball Total Runs
+KXNCAABGAME                  College Basketball Game
+KXNCAABIVY                   Ivy League Men's Basketball Tournament
+KXNCAABSEC                   SEC Men's Basketball Tournament
+KXNCAAF                      NCAAF Championship
+KXNCAAF1H                    College Football 1st Half Winner
+KXNCAAF1HFT                  College Football 1st Half Fulltime Result
+KXNCAAF1HSPREAD              College Football 1st Half Spread
+KXNCAAF1HTEAMTOTAL           College Football 1st Half Team Total Points
+KXNCAAF1HTOTAL               College Football 1st Half Total
+KXNCAAF1HWINNER              College Football 1st Half Winner
+KXNCAAF1Q                    College Football 1st Quarter Winner
+KXNCAAF1QBTTS                College Football Both Teams to Score in 1st Quarter
+KXNCAAF1QSPREAD              College Football 1st Quarter Spread
+KXNCAAF1QTOTAL               College Football 1st Quarter Total
+KXNCAAF2H                    College Football 2nd Half Winner
+KXNCAAF2HSPREAD              College Football 2nd Half Spread
+KXNCAAF2HTOTAL               College Football 2nd Half Total
+KXNCAAF2PT                   College Football 2-Point Conversion
+KXNCAAF2Q                    College Football 2nd Quarter Winner
+KXNCAAF2QBTTS                College Football Both Teams to Score in 2nd Quarter
+KXNCAAF2QSPREAD              College Football 2nd Quarter Spread
+KXNCAAF2QTOTAL               College Football 2nd Quarter Total
+KXNCAAF3Q                    College Football 3rd Quarter Winner
+KXNCAAF3QBTTS                College Football Both Teams to Score in 3rd Quarter
+KXNCAAF3QSPREAD              College Football 3rd Quarter Spread
+KXNCAAF3QTOTAL               College Football 3rd Quarter Total
+KXNCAAF4Q                    College Football 4th Quarter Winner
+KXNCAAF4QBTTS                College Football Both Teams to Score in 4th Quarter
+KXNCAAF4QSPREAD              College Football 4th Quarter Spread
+KXNCAAF4QTOTAL               College Football 4th Quarter Total
+KXNCAAFAAC                   American Athletic Conference Champion
+KXNCAAFAACQUAL               College Football American Athletic Conference Championship Qualifiers
+KXNCAAFACC                   ACC Champion
+KXNCAAFACCAWARD              College Football ACC Award Winner
+KXNCAAFACCLEADER             College Football ACC Stats Leaders
+KXNCAAFACCQUAL               College Football ACC Championship Qualifiers
+KXNCAAFACCREGTOP             College Football ACC Regular Season Top Finishers
+KXNCAAFACCWINS               College Football ACC Teams to Win
+KXNCAAFAPANY                 College Football AP Rank Anytime in Season
+KXNCAAFAPCHURN               College Football AP Poll Churn
+KXNCAAFAPRANK                College Football AP Rank
+KXNCAAFAWARD                 College Football Award Winner
+KXNCAAFAWARDFIN              College Football Award Finalists
+KXNCAAFB10                   Big Ten Champion
+KXNCAAFB10QUAL               College Football Big Ten Championship Qualifiers
+KXNCAAFB12                   Big 12 Champion
+KXNCAAFB12QUAL               College Football Big 12 Championship Qualifiers
+KXNCAAFB12REGTOP             College Football Big 12 Regular Season Top Finishers
+KXNCAAFBACC                  ACC Champion
+KXNCAAFBB10                  Big Ten Champion
+KXNCAAFBB12                  Big 12 Champion
+KXNCAAFBIG12AWARD            College Football Big 12 Award Winner
+KXNCAAFBIG12LEADER           College Football Big 12 Stats Leaders
+KXNCAAFBIG12WINS             College Football Big 12 Teams to Win
+KXNCAAFBIGTENAWARD           College Football Big Ten Award Winner
+KXNCAAFBIGTENLEADER          College Football Big Ten Stats Leaders
+KXNCAAFBIGTENREGTOP          College Football Big Ten Regular Season Top Finishers
+KXNCAAFBIGTENWINS            College Football Big Ten Teams to Win
+KXNCAAFBOWLGAME              College Football Teams to Make a Bowl Game
+KXNCAAFBSEC                  SEC Champion
+KXNCAAFCFPCONF               College Football Playoff Conference Representation
+KXNCAAFCFPPOLL               College Football CFP Poll
+KXNCAAFCOACHLEAVE            College Football Coach Out By
+KXNCAAFCOACHOUT              College Football Coaches Out
+KXNCAAFCONF                  NCAAF Championship Conference
+KXNCAAFCONFAWARD             College Football Conference Awards
+KXNCAAFCONFLEAVE             College Football Conference Leave
+KXNCAAFCONFMATCHUP           College Football Conference Championship Matchup
+KXNCAAFCOTW                  College Football Coach of the Week
+KXNCAAFCOTY                  College Football Coach of the Year
+KXNCAAFCS                    FCS Football Champion
+KXNCAAFCSGAME                College Football FCS Game
+KXNCAAFCUSA                  Conference USA Champion
+KXNCAAFCUSAQUAL              College Football Conference USA Championship Qualifiers
+KXNCAAFD3                    D3 College Football Champion
+KXNCAAFD3GAME                DIII College Football Game
+KXNCAAFDELAY                 College Football Weather Delay
+KXNCAAFDSTTD                 College Football Defense Special Teams Touchdown
+KXNCAAFEQBTTS                College Football Both Teams to Score in Every Quarter
+KXNCAAFFCS                   College Football FCS Champion
+KXNCAAFFINALIST              College Football Finalist
+KXNCAAFFIRSTTDTEAM           College Football First Team to Score a Touchdown
+KXNCAAFFTTS                  College Football First Team to Score
+KXNCAAFGAME                  College Football Game
+KXNCAAFH2HWINS               College Football Head-to-Head Regular Season Wins
+KXNCAAFHIGHSCORE             College Football Highest Scoring Game
+KXNCAAFIVY                   Ivy League Champion
+KXNCAAFJOINCONF              College Football Join Conference
+KXNCAAFLEADER                College Football Stats Leaders
+KXNCAAFLSUTEX2X              LSU to Beat Texas in Regular Season and National Championship
+KXNCAAFMAC                   MAC Champion
+KXNCAAFMACQUAL               College Football Mid-American Conference Championship Qualifiers
+KXNCAAFMOSTOT                College Football Most Amount of Overtimes
+KXNCAAFMWC                   Mountain West Champion
+KXNCAAFMWCQUAL               College Football Mountain West Conference Championship Qualifiers
+KXNCAAFNEXTCOACH             College Football Next Coach
+KXNCAAFOT                    College Football Overtime
+KXNCAAFPAC10                 Pac-10 Champion
+KXNCAAFPAC12                 Pac-12 Champion
+KXNCAAFPAC12QUAL             College Football Pac-12 Championship Qualifiers
+KXNCAAFPLAYOFF               College Football Playoff Qualifiers
+KXNCAAFPREPACK2ML            MVE NCAAF Pre Pack
+KXNCAAFPREPACK3ML            MVE NCAAF Pre Pack
+KXNCAAFPREPACK4ML            MVE NCAAF Pre Pack
+KXNCAAFPREPACKSGP            MVE NCAAF Pre Pack
+KXNCAAFQF                    College Football Playoff Quarterfinals Qualifiers
+KXNCAAFQHIGHSCORE            College Football Highest Scoring Quarter
+KXNCAAFSBELT                 Sun Belt Champion
+KXNCAAFSBELTQUAL             College Football Sun Belt Championship Qualifiers
+KXNCAAFSEC                   SEC Champion
+KXNCAAFSECAWARD              College Football SEC Award Winner
+KXNCAAFSECLEADER             College Football SEC Stats Leaders
+KXNCAAFSECQ                  College Football SEC Championship Qualifiers
+KXNCAAFSECREGTOP             College Football SEC Regular Season Top Finishers
+KXNCAAFSECWINS               College Football SEC Teams to Win
+KXNCAAFSEED                  College Football Playoff Seed
+KXNCAAFSF                    College Football Playoff Semifinals Qualifiers
+KXNCAAFSPREAD                College Football Spread
+KXNCAAFSTADIUM               College Football Stadiums
+KXNCAAFTEAMFG                College Football Team Total Field Goals
+KXNCAAFTEAMINT               College Football Team Total Defensive Interceptions
+KXNCAAFTEAMREC               College Football Team Total Receptions
+KXNCAAFTEAMRECTD             College Football Team Receiving Touchdowns
+KXNCAAFTEAMRECYDS            College Football Team Receiving Yards
+KXNCAAFTEAMRSHATT            College Football Team Total Rushing Attempts
+KXNCAAFTEAMRSHTD             College Football Team Rushing Touchdowns
+KXNCAAFTEAMRSHYDS            College Football Team Rushing Yards
+KXNCAAFTEAMSACK              College Football Team Total Sacks
+KXNCAAFTEAMTD                College Football Team Total Touchdowns
+KXNCAAFTEAMTO                College Football Team Total Forced Turnovers
+KXNCAAFTEAMTOTAL             College Football Team Total Points
+KXNCAAFTEAMYDS               College Football Team Total Yards
+KXNCAAFTFUT                  Team to Make the College Football Playoffs before 2030
+KXNCAAFTOPAPRANK             College Football AP Poll Top Rank
+KXNCAAFTOPCFPPOLL            College Football CFP Poll
+KXNCAAFTOPSEED               College Football Playoff Top Seed
+KXNCAAFTOTAL                 College Football Total Points
+KXNCAAFTOTALFG               College Football Total Field Goals
+KXNCAAFTOTALTD               College Football Total Touchdowns
+KXNCAAFUNDEFEATED            Undefeated in College Football Regular Season
+KXNCAAFUNDEFEATEDHOME        College Football Teams to go Undefeated at Home
+KXNCAAFWINS                  College Football Win Total
+KXNCAAH                      College Hockey National Champion
+KXNCAAHGAME                  College Hockey Game
+KXNCAAHOCKEY                 College Hockey National Champion
+KXNCAAHOCKEYGAME             College Hockey Game
+KXNCAALAX                    College Lacrosse National Championship
+KXNCAALAXFINAL               College Lacrosse National Championship
+KXNCAALAXGAME                College Lacrosse Game
+KXNCAAMACC                   ACC MEN'S BASKETBALL TOURNAMENT
+KXNCAAMB1HSPREAD             Men's College Basketball First Half Spread
+KXNCAAMB1HTOTAL              Men's College Basketball First Half Total
+KXNCAAMB1HWINNER             College Basketball 1H Winner
+KXNCAAMB2HSPREAD             Men's College Basketball Second Half Spread
+KXNCAAMB2HTOTAL              Men's College Basketball Second Half Total
+KXNCAAMB2ML                  College Basketball 2-Moneyline Combo
+KXNCAAMBA10                  Atlantic-10 Conference Tournament
+KXNCAAMBACC                  ACC Conference Tournament
+KXNCAAMBACCREG               Men's College Basketball ACC Regular Season Champion
+KXNCAAMBACCREGTOP            Men's College Basketball ACC Regular Season Top Finishers
+KXNCAAMBACHAMP               College Baseball Championship
+KXNCAAMBAE                   American East Conference Tournament
+KXNCAAMBAMER                 American Conference Tournament
+KXNCAAMBAPANY                Men's College Basketball AP Rank Anytime in Season
+KXNCAAMBAPRANK               College Basketball AP Poll
+KXNCAAMBASUN                 Atlantic Sun Conference Tournament
+KXNCAAMBBIG10                Big Ten Conference Tournament
+KXNCAAMBBIG10REG             Men's College Basketball Big Ten Regular Season Champion
+KXNCAAMBBIG10REGTOP          Men's College Basketball Big Ten Regular Season Top Finishers
+KXNCAAMBBIG12                Big 12 Conference Tournament
+KXNCAAMBBIG12REG             Men's College Basketball Big 12 Regular Season Champion
+KXNCAAMBBIG12REGTOP          Men's College Basketball Big 12 Regular Season Top Finishers
+KXNCAAMBBIGEAST              Big East Conference Tournament
+KXNCAAMBBIGEASTREG           Men's College Basketball Big East Regular Season Champion
+KXNCAAMBBIGEASTREGTOP        Men's College Basketball Big East Regular Season Top Finishers
+KXNCAAMBBIGTENREG            Men's College Basketball Big Ten Regular Season Champion
+KXNCAAMBBIGTENREGTOP         Men's College Basketball Big Ten Regular Season Top Finishers
+KXNCAAMBBOTHQUAL             Men's College Basketball Both Teams to Qualify
+KXNCAAMBBSKY                 Big Sky Conference Tournament
+KXNCAAMBBSOU                 Big South Conference Tournament
+KXNCAAMBBWEST                Big West Conference Tournament
+KXNCAAMBCAA                  Coastal Athletic Association Conference Tournament
+KXNCAAMBCBC                  Men's College Basketball Crown Winner
+KXNCAAMBCOTY                 Men's College Basketball Naismith Coach of the Year
+KXNCAAMBD3GAME               Men's College Basketball D3 Game
+KXNCAAMBFIRST10              College Basketball Race to 10 Points
+KXNCAAMBFIRST25              College Basketball Race to 25 Points
+KXNCAAMBFIRST50              College Basketball Race to 50 Points
+KXNCAAMBGAME                 Men's College Basketball Men's Game
+KXNCAAMBHL                   Horizon League conference tournament winner
+KXNCAAMBHOR                  Horizon League Conference Tournament
+KXNCAAMBIG12                 Big 12 MEN'S BASKETBALL TOURNAMENT
+KXNCAAMBIGEAST               Big East Men's basketball tournament
+KXNCAAMBIGTEN                big ten MEN'S BASKETBALL TOURNAMENT
+KXNCAAMBIVY                  Ivy League Conference Tournament
+KXNCAAMBKENPOMRANK           Men's College Basketball KenPom Ratings
+KXNCAAMBKENPOMTOP            Men's College Basketball KenPom Top Ratings
+KXNCAAMBMAA                  Metro Atlantic Conference Tournament
+KXNCAAMBMAMER                Mid-American Conference Tournament
+KXNCAAMBMEAC                 Mid-Eastern Conference Tournament
+KXNCAAMBMOP                  Men's College Basketball Most Outstanding Player
+KXNCAAMBMVAL                 Missouri Valley Conference Tournament
+KXNCAAMBMW                   Mountain West Conference Tournament
+KXNCAAMBNAISMITH             Men's College Basketball Naismith
+KXNCAAMBNEC                  Northeast Conference Tournament
+KXNCAAMBNEXTCOACH            Men's College Basketball Next Coach
+KXNCAAMBNIT                  Men's NIT Tournament Champion
+KXNCAAMBOV                   Ohio Valley Conference Tournament
+KXNCAAMBPAC12                Pac-12 Conference Tournament
+KXNCAAMBPAT                  Patriot League Conference Tournament
+KXNCAAMBSBELT                Sun Belt Conference Tournament
+KXNCAAMBSEC                  SEC Conference Tournament
+KXNCAAMBSECREG               Men's College Basketball SEC Regular Season Champion
+KXNCAAMBSECREGTOP            Men's College Basketball SEC Regular Season Top Finishers
+KXNCAAMBSGP                  College Basketball Same Game Parlay
+KXNCAAMBSLC                  Southland Conference Tournament
+KXNCAAMBSOCON                Southern Conference Tournament
+KXNCAAMBSPREAD               Men's College Basketball Spread
+KXNCAAMBSUM                  Summit League Conference Tournament
+KXNCAAMBSUN                  Atlantic Sun Conference Tournament
+KXNCAAMBSWAC                 Southwestern Atlantic Conference Tournament
+KXNCAAMBTEAMMOSTPTS          College Basketball Team with the Most Points Scored
+KXNCAAMBTEAMSQUAL            Men's College Basketball Teams to Qualify
+KXNCAAMBTOPAPRANK            College Basketball AP Poll Top Rank
+KXNCAAMBTOTAL                Men's College Basketball Total Points
+KXNCAAMBUAC                  United Athletic Conference Conference Tournament
+KXNCAAMBUNDEFEATED           Undefeated in College Basketball Regular Season
+KXNCAAMBUSA                  Conference USA Conference Tournament
+KXNCAAMBWAC                  Western Athletic Conference Tournament
+KXNCAAMBWCC                  West Coast Conference Tournament
+KXNCAAMBWINS                 Men's College Basketball Win Totals
+KXNCAAMIVYLEAGUE             Ivy League MEN'S BASKETBALL TOURNAMENT
+KXNCAAMLAXF4                 College Lacrosse Final Four Qualifiers
+KXNCAAMLAXGAME               Men's College Lacrosse Game
+KXNCAAMPAC12                 PAC-12 MEN'S BASKETBALL TOURNAMENT
+KXNCAAMSEC                   SEC MEN'S BASKETBALL TOURNAMENT
+KXNCAAMSOCCERGAME            College Soccer Game
+KXNCAAMWRESTLING125          College Wrestling National Champion: 125-Pound Weight Class
+KXNCAAMWRESTLING133          College Wrestling National Champion: 133-Pound Weight Class
+KXNCAAMWRESTLING141          College Wrestling National Champion: 141-Pound Weight Class
+KXNCAAMWRESTLING149          College Wrestling National Champion: 149-Pound Weight Class
+KXNCAAMWRESTLING157          College Wrestling National Champion: 157-Pound Weight Class
+KXNCAAMWRESTLING165          College Wrestling National Champion: 165-Pound Weight Class
+KXNCAAMWRESTLING174          College Wrestling National Champion: 174-Pound Weight Class
+KXNCAAMWRESTLING184          College Wrestling National Champion: 184-Pound Weight Class
+KXNCAAMWRESTLING197          College Wrestling National Champion: 197-Pound Weight Class
+KXNCAAMWRESTLING285          College Wrestling National Champion: 285-Pound Weight Class
+KXNCAANIT                    NIT Champion
+KXNCAAPLAYOFF                College Football Playoff Qualifiers
+KXNCAASBGAME                 College Softball Game
+KXNCAASOFTBALL               College Softball Champion
+KXNCAAWB                     Women's March Madness Champion
+KXNCAAWB1HSPREAD             Women's College Basketball First Half Spread
+KXNCAAWB2HSPREAD             Women's College Basketball Second Half Spread
+KXNCAAWBAPRANK               Women's College Basketball AP Poll
+KXNCAAWBCONFSTREAK           Women's College Basketball Conference Championship Streak
+KXNCAAWBGAME                 College Basketball Women's Game
+KXNCAAWBMOP                  Women's College Basketball Most Outstanding Player
+KXNCAAWBNIT                  Women's NIT Tournament Champion
+KXNCAAWBSPREAD               Women's College Basketball Spread
+KXNCAAWBTOTAL                Women's College Basketball Total Points
+KXNCAAWBUNDEFEATED           Undefeated in Women's College Basketball Regular Season
+KXNCAAWBWBIT                 WBIT Winner
+KXNCAAWBWINS                 Women's College Basketball Win Totals
+KXNCAAWV                     Women's college volleyball champion
+KXNCAAWVMATCH                Women's College Volleyball Match
+KXNDJOINCONF                 Join Conference
+KXNEXTCOACHOUTNBA            Next coach out NBA
+KXNEXTCOACHOUTNFL            Next Coach Out Pro Football
+KXNEXTMANAGEREPL             Next Manager
+KXNEXTMANAGERLALIGA          La Liga Next Manager
+KXNEXTMANAGERMLB             Next Manager
+KXNEXTMANAGERSERIEA          Next Manager
+KXNEXTNBACOACH               Who is the Next NBA Coach of Team
+KXNEXTNFLCOACH               Next Pro Football Coach
+KXNEXTTEAMMLB                MLB Player Next Team
+KXNEXTTEAMNBA                Next NBA Team
+KXNEXTTEAMNFL                Player Next Team
+KXNEXTTEAMNHL                Next Team NHL
+KXNEXTWIN                    Will golfer win this tournament next?
+KXNFC                        NFC Championship
+KXNFL1H                      Pro Football 1st Half Winner
+KXNFL1HFT                    1st Half Fulltime Result
+KXNFL1HSPREAD                Pro Football 1st Half Spread
+KXNFL1HTD                    1st Half Touchdown
+KXNFL1HTEAMTOTAL             Pro Football 1st Half Team Total
+KXNFL1HTOTAL                 Pro Football 1st  Half Total Points
+KXNFL1HWINNER                NFL 1st Half Winner
+KXNFL1Q                      Pro Football 1st Quarter Winner
+KXNFL1QBTTS                  Pro Football Both Teams to Score in 1st Quarter
+KXNFL1QSPREAD                Pro Football 1st Quarter Spread
+KXNFL1QTOTAL                 Pro Football 1st Quarter Total
+KXNFL1QWINNER                Pro Football 1st Quarter Winner
+KXNFL1SEED                   Will team win conference in regular season
+KXNFL1YDPASS                 Seattle 1 Yard Pass
+KXNFL2H                      Pro Football 2nd Half
+KXNFL2HSPREAD                Pro Football 2nd Half Spread
+KXNFL2HTD                    2nd Half Touchdowns
+KXNFL2HTOTAL                 Pro Football 2nd Half Total
+KXNFL2HWINNER                NFL 2nd Half Winner
+KXNFL2PTCONV                 Pro Football 2-Point Conversions
+KXNFL2Q                      Pro Football 2nd Quarter Winner
+KXNFL2QBTTS                  Pro Football Both Teams to Score in 2nd Quarter
+KXNFL2QSPREAD                Pro Football 2nd Quarter Spread
+KXNFL2QTOTAL                 Pro Football 2nd Quarter Total
+KXNFL2QWINNER                Pro Football 2nd Quarter Winner
+KXNFL2TD                     Pro Football Multiple Touchdowns
+KXNFL3Q                      Pro Football 3rd Quarter Winner
+KXNFL3QBTTS                  Pro Football Both Teams to Score in 3rd Quarter
+KXNFL3QSPREAD                Pro Football 3rd Quarter Spread
+KXNFL3QTOTAL                 Pro Football 3rd Quarter Total
+KXNFL3QWINNER                Pro Football 3rd Quarter Winner
+KXNFL4DCONV                  Pro Football 4th Down Conversions
+KXNFL4DOWNCONV               Pro Football 4th Down Conversions
+KXNFL4Q                      Pro Football 4th Quarter Winner
+KXNFL4QBTTS                  Pro Football Both Teams to Score in 4th Quarter
+KXNFL4QSPREAD                Pro Football 4th Quarter Spread
+KXNFL4QTOTAL                 Pro Football 4th Quarter Total
+KXNFL4QWINNER                Pro Football 4th Quarter Winner
+KXNFL53MAN                   Pro Football 53 Man Roster
+KXNFL60YARDFGS               Pro Football 60+ Yard Field Goals
+KXNFLAFCCHAMP                American Football Conference Champion
+KXNFLAFCEAST                 American Football Conference East Winner
+KXNFLAFCNORTH                American Football Conference North Winner
+KXNFLAFCSOUTH                American Football Conference South Winner
+KXNFLAFCWEST                 American Football Conference West Winner
+KXNFLALLPRO                  Pro Football All-Pro Teams
+KXNFLANYTD                   Pro Football Anytime Touchdown
+KXNFLASSCOACH                NFL Assistant Coach of the Year
+KXNFLAWARDFIN                Pro Football Award Finalists
+KXNFLBLOWOUT                 Pro Football Biggest Blowout
+KXNFLBOTH                    Pro Football Both Teams to Score Points
+KXNFLCAREERPASSTDS           NFL Career Passing Touchdowns
+KXNFLCAREERPASSYDS           NFL Career Passing Yards
+KXNFLCAREERRECYDS            NFL Career Receiving Yards
+KXNFLCAREERRSHTDS            NFL Career Rushing Touchdowns
+KXNFLCAREERRSHYDS            NFL Career Rushing Yards
+KXNFLCELEBRITYGAME           Pro Football Celebrity Flag Football Game
+KXNFLCOACH                   NFL Coach of the Year
+KXNFLCOACHOUT                NFL Coaches Fired
+KXNFLCOACHOUTFIRST           First NFL coach out
+KXNFLCOMBINE                 NFL Combine
+KXNFLCOMBINE40               Pro Football Combine Fastest 40 Time
+KXNFLCOMBO                   NFL COMBO
+KXNFLCOMEBACK                Pro Football Comeback
+KXNFLCOMPETE                 Will an NFL Player Compete in game
+KXNFLCONTRACTSIZE            Pro Football Next Contract Size
+KXNFLCOTY                    AP Pro Football Coach Of The Year
+KXNFLCPOTY                   AP Pro Football Comeback Player of the Year
+KXNFLDEBUT                   Pro Football Player to Make Debut
+KXNFLDELAY                   NFL Weather Delay
+KXNFLDEPTHPOSITIONCLEQB2     QB2 CLE
+KXNFLDIVISIONORDER           Pro Football Division Exact Order
+KXNFLDIVISIONWINS            Pro Football Division Total Wins
+KXNFLDIVLEASTWINS            Pro Football Division with the Most Wins
+KXNFLDIVMOSTWINS             Pro Football Division with the Least Wins
+KXNFLDIVUNDEFEATED           Team to go undefeated in division
+KXNFLDPOTY                   AP Pro Football Defensive Player Of The Year
+KXNFLDPOY                    NFL Defensive Player of the Year
+KXNFLDPOYSPECIALS            NFL Defensive Player of the Year Specials
+KXNFLDRAFT1                  NFL Draft First Pick
+KXNFLDRAFT1ST                Make the 1st pick in NFL Draft
+KXNFLDRAFTCAT                Pro Football Draft Category
+KXNFLDRAFTCOMPARE            NFL Draft Comparison
+KXNFLDRAFTDB                 Pro Football Defensive Back Drafted
+KXNFLDRAFTDT                 Pro Football Defensive Tackle Drafted
+KXNFLDRAFTEAMPOS             Will team draft a position across round
+KXNFLDRAFTEDGE               Pro Football Edge Drafted
+KXNFLDRAFTLB                 Pro Football Linebacker Drafted
+KXNFLDRAFTMATCHUP            Pro Football Draft Matchup
+KXNFLDRAFTOL                 Pro Football Offensive Line Drafted 
+KXNFLDRAFTOU                 Will Player be drafted before or after pick?
+KXNFLDRAFTPICK               NFL Draft Pick
+KXNFLDRAFTQB                 Pro Football Quarterback Drafted
+KXNFLDRAFTRB                 Pro Football Running Back Drafted
+KXNFLDRAFTTE                 Pro Football Tight End Drafted
+KXNFLDRAFTTEAM               Pro Football Team Draft
+KXNFLDRAFTTEAMPOS            Which team will draft a quarterback in specific round?
+KXNFLDRAFTTOP                Pro Football Top Draft
+KXNFLDRAFTWR                 Pro Football Wide Receiver Drafted 
+KXNFLDROTY                   AP Pro Football Defensive Rookie of the Year
+KXNFLDROY                    NFL Defensive Rookie of the Year
+KXNFLDSTTD                   Pro Football D/ST Touchdown
+KXNFLENDSTREAK               When will team end streak
+KXNFLEQBTTS                  Pro Football Both Teams to Score in Every Quarter
+KXNFLESCALATORREC            Receptions Escalator
+KXNFLESCALATORRECYDS         Receiving Yards Escalator
+KXNFLESCALATORRSHYDS         Rushing Yards Escalator
+KXNFLEVERYWEEKCOMPETE        Pro Football Players to Play in Every Week of the Season
+KXNFLEXACTWINSARI            Pro football exact wins Arizona
+KXNFLEXACTWINSATL            Pro football exact wins Atlanta
+KXNFLEXACTWINSBAL            Pro football exact wins Baltimore
+KXNFLEXACTWINSBUF            Pro football exact wins Buffalo
+KXNFLEXACTWINSCAR            Pro football exact wins Carolina
+KXNFLEXACTWINSCHI            Pro football exact wins Chicago
+KXNFLEXACTWINSCIN            Pro football exact wins Cincinnati
+KXNFLEXACTWINSCLE            Pro football exact wins Cleveland
+KXNFLEXACTWINSDAL            Pro football exact wins Dallas
+KXNFLEXACTWINSDEN            Pro football exact wins Denver
+KXNFLEXACTWINSDET            Pro football exact wins Detroit
+KXNFLEXACTWINSGB             Pro football exact wins Green Bay
+KXNFLEXACTWINSHOU            Pro football exact wins Houston
+KXNFLEXACTWINSIND            Pro football exact wins Indianapolis
+KXNFLEXACTWINSJAC            Pro football exact wins Jacksonville
+KXNFLEXACTWINSKC             Pro football exact wins Kansas City
+KXNFLEXACTWINSLA             Pro football exact wins Los Angeles R
+KXNFLEXACTWINSLAC            Pro football exact wins Los Angeles C
+KXNFLEXACTWINSLV             Pro football exact wins Las Vegas
+KXNFLEXACTWINSMIA            Pro football exact wins Miami
+KXNFLEXACTWINSMIN            Pro football exact wins Minnesota
+KXNFLEXACTWINSNE             Pro football exact wins New England
+KXNFLEXACTWINSNO             Pro football exact wins New Orleans
+KXNFLEXACTWINSNYG            Pro football exact wins New York G
+KXNFLEXACTWINSNYJ            Pro football exact wins New York J
+KXNFLEXACTWINSPHI            Pro football exact wins Philadephia
+KXNFLEXACTWINSPIT            Pro football exact wins Pittsburgh
+KXNFLEXACTWINSSEA            Pro football exact wins Seattle
+KXNFLEXACTWINSSF             Pro football exact wins San Francisco
+KXNFLEXACTWINSTB             Pro football exact wins Tampa Bay
+KXNFLEXACTWINSTEN            Pro football exact wins Tennessee
+KXNFLEXACTWINSWAS            Pro football exact wins Washington
+KXNFLEXECOTY                 Pro Football Executive of the Year
+KXNFLFANTASYMOST             Pro Football Most Fantasy Points
+KXNFLFF40PTS                 Fantasy Football 40 Point Performances
+KXNFLFF50PTS                 Fantasy Football 50 Point Performances
+KXNFLFFH2H                   Weekly Fantasy Football Head-to-Head
+KXNFLFFH2HSEASON             Season Fantasy Football Head-to-Head
+KXNFLFFHIGHSCORE             Fantasy Football Highest Scoring Performance
+KXNFLFFLEADER                Best in Fantasy By Position
+KXNFLFFLEADERTOP             Top Fantasy
+KXNFLFFPLAYERHIGH            Pro Football Player's Highest Scoring Fantasy Performance
+KXNFLFFPLAYOFFLEADER         Fantasy Football Playoffs Leader
+KXNFLFFPTS                   Pro Football Player Fantasy Points
+KXNFLFFPTSLADDER             Fantasy Ladder
+KXNFLFFPTSSEASON             Pro Football Player Fantasy Points
+KXNFLFFSEASONTOTAL           Pro Football Player's Fantasy Season Total
+KXNFLFFTOP                   Top Fantasy Rank
+KXNFLFFWEEKLEAD              Weekly Fantasy Football Leader
+KXNFLFFWEEKTOP               Weekly Fantasy Football Top Players
+KXNFLFG                      Pro Football Field Goals
+KXNFLFIRSTPICK               First Pick in NFL Draft
+KXNFLFIRSTSTART              Pro Football First Start
+KXNFLFIRSTTD                 Pro Football First Touchdown
+KXNFLFIRSTTDTEAM             Pro Football First Team to Score a Touchdown
+KXNFLFIRSTTDTIME             Pro Football First Touchdown Time
+KXNFLGAME                    NFL Game
+KXNFLGAMEFG                  Pro Football Field Goals
+KXNFLGAMELOCATION            NFL Game Location
+KXNFLGAMESACK                Pro Football Sacks
+KXNFLGAMESPECIALS            Pro Football Game Specials
+KXNFLGAMETD                  Pro Football Touchdowns
+KXNFLGAMETO                  Pro Football Turnovers
+KXNFLGPICKENSCONTRACT        Pro Football George Picken's Next Contract Size
+KXNFLH2HWINS                 Pro Football Head-to-Head Win Totals
+KXNFLHALLOFFAME              Pro Football Hall of Fame
+KXNFLHIGHSCORE               Pro Football Highest Scoring Game
+KXNFLHIGHSCOREQ              Pro Football Highest Scoring Quarter
+KXNFLHIRECOACH               NFL hire coach
+KXNFLHKANE                   Harry Kane Pro Football signing
+KXNFLHOFINDUCTEES            Pro Football Hall of Fame Inductees
+KXNFLINT                     Pro Football Interceptions
+KXNFLLADDERREC               Receptions Ladder
+KXNFLLADDERRECYDS            Receiving Yards Ladder
+KXNFLLADDERRSHYDS            Rushing Yards Ladder
+KXNFLLARGELEAD               Pro Football Largest Lead
+KXNFLLARGESTLEAD             Pro Football Largest Lead
+KXNFLLASTPICKPOS             NFL Last Pick of the Draft Position
+KXNFLLASTTOLOSE              Pro Football Last Undefeated Team
+KXNFLLASTTOWIN               Pro Football last team to win a game
+KXNFLLEADCHANGE              Pro Football Lead Changes
+KXNFLLEADERPINT              Pro Football P INT Leader
+KXNFLLEASTPENALIZED          Pro Football Least Penalized Team
+KXNFLLONGESTFG               Pro Football Longest Field Goal
+KXNFLLONGESTPLAY             NFL Longest Touchdown
+KXNFLLONGESTREC              Longest Reception
+KXNFLLONGESTTD               Pro Football Longest Touchdown
+KXNFLLONGFG                  Pro Football Team Longest Field Goal
+KXNFLLONGREC                 Longest Reception
+KXNFLLONGRSH                 Longest Rush
+KXNFLMATCHUP                 Pro Football Matchups
+KXNFLMOSTRECYDS              Pro Football Most Receiving Yards
+KXNFLMOSTRSHYDS              Pro Football Most Rushing Yards
+KXNFLMVP                     AP Pro Football Regular Season MVP
+KXNFLMVPSPECIALS             NFL MVP Award Specials
+KXNFLNEXTCOACHOUT            Next NFL Coach Out
+KXNFLNEXTINT                 Pro Football Next Interception
+KXNFLNEXTTD                  Pro Football Next TD scorer
+KXNFLNEXTTEAM                Player Next Team
+KXNFLNFCCHAMP                National Football Conference Champion
+KXNFLNFCEAST                 National Football Conference East Winner
+KXNFLNFCNORTH                National Football Conference North Winner
+KXNFLNFCSOUTH                National Football Conference South Winner
+KXNFLNFCWEST                 National Football Conference West Winner
+KXNFLNONQBPASS               Pro Football Non-QB Passes
+KXNFLNOSCOREQ                Pro Football Scoreless Quarter
+KXNFLOPOTY                   AP Pro Football Offensive Player Of The Year
+KXNFLOPOY                    NFL Offensive Player of the Year
+KXNFLOPOYSPECIALS            NFL Offensive Player of the Year Specials
+KXNFLOROTY                   AP Pro Football Offensive Rookie of the Year
+KXNFLOROY                    NFL Offensive Rookie of the Y ear
+KXNFLOT                      Pro Football Overtime
+KXNFLOTWIN                   Pro Football Overtime Winner
+KXNFLOWNERSTAKE              Next Pro Football Team to Sell Ownership Stake
+KXNFLPASSATT                 Pro Football Passing Attempts
+KXNFLPASSCOMP                Pro Football Passing Completions
+KXNFLPASSINT                 Pro Football Passing Interceptions
+KXNFLPASSTDS                 Pro Football player Passing Touchdowns
+KXNFLPASSYDS                 Pro Football Passing Yards
+KXNFLPASSYDSH2H              Pro Football Head-to-Head Passing Yards
+KXNFLPLAYOFF                 Pro Football Playoff Qualifiers
+KXNFLPLAYOFFC                Will both teams make the NFL Playoffs
+KXNFLPLAYOFFHOST             Team to host a playoff game
+KXNFLPOTM                    NFL Player of the Month
+KXNFLPREPACK                 MVE NFL Pre Pack
+KXNFLPREPACK1HFT             MVE NFL Pre Pack
+KXNFLPREPACK1Q1H             MVE NFL Pre Pack
+KXNFLPREPACK2ML              MVE NFL Pre Pack
+KXNFLPREPACK3ML              MVE NFL Pre Pack
+KXNFLPREPACKSGP              MVE NFL Pre Pack
+KXNFLPREPACKSGPSPREAD        MVE NFL Pre Pack
+KXNFLPRIMETIME               Pro Football Primetime Games
+KXNFLPROBOWL                 Pro Football Pro Bowl
+KXNFLPROBOWLWIN              Pro Football Pro Bowl Game
+KXNFLPROOTY                  Pro Football Protector of the Year
+KXNFLRACE                    Pro Football Race to Points
+KXNFLREBOOT                  Reboot Rules
+KXNFLREC                     Pro Football Player Receptions
+KXNFLRECYDS                  Pro Football Receiving Yards
+KXNFLRECYDSH2H               Pro Football Head-to-Head Receiving Yards
+KXNFLRECYDSRECORD            NFL Regular Season Receiving Yards Record
+KXNFLREDZONEADS              NFL Redzone ads
+KXNFLREDZONEBRANDADS         Redzone week 1 brand ads
+KXNFLRETIRE                  Pro Football Retirement
+KXNFLRETURN                  Pro Football Player to Compete
+KXNFLROLE                    Pro Football Role at Event
+KXNFLROTM                    NFL Rookie of the Month
+KXNFLROUNDQUAL               Pro Football Round Qualifier
+KXNFLRRYDS                   Pro Football Rush and Receiving Yards
+KXNFLRSHATT                  Pro Football Rushing Attempts
+KXNFLRSHYDS                  Pro Football Rushing Yards
+KXNFLRSHYDSH2H               Pro Football Head-to-Head Rushing Yards
+KXNFLSACK                    Pro Football Sacks
+KXNFLSACKRECORD              NFL Regular Season Sack Record
+KXNFLSAFETY                  Pro Football Safeties
+KXNFLSBMVP                   Pro Football Championship MVP
+KXNFLSBMVPDEF                Defensive Player Championship MVP
+KXNFLSBMVPPOS                Pro Football Championship MVP Position
+KXNFLSBMVPQB                 Non QB Championship MVP
+KXNFLSDRAFTTOP               Will player be drafted Top X in Supplemental Draft
+KXNFLSEASONPASSTDS           Passing Touchdowns
+KXNFLSEASONPASSYDS           Passing Yards
+KXNFLSEASONREC               Receptions
+KXNFLSEASONRECTD             Receiving Touchdowns
+KXNFLSEASONRECYDS            Receiving Yards
+KXNFLSEASONRSHTD             Rushing Touchdowns
+KXNFLSEASONRSHYDS            Rushing Yards
+KXNFLSEASONRUSHYDS           Rushing Yards
+KXNFLSEED                    NFL Playoff Seed
+KXNFLSELLOUT                 Pro Football Sellouts
+KXNFLSFPRACFIELD             Practice Field Relocation
+KXNFLSFTY                    Pro Football Safety
+KXNFLSHORTESTTD              Pro Football Shortest Touchdown
+KXNFLSPREAD                  Pro Football Spread
+KXNFLSTADIUM                 Will NFL Stadium Project be complete by date
+KXNFLSTAGEOFELIM             Pro Football Stage of Elimination
+KXNFLSUPDRAFTPICK            Will Player declare for supplemental draft
+KXNFLSZNRECORD               Will single season record be broken?
+KXNFLT100                    Will player be ranked on Pro Football T100 List
+KXNFLT100TOP                 Will player be ranked Top X on NFL 100
+KXNFLTD                      Pro Football Touchdowns
+KXNFLTDPROT                  Pro Football Touchdowns Protected
+KXNFLTEAM1POS                What position will Team select with first pick
+KXNFLTEAM1STDOWNS            Pro Football Team 1st Downs
+KXNFLTEAMDPTS                Who will allow the least/most points this season
+KXNFLTEAMFG                  Pro Football Field Goals
+KXNFLTEAMFIRSTTD             Pro Football First Touchdown
+KXNFLTEAMPTS                 Who will most/least points in Regular Season
+KXNFLTEAMSACK                Pro Football Team Sacks
+KXNFLTEAMTD                  Pro Football Team Touchdowns
+KXNFLTEAMTO                  Pro Football Forced Turnovers
+KXNFLTEAMTOTAL               Pro Football Team Total Points
+KXNFLTEAMYDS                 Pro Football Team Yards
+KXNFLTIE                     NFL Game to Tie
+KXNFLTIES                    Pro Football Ties
+KXNFLTKL                     Pro Football Tackles
+KXNFLTOTAL                   Pro Football Total Points
+KXNFLTOTALTD                 Pro Football Total Touchdowns
+KXNFLTRADE                   Pro Football Players Traded
+KXNFLTSPEC                   NFL Team Specials
+KXNFLVIEWERSHIP              Pro Football Game Viewership
+KXNFLWEEKCOMPETE             NFL Player to Play in Week
+KXNFLWEEKHIGHSCORE           NFL Highest Scoring Team of the Week
+KXNFLWEEKMOSTPASSYDS         Weekly Most Passing Yards
+KXNFLWEEKMOSTRECYDS          Weekly Most Receiving Yards
+KXNFLWEEKMOSTRSHYDS          Weekly Most Rushing Yards
+KXNFLWEEKTIE                 NFL Weekly Tie
+KXNFLWINMARGIN               Pro Football Win Margin
+KXNFLWINNINGSTREAK           NFL Team Winning Streak
+KXNFLWINS                    Pro Football Wins
+KXNFLWINS-ANY                Pro football wins any team
+KXNFLWINS-ARI                Pro football wins Arizona
+KXNFLWINS-ATL                Pro football wins Atlanta
+KXNFLWINS-BAL                Pro football wins Baltimore
+KXNFLWINS-BUF                Pro football wins Buffalo
+KXNFLWINS-CAR                Pro football wins Carolina
+KXNFLWINS-CHI                Pro football wins Chicago
+KXNFLWINS-CIN                Pro football wins Cincinnati
+KXNFLWINS-CLE                Pro football wins Cleveland
+KXNFLWINS-DAL                Pro football wins Dallas
+KXNFLWINS-DEN                Pro football wins Denver
+KXNFLWINS-DET                Pro football wins Detroit
+KXNFLWINS-GB                 Pro football wins Green Bay
+KXNFLWINS-HOU                Pro football wins Houston
+KXNFLWINS-IND                Pro football wins Indianapolis
+KXNFLWINS-JAC                Pro football wins Jacksonville
+KXNFLWINS-KC                 Pro football wins Kansas City
+KXNFLWINS-LA                 Pro football wins Los Angeles R
+KXNFLWINS-LAC                Pro football wins Los Angeles C
+KXNFLWINS-LV                 Pro football wins Las Vegas
+KXNFLWINS-MIA                Pro football wins Miami
+KXNFLWINS-MIN                Pro football wins Minnesota
+KXNFLWINS-NE                 Pro football wins New England
+KXNFLWINS-NO                 Pro football wins New Orleans
+KXNFLWINS-NYG                Pro football wins New York G
+KXNFLWINS-NYJ                Pro football wins New York J
+KXNFLWINS-PHI                Pro football wins Philadelphia
+KXNFLWINS-PIT                Pro football wins Pittsburgh
+KXNFLWINS-SEA                Pro football wins Seattle
+KXNFLWINS-SF                 Pro football wins San Francisco
+KXNFLWINS-TB                 Pro football wins Tampa Bay
+KXNFLWINS-TEN                Pro football wins Tennessee
+KXNFLWINS-WAS                Pro football wins Washington
+KXNFLWINSTREAK               Pro Football Win Streak
+KXNFLWINSWEEK                NFL wins by week
+KXNFLWORSTTOFIRST            Pro Football Worst in Division to First
+KXNFLWPMOTY                  Walter Payton Man of the Year
+KXNHL                        Stanley Cup
+KXNHL1P                      NHL 1st Period Winner
+KXNHL1PBTTS                  NHL Both Teams to Score in 1st Period
+KXNHL1PSPREAD                1st Period Spread
+KXNHL1PTOTAL                 NHL 1st Period Total
+KXNHL1STTEAM                 All NHL First Team
+KXNHL2OT                     NHL Double Overtime
+KXNHL2P                      NHL 2nd Period Winner
+KXNHL2PBTTS                  NHL Both Teams to Score in 2nd Period
+KXNHL2PSPREAD                2nd Period Spread
+KXNHL2PTOTAL                 2nd Period Total
+KXNHL30COMEBACK              NHL 3-0 Series Comeback
+KXNHL3P                      NHL 3rd Period Winner
+KXNHL3PBTTS                  NHL Both Teams to Score in 3rd Period
+KXNHL3PSPREAD                NHL 3rd Period Spread
+KXNHL3PTOTAL                 3rd Period Total
+KXNHL4NATIONS                4 nations face off
+KXNHLADAMS                   NHL Jack Adams Award
+KXNHLANYGOAL                 Pro Hockey Goalscorer
+KXNHLAST                     Pro Hockey Assists
+KXNHLATLANTIC                NHL Atlantic Division Winner
+KXNHLCALDER                  NHL Calder Memorial Trophy
+KXNHLCENTRAL                 NHL Central Division Winner
+KXNHLDRAFTPICK               Pro Hockey Draft Pick
+KXNHLDRAFTTOP                Pro Hockey Top Pick
+KXNHLEAST                    Eastern Conference Championship
+KXNHLEXPANSION               NHL Expansion
+KXNHLF10G                    NHL Goal in First 10 Minutes
+KXNHLFINALSEXACT             NHL Championship Series Score
+KXNHLFIRSTGOAL               Pro Hockey First Goal
+KXNHLGAME                    NHL Game
+KXNHLGOAL                    NHL Goalscorer
+KXNHLHART                    NHL Hart Memorial Trophy
+KXNHLLINDSAY                 NHL Ted Lindsay Winner
+KXNHLMETROPOLITAN            NHL Metropolitan Division Winner
+KXNHLMVP                     NHL Hart Memorial Trophy Winner
+KXNHLNEXTGM                  Next NHL GM
+KXNHLNEXTTEAM                NHL Next Team
+KXNHLNORRIS                  NHL James Norris Memorial Trophy
+KXNHLOT                      NHL Overtime
+KXNHLOVERTIME                NHL Overtime
+KXNHLPACIFIC                 NHL Pacific Division Winner
+KXNHLPLAYOFF                 Playoff Qualifier
+KXNHLPLAYOFFGOALS            NHL Playoffs Goal Leader (by Round)
+KXNHLPRES                    NHL President's Trophy Winner
+KXNHLPSEASONGOALS            Player Goals Scored in Season
+KXNHLPTS                     Pro Hockey Points
+KXNHLRECORDWORST             Worst NHL Record
+KXNHLRETIRE                  NHL Retire
+KXNHLRICHARD                 NHL Maurice "Rocket" Richard Trophy
+KXNHLROSS                    NHL Art Ross Trophy
+KXNHLSAVE                    Goaltender Saves
+KXNHLSAVES                   Pro Hockey Saves
+KXNHLSEASONGOALS             Player to score X Goals in Season
+KXNHLSEASONPPTS              Season Player Points
+KXNHLSEASONPTS               NHL Season Point Totals
+KXNHLSERIES                  NHL Series Winner
+KXNHLSERIESGAMES             NHL Series Total Games
+KXNHLSERIESOT                NHL Series Overtime
+KXNHLSERIESSCORE             NHL Series Exact Score
+KXNHLSERIESSPREAD            NHL Series Game Spread
+KXNHLSERIESTOTALGOAL         NHL Series Total Goals
+KXNHLSERIESTOTALGOALS        NHL Series Total Goals
+KXNHLSPREAD                  NHL Spread
+KXNHLTEAMTOTAL               NHL Team Goals Scored During Game
+KXNHLTOTAL                   NHL Total Goals
+KXNHLVEZINA                  NHL Vezina Trophy
+KXNHLWEST                    Western Conference Champion
+KXNHLWINS                    NHL wins 
+KXNHLWSTREAK                 Longest NHL win streak in regular season
+KXNPB                        NPB Champion
+KXNPBGAME                    Japan NPB Game
+KXNPBRFI                     First Inning Run
+KXNPBSPREAD                  NPB Spread
+KXNPBTOTAL                   Point Total
+KXODIMATCH                   Men's ODI Cricket Match
+KXPERLIGA1                   Peru Liga 1
+KXPERLIGA1ADVANCE            To Advance
+KXPERLIGA1BBTTS              BTTS
+KXPERLIGA1BTTS               BTTS
+KXPERLIGA1GAME               Peru Liga 1 Game
+KXPERLIGA1SPREAD             Spread
+KXPERLIGA1TOTAL              Point Total
+KXPGA                        PGA Championship
+KXPGA1STTIMEWIN              PGA 1st Time Winner
+KXPGA3BALL                   PGA 3-Ball
+KXPGA5BALL                   PGA 5-Ball
+KXPGAACTION                  PGA Tour Action
+KXPGAAGECUT                  Oldest to make the cut
+KXPGAALBATROSS               Golf Albatross
+KXPGABIRDIES                 PGA Golf Birdies
+KXPGABOGEYFREE               Will any Golfer Record a bogey free round
+KXPGAC                       Golfers to Participate in the PGA championship
+KXPGACAT                     PGA Golf Category Leader
+KXPGACOMPETE                 Golfers to Participate in the Golf Tournament
+KXPGACURRY                   Steph Curry PGA
+KXPGACUTLINE                 PGA What Will the Cut Line Be
+KXPGAEAGLE                   Player to Record an Eagle in Round
+KXPGAFUTURE                  Future Major Championship Wins
+KXPGAGOLFERSCORE             Golf Round Strokes
+KXPGAH2H                     PGA Head-to-Head Matchups
+KXPGAHOLE                    Will the player win the hole matchup
+KXPGAHOLEINONE               PGA Hole in One
+KXPGAHOLESCORE               PGA Hole Score
+KXPGALOWSCORE                PGA Lowest Round Score
+KXPGAMAJOR                   PGA Major Wins
+KXPGAMAJORTOP10              PGA Top 10 for All 4 Majors
+KXPGAMAJORWIN                PGA Major Winner
+KXPGAMAKECUT                 PGA To Make Cut
+KXPGAMASTERS                 Golfers to Participate in the Masters
+KXPGAOCCUR                   PGA Golf Event Occurence
+KXPGAPLAYERCAT               PGA Player Category
+KXPGAPLAYOFF                 Golf Playoff
+KXPGAR1LEAD                  PGA Round 1 Leader
+KXPGAR1TOP10                 PGA Round 1 Top 10 FInishers
+KXPGAR1TOP20                 PGA Round 1 Top 20 FInishers
+KXPGAR1TOP5                  PGA Round 1 Top 5 FInishers
+KXPGAR2LEAD                  PGA Round 2 Leader
+KXPGAR2TOP10                 PGA Round 2 Top 10 FInishers
+KXPGAR2TOP5                  PGA Round 2 Top 5 Finishers
+KXPGAR3LEAD                  PGA Round 3 Leader
+KXPGAR3TOP10                 PGA Round 3 Top 10 Finishers
+KXPGAR3TOP5                  PGA Round 3 Top 5 Finishers
+KXPGAREGION                  PGA Region Winner
+KXPGARETURN                  PGA Returning Players
+KXPGAROUNDBIRDIES            Golf Round Birdies
+KXPGAROUNDLOW                lowest round score
+KXPGAROUNDSCORE              Golf Round Scores
+KXPGARYDER                   Ryder Cup
+KXPGARYDERCUPD1              Ryder Cup Day 1 Winner
+KXPGARYDERCUPD2              Ryder Cup Day 2 Winner
+KXPGARYDERCUPD3              Ryder Cup Day 3 Winner
+KXPGARYDERMATCH              PGA Ryder Cup Matchups
+KXPGARYDERTOP                Ryder Cup Top Points Scorer
+KXPGARYDERTOP3               Ryder Cup Top 3 Points Scorer
+KXPGASOLHEIM                 Solheim Cup
+KXPGASTROKEMARGIN            PGA Stroke Margin
+KXPGATIGER                   Tiger Woods PGA
+KXPGATOP10                   PGA Top 10 Finisher
+KXPGATOP20                   PGA Top 20 Finisher
+KXPGATOP40                   PGA Top 40 Finisher
+KXPGATOP5                    PGA Top 5 Finisher
+KXPGATOUR                    PGA Tour
+KXPGATOURCHAMP               Golfers to Participate in the Tour Championship
+KXPGAUNDERPAR                Golfers to Finish Under Par
+KXPGAUSO                     golfers to compete in US Open
+KXPGAWIN                     Golfer to Win
+KXPGAWINMARGIN               PGA Win Margin
+KXPGAWINNERREGION            PGA Tournament Winner Region
+KXPGAWINNERWITHOUT           PGA Winner Without
+KXPGAWINNINGSCORE            PGA Winning Score
+KXPGLBUCH                    Who will win the PGL Masters Bucharest 2025
+KXPGLMASTERSBUCHAREST        Who will win the PGL Masters Bucharest 2025
+KXPHILIPRIVERSNFL            Philips Rivers Play This Year
+KXPHKLGAME                   Croatia Premijer Liga Game
+KXPLAYEROPTIONNBA            player option nba
+KXPLAYWC                     Player World Cup
+KXPLLGAME                    PLL Game
+KXPREMCHAMP                  Gallagher Premiership Champion
+KXPREMDARTS                  Premier League Darts Champion
+KXPREMIERLEAGUE              PREMIER LEAGUE
+KXPRESCUPPTS                 Presidents Cup Points by Golfer
+KXPRYLIGA1GAME               delete
+KXPSASQUASH                  Professional Squash Association (PSA) World Championships
+KXPSLGAME                    Pakistan Super League Cricket Game
+KXPUBGGC                     PUBG Global Championship 2025
+KXRANKLISTBONK               Bonk top 100 currencies by end of year
+KXRECORDNBABEST              Best Pro Basketball Record
+KXRECORDNFLBEST              best football record
+KXRECORDNFLWORST             worst football record
+KXRUGBYWC                    Men's Rugby World Cup Winner
+KXRYDERCUP                   Ryder Cup 
+KXRYDERCUPCAPTAIN            Ryder Cup Captain
+KXSAILGP                     SailGP Championship
+KXSAUDIPL1H                  1st Half Winner
+KXSAUDIPL1HBTTS              1st Half BTTS
+KXSAUDIPL1HSPREAD            1st Half Spread
+KXSAUDIPL1HTOTAL             1st Half Total
+KXSAUDIPLADVANCE             To Advance
+KXSAUDIPLBTTS                BTTS
+KXSAUDIPLGAME                Saudi Pro League Game
+KXSAUDIPLSPREAD              Saudi Pro League Game
+KXSAUDIPLTEAMTOTAL           Team Total
+KXSAUDIPLTOTAL               Saudi Pro League Total
+KXSBHOST                     Pro Football Championship Host
+KXSCOCUPGAME                 Scottish Cup Game
+KXSCOTTISHPREMGAME           Scottish Premiership Game
+KXSECREG                     SEC Regular Season Champions
+KXSERIEA                     Serie A 
+KXSERIEA1H                   Serie A First Half Winner
+KXSERIEA1HBTTS               1st Half BTTS
+KXSERIEA1HSCORE              1st Half Correct Score
+KXSERIEA1HSPREAD             1st Half Spread
+KXSERIEA1HTOTAL              1st Half Total
+KXSERIEA2H                   2nd Half Winner
+KXSERIEA2HBTTS               2nd Half BTTS
+KXSERIEA2HSPREAD             2nd Half Spread
+KXSERIEA2HTOTAL              2nd Half Total
+KXSERIEAADVANCE              To Advance
+KXSERIEABTTS                 Serie A BTTS
+KXSERIEACORNERS              Total Corners
+KXSERIEAFIRSTGOAL            First Goal
+KXSERIEAFTTS                 First Team to Score
+KXSERIEAGAME                 Serie A Game
+KXSERIEAGOAL                 Goalscorer
+KXSERIEALAST                 Serie A Last Place Finisher
+KXSERIEALEADER               Serie A Leader
+KXSERIEAMOV                  Method of Victory
+KXSERIEAPOINTMARGIN          Serie A Champion Winning Margin
+KXSERIEARELEGATION           Serie A Relegation
+KXSERIEASCORE                Correct Score
+KXSERIEASPREAD               Serie A Spread
+KXSERIEATCORNERS             Team Corners
+KXSERIEATEAMPOINTS           Team Points
+KXSERIEATEAMTOTAL            Team Total
+KXSERIEATOP                  Serie A Top Finishers
+KXSERIEATOP4                 Serie A Top 4 Finishers
+KXSERIEATOTAL                Serie A Total
+KXSERIEAWGAME                Serie A Femminile Game
+KXSERIEBADVANCE              To Advance
+KXSERIEBBTTS                 BTTS
+KXSERIEBGAME                 Serie B Game
+KXSERIEBSPREAD               Spread
+KXSERIEBTOTAL                Point Total
+KXSERIECBTTS                 BTTS
+KXSERIECCUPADVANCE           To Advance
+KXSERIECCUPBTTS              BTTS
+KXSERIECCUPGAME              Coppa Italia Lega Pro Game
+KXSERIECCUPSPREAD            Spread
+KXSERIECCUPTOTAL             Point Total
+KXSERIECGAME                 Serie C Game
+KXSERIECSCUPBTTS             BTTS
+KXSERIECSCUPGAME             Supercoppa di Lega Pro Game
+KXSERIECSCUPSPREAD           Spread
+KXSERIECSCUPTOTAL            Point Total
+KXSERIECSPREAD               Spread
+KXSERIECTOTAL                Point Total
+KXSGPPLGAME                  Singapore Premier League Game
+KXSINNERFINISH               Jannik Sinner to Complete Tennis
+KXSOCCERBTTS                 Soccer Both Team to Score
+KXSOCCERINTLRETIRE           Soccer International Play Retirement
+KXSOCCERJOIN                 Soccer Next Team
+KXSOCCERLEAVE                Soccer Leave Role
+KXSOCCERPLAYCRON             Cristiano Ronaldo world cup
+KXSOCCERPLAYMESSI            Messi World Cup
+KXSOCCERRETIRE               Soccer Retire
+KXSOCCERSPREAD               Soccer Spread
+KXSOCCERTOTAL                Soccer Goal Total
+KXSOCCERTRANSFER             Soccer Transfer
+KXSOCCERTREBLE               Soccer Treble Winners
+KXSOCCERTROPHIES             Soccer Trophies
+KXSOLAXQUAL                  Summer Olympics Lacrosse Qualifiers
+KXSPBGAME                    Venezuela Superliga Game
+KXSRBCUPGAME                 Serbian Cup Game
+KXSRBSLGAME                  Serbian SuperLiga Game
+KXSTARTINGQBWEEK1            NFL Starting QB Week 1
+KXSTEELBRIDGE                Steel Bridge National Championship
+KXSUPERBOWLWHITEHOUSE        WILL THE WINNERS OF THE PRO FOOTBALL CHAMPIONSHIP GO TO THE WHITE HOUSE? 
+KXSUPERLIGADVANCE            To Advance
+KXSVK2LGAME                  Slovakian 2. Liga Game
+KXSVKCUPGAME                 Slovakian Cup Game
+KXSVNCUPGAME                 Slovenian Cup Game
+KXSVNPLGAME                  Slovenian Prva Liga Game
+KXSWIFTATTEND                NFL Attendance Swift
+KXT20MATCH                   Men's T20 Cricket Match
+KXT20SIXES                   Cricket Number of Sixes
+KXT20WORLDCUP                T20 World Cup Winner
+KXTABLETENNIS                Table Tennis Match
+KXTABLETENNISMATCH           Men's Table Tennis Match
+KXTEAMSINNBAEF               Teams in NBA Eastern Conference Finals
+KXTEAMSINNBAF                Teams in NBA Finals
+KXTEAMSINNBAWF               Teams in NBA Western Conference Finals
+KXTEAMSINNCAABBWS            Teams in College Baseball Finals
+KXTEAMSINUCL                 Champions League Final Matchup
+KXTEAMSINWS                  Teams in MLB Finals
+KXTENNISEXHIBITION           Tennis Exhibition Match
+KXTENNISGRANDSLAM            Tennis Grand Slam
+KXTENNISMAJORDJOKOVIC        Djokovic major
+KXTESTINNINGTOTAL            Test Cricket Innings Total Runs
+KXTESTMATCH                  Men's Test Cricket Match
+KXTFF1LIGBTTS                BTTS
+KXTFF1LIGGAME                TFF 1. Lig Game
+KXTFF1LIGSPREAD              Spread
+KXTFF1LIGTOTAL               Point Total
+KXTGLMATCH                   TGL Golf Match
+KXTHEOPEN                    The Open Championship
+KXTIGERMASTERS               Will Tiger Woods play in the Masters
+KXTOP3NBADRAFT               NBA Draft Top 3
+KXTORONTOULTRACHAMPIONSHIP   Dota 2 at 2025 Esports World Cup
+KXTRADEOFFNBA                Pro basketball trades offseason
+KXTRADEOFFNFL                Pro football trades offseason
+KXTRUMPGOLF                  Trump US gold championship
+KXTTELITEGAME                TT Elite Series Table Tennis Game
+KXTTELITEMATCH               TT Elite Series Match
+KXTTMATCH                    Men's Table Tennis Match
+KXTTSTARMATCH                TT Star Series Match
+KXUAEPLADVANCE               To Advance
+KXUAEPLBTTS                  BTTS
+KXUAEPLGAME                  UAE Pro League
+KXUAEPLSPREAD                Spread
+KXUAEPLTOTAL                 Point Total
+KXUCL                        UEFA Champions League
+KXUCL16                      Champions League round of 16
+KXUCL16BVBSPO                Champions League round of 16 - BVB SPO
+KXUCL16PSGSTB                Champions League round of 16 - PSG STB
+KXUCL16PSVJUV                Champions League round of 16 - PSV JUV
+KXUCL16RMAMCI                Champions League round of 16 - RMA MCI
+KXUCL1H                      Champions League First Hal Winner
+KXUCL1HBTTS                  UCL Half BTTS
+KXUCL1HSCORE                 1st Half Correct Score
+KXUCL1HSPREAD                UCL First Half Spread
+KXUCL1HTOTAL                 UCL 1st Half Total
+KXUCL2H                      2nd Half Winner
+KXUCL2HBTTS                  2nd Half BTTS
+KXUCL2HSPREAD                2nd Half Spread
+KXUCL2HTOTAL                 2nd Half Total
+KXUCL8                       Champion's League to Round of 8
+KXUCLACOACH                  UCLA Next Coach
+KXUCLADVANCE                 Champions League Advance
+KXUCLAST                     UCL Assists
+KXUCLBOTTOM                  UCL League Phase Bottom of Table
+KXUCLBTTS                    Champions League BTTS
+KXUCLCORNERS                 UCL Corners
+KXUCLFINALIST                UCL Advance to the Finals
+KXUCLFIRSTGOAL               UCL First Goalscorer
+KXUCLFTTS                    First Team to Score
+KXUCLGAME                    UEFA Champions League Game
+KXUCLGOAL                    UCL Goalscorer
+KXUCLLEADER                  Champions League Leader
+KXUCLLEAGUE                  League to Win UEFA Champions League
+KXUCLMOF                     UCL Method of Finish
+KXUCLMOV                     UCL Method of Advancing
+KXUCLQUAL                    Champions League Qualifiers
+KXUCLRO16                    UCL Advance to Round of 16
+KXUCLRO4                     UCL Advance to Round of 4
+KXUCLRO8                     UCL Advance to Round of 8
+KXUCLROUND                   Round Qualifiers
+KXUCLSAVE                    UCL Goalkeeper Saves
+KXUCLSCORE                   Correct Score
+KXUCLSHOT                    UCL Shots
+KXUCLSOA                     UCL Score or Assist
+KXUCLSOT                     UCL Shots or Target
+KXUCLSPREAD                  Champions League Spread
+KXUCLTCORNERS                Champions League Team Corners
+KXUCLTEAMSHOT                UCL Team Shots
+KXUCLTEAMSOT                 UCL Team Shots on Target
+KXUCLTEAMTOTAL               UCL Team Total
+KXUCLTOP                     UCL League Phase Top of Table
+KXUCLTOP8                    UCL League Phase Top 8 Finishers
+KXUCLTOTAL                   Champions League Total Goals
+KXUCLW                       Champions League Women's
+KXUCLWADVANCE                To Advance
+KXUCLWBTTS                   BTTS
+KXUCLWGAME                   Champions League Women's Game
+KXUCLWSPREAD                 Spread
+KXUCLWTOTAL                  Point Total
+KXUECL                       UEFA Conference League Winner
+KXUECL1H                     Conference League 1H
+KXUECLADVANCE                Conference League Advance
+KXUECLBTTS                   Conference League BTTS
+KXUECLGAME                   UEFA Conference League Game
+KXUECLSPREAD                 Conference League Spread
+KXUECLTOTAL                  Conference League Total
+KXUEFACL                     UEFA Champions League
+KXUEFAEURO                   UEFA European Championship
+KXUEFAEUROQUAL               Euros Qualifiers
+KXUEFAGAME                   UEFA Soccer Games
+KXUEFANL                     UEFA Nations League
+KXUEFANLFIRSTGOAL            UEFA Nations League First Goal
+KXUEFANLGAME                 UEFA Nations League Game
+KXUEFANLGOAL                 UEFA Nations League Goal
+KXUEFANLGROUPQUAL            UEFA Nations League Group Qualifiers
+KXUEFANLGROUPWIN             UEFA Nations League Group Winner
+KXUEFANLROUND                UEFA Nations League Round Qualifiers
+KXUEFASC1HSCORE              World Cup 1st Half Score
+KXUEL                        Europa Leauge champion
+KXUEL16AJAUSG                Europa League round of 16 - AJA USG
+KXUEL16BOGTWE                Europa League round of 16 -  BOG TWE
+KXUEL16FCSBPAOK              Europa League round of 16 - FCSB PAOK
+KXUEL16FTCRSO                Europa League round of 16 - FTC RSO
+KXUEL16GALAZA                Europa League round of 16 - GAL AZA
+KXUEL16ROMFCP                Europa League round of 16 - ROM FCP
+KXUEL16RSCFEN                Europa League round of 16 - RSC FEN
+KXUEL16RSOFCM                Europa League round of 16 - RSO FCM
+KXUEL16TWEVIK                Europa League round of 16 - TWE VIK
+KXUEL16VIKFTC                Europa League round of 16 - VIK FTC
+KXUEL1H                      Europa League 1st Half
+KXUELADVANCE                 Europa League Advance
+KXUELBTTS                    Europa League BTTS
+KXUELGAME                    UEFA Europa League Game
+KXUELMOV                     Europa League Method of Victory
+KXUELSPREAD                  Europa League Spread
+KXUELTOTAL                   Europa League Total
+KXUFASEMI                    Ultimate Frisbee Association Championship Qualifiers
+KXUFC                        UFC Weightclass Champion
+KXUFCARDKO                   MMA Card Knockouts
+KXUFCBANTAMWEIGHTTITLE       UFC Bantamweight Title
+KXUFCCARDKO                  MMA Card Knockouts
+KXUFCDELAY                   UFC Delay
+KXUFCDISTANCE                UFC To Go The Distance
+KXUFCFEATHERWEIGHTTITLE      UFC Featherweight Title
+KXUFCFIGHT                   UFC Fight
+KXUFCFIGHTOCCUR              UFC Fighter to Compete in a Fight
+KXUFCFLYWEIGHTTITLE          UFC Flyweight Title
+KXUFCHEAVYWEIGHTTITLE        UFC Heavyweight Title
+KXUFCLHEAVYWEIGHTTITLE       UFC Light Heavyweight Title
+KXUFCLIGHTWEIGHTTITLE        UFC Lightweight Title
+KXUFCMIDDLEWEIGHTTITLE       UFC Middleweight Title
+KXUFCMOF                     UFC Method of Finish
+KXUFCMOV                     UFC Method of Victory
+KXUFCMWEIGHT                 UFC Middleweight Champion
+KXUFCOCCUR                   Will UFC fight take place?
+KXUFCROUNDS                  UFC Total Rounds
+KXUFCTITLE                   UFC Title Holder
+KXUFCVICROUND                UFC Round of Victory
+KXUFCWELTERWEIGHTTITLE       UFC Welterweight Title
+KXUFCWHITEHOUSE              UFC at White House
+KXUFCWOMBANTAMWEIGHTTITL     UFC Women Bantamweight Title Holder
+KXUFCWOMBANTAMWEIGHTTITLE    UFC Women Bantamweight Title Holder
+KXUFCWOMFLYWEIGHTTITLE       UFC Women Flyweight Title Holder
+KXUFCWOMSTRAWWEIGHTTITLE     UFC Women Strawweight Title
+KXUFLUSFLCONF                UFL USFL Conference Champion
+KXUFLXFLCONF                 UFL XLF Conference Champion
+KXUNITEDCUP                  United Cup Champions
+KXURCMATCH                   United Rugby Championship Match
+KXURYPD                      Uruguayan Premier Division
+KXUSAF1                      4th USA F1 race
+KXUSL                        USL Championship
+KXUSLCUPGAME                 USL Cup Game
+KXUSLGAME                    USL Championship Game
+KXUSOPENCUP                  US Open Cup Soccer
+KXUSOPENCUPGAME              US Open Cup Game
+KXVALGCSEOUL                 Game Changers : Championship Seoul
+KXVALORANT                   Valorant Tournament Winner
+KXVALORANTAWARD              Valorant Award
+KXVALORANTGAME               Valorant game winner
+KXVALORANTGAMETEAMVSMIBR     TEAM VS. MIBR
+KXVALORANTGROUPWIN           Valorant Tournament Group Winner
+KXVALORANTMAP                Valorant Map Winner
+KXVALORANTMASTERSFINALS      Who will win the VALORANT Masters Finals
+KXVALORANTQUALIFIERS         Valorant Qualifiers
+KXVALORANTREGION             Valorant Tournament Winning Region
+KXVALORANTSPREAD             Valorant Spread
+KXVALORANTTOTALMAPS          Valorant Total Maps
+KXVALPL                      Valorant Predator League
+KXVALPLIND                   Valorant Predator League Indonesia
+KXVALPLPHIL                  Valorant Predator League Phillippines
+KXVCCHAMPIONSPARIS           VALORANT Champions 2025 PARIS
+KXVENFUTVEGAME               Venezuela Liga FUTVE game
+KXWBCBANTAMWEIGHTTITLE       Boxing Bantamweight Title
+KXWBCCRUISERWEIGHTTITLE      Boxing Cruiserweight Title
+KXWBCFEATHERWEIGHTTITLE      Boxing Featherweight Title
+KXWBCFLYWEIGHTTITLE          Boxing Flyweight Title
+KXWBCGROUPQUAL               WBC Pool Qualifiers
+KXWBCHEAVYWEIGHTTITLE        Boxing Heavyweight Title
+KXWBCLIGHTWEIGHTTITLE        Boxing Lightweight Title
+KXWBCMIDDLEWEIGHTTITLE       Boxing Middleweight Title
+KXWBCWELTERWEIGHTTITLE       Boxing Welterweight Title
+KXWC                         World Cup
+KXWC1H                       World Cup 1st Half
+KXWC1HBTTS                   World Cup 1st Half BTTS
+KXWC1HSCORE                  World Cup 1st Half Score
+KXWC1HSPREAD                 World Cup First Half Spread
+KXWC1HTOTAL                  World Cup 1st Half Total
+KXWC1STTIMEWIN               World Cup First Time Winner
+KXWC2H                       World Cup 2nd Half Winner
+KXWC2HBTTS                   World Cup 2nd Half BTTS
+KXWC2HSPREAD                 World Cup Second Half Spread
+KXWC2HTOTAL                  World Cup 2nd Half Total
+KXWC3RDPLACE                 World Cup 3rd Place Finisher
+KXWC3RDPLACEQUAL             World Cup 3rd Place Qualification
+KXWCADVANCE                  World Cup Advance
+KXWCAST                      World Cup Assists
+KXWCAWARD                    World Cup Award
+KXWCAWARDCOMBO               World Cup Awards
+KXWCBESTHOST                 World Cup Best Performing Host Nation
+KXWCBRACE                    World Cup Any Player to Score a Brace
+KXWCBTTS                     World Cup BTTS
+KXWCCAREERGOALS              World Cup Career Goals
+KXWCCLUBGOALS                World Cup Club Goals
+KXWCCODWARZONE               Call of Duty: Warzone at 2025 Esports World Cup
+KXWCCONCEDE1ST               World Cup Concede First
+KXWCCONGO                    DR Congo World Cup
+KXWCCONTINENT                World Cup Continent
+KXWCCORNERS                  World Cup Corners
+KXWCCREG                     West Coast Conference Regular Season Champions
+KXWCDELAY                    World Cup Delay
+KXWCEVERYTEAMGOAL            World Cup Every Team to Score a Goal
+KXWCFASTESTGOAL              World Cup Fastest Goal
+KXWCFIFATOP10                World Cup FIFA Top 10
+KXWCFINALMATCHUP             World Cup Final Matchup
+KXWCFINISHINGORDER           World Cup Finishing Order
+KXWCFIRSTGOAL                World Cup First Goal
+KXWCFREEKICKGOAL             World Cup Free Kick Goal
+KXWCFTTS                     World Cup Team To Score First
+KXWCFURTHESTADVANCING        Furthest Advancing Country from World Cup Region
+KXWCGAME                     World Cup Game
+KXWCGAMEGOALS                World Cup Highest Scoring Game
+KXWCGBOOTGOALS               World Soccer Cup Golden Boot Total Goals
+KXWCGOAL                     World Cup Goal
+KXWCGOALCOUNT                World Cup Goal Count
+KXWCGOALEVERYGAME            World Cup Goal in Every Game
+KXWCGOALIEGOAL               Goalie Goal in World Cup
+KXWCGOALIEPEN                Goalie Penalty Goal in World Cup
+KXWCGOALLEADER               World Cup Goal Leader
+KXWCGOALRECORD               World Cup Goal Record
+KXWCGOALSALLOWED             World Cup Goals Allowed
+KXWCGOALSTREAK               World Soccer Cup Goal Streak
+KXWCGROUPORDER               World Cup Group Exact Order
+KXWCGROUPPTS                 World Cup Group Points
+KXWCGROUPQUAL                World Cup Group Qualifiers
+KXWCGROUPWIN                 World Cup Group Winner
+KXWCGROUPWINELIM             World Cup Group Winners to be Eliminated in Round of 32
+KXWCGROUPWINNER              World Cup Group to Win
+KXWCGS3WINS                  World Cup Group Stage Undefeated
+KXWCGSGOALS                  World Cup Group Stage Goals
+KXWCGSUNDEFEATED             World Cup Group Stage Undefeated
+KXWCHATTRICK                 World Cup Hat Trick
+KXWCHOST                     World Soccer Cup Host Country
+KXWCHOSTKO                   World Cup All Host Nations to Reach Knockout Round
+KXWCHOSTSTAGE                World Cup Furthest Stage Advanced to by a Host Nation
+KXWCHOSTWIN                  World Cup Host Nation to Win
+KXWCIRAN                     Iran World Cup
+KXWCKOPENALTIES              World Cup Matches to go to Penalties
+KXWCLOCATION                 World Cup Game Location
+KXWCLONGESTPEN               World Cup Longest Penalty Shootout
+KXWCMATCHUP                  World Cup Matchup
+KXWCMBAPPEGOALLEADER         Mbappe to Break the World Soccer Cup All-Time Goals Record
+KXWCMOF                      World Cup Method of Finish
+KXWCMOV                      World Cup Method of Victory
+KXWCNOEURSA                  World Cup Any Country not in Europe or South America to Win
+KXWCOLIMPICO                 World Cup Olimpico Goal
+KXWCPLAY                     World Cup Play in Game
+KXWCPLAYERGOALS              World Cup Player Goals
+KXWCPREPACK                  World Cup Prepack
+KXWCQUAL                     World Cup Qualifiers
+KXWCRECORD                   World Cup Record Breaking
+KXWCREGIONKO                 World Cup Region Teams to Reach Knockout Stage
+KXWCROUND                    World Cup Reach Round
+KXWCSAVE                     World Cup Saves
+KXWCSCORE                    World Cup Correct Score
+KXWCSHOT                     World Cup Shots
+KXWCSOA                      World Cup Score or Assist
+KXWCSOG                      World Cup Shot on Goal
+KXWCSPREAD                   World Cup Spread
+KXWCSQUAD                    World Cup Squad
+KXWCSTAGE                    World Cup Furthest Stage Advanced
+KXWCSTAGEOFELIM              World Cup Stage of Elimination
+KXWCSTART                    World Cup Starters
+KXWCTCORNERS                 World Cup Team Corners
+KXWCTEAM1STGOAL              World Cup Country First Goal
+KXWCTEAMFIRSTGOAL            World Cup Team First Goal
+KXWCTEAMGOALS                World Cup Team Goals
+KXWCTEAMH2H                  World Cup Team Head to Head
+KXWCTEAMLEADGOAL             World Cup Team Top Scorer
+KXWCTEAMS                    World Cup Team Count
+KXWCTEAMSHOT                 World Cup Team Shots
+KXWCTEAMSINGAME              World Cup Teams in Game
+KXWCTEAMSOG                  World Cup Team Shots on Goal
+KXWCTEAMTOTAL                World Cup Team Total
+KXWCTEAMTOTALGOALS           World Cup Tournament Goals
+KXWCTOTAL                    World Cup Total
+KXWCTOTALGOAL                World Cup Total Goals
+KXWCTTSF                     World Cup Team To Score First
+KXWCUSAOPPONENT              World Cup USA Opponent
+KXWCW                        Women's World Cup
+KXWCWINGROUP                 World Cup Win Group
+KXWCWINMARGIN                World Cup Winning Margin
+KXWCWINNERTRAIL              World Cup Winner to Trail in a Match
+KXWCWOMEN                    World Cup Women
+KXWDBBLGAME                  Women's Bundesliga Basketball Game
+KXWFIBAWC                    Women's FIBA World Cup Winner
+KXWHUNDREDMATCH              The Hundred Women's Cricket Match
+KXWIBPLGAME                  Women's Iceland Premier League Game
+KXWIMMEN                     Wimbledon Championship Men's
+KXWIMWOMEN                   Wimbledon Championship Women's
+KXWINSTREAKHOUMLB10          Houston winning 10 games
+KXWNBA                       WNBA Championship
+KXWNBA1H                     Women's Pro Basketball 1st Half Winner
+KXWNBA1HSPREAD               Women's Pro Basketball 1st Half Spread
+KXWNBA1HTOTAL                WNBA 1st Half Total
+KXWNBA1HWINNER               Women's Pro Basketball 1st Half Winner
+KXWNBA1QSPREAD               Women's Pro Basketball 1st Quarter Spread
+KXWNBA1QTOTAL                Women's Pro Basketball 1st Quarter Total
+KXWNBA1QWINNER               Women's Pro Basketball 1st Quarter Winner
+KXWNBA1SEED                  Women's Pro Basketball #1 Seed
+KXWNBA2H                     Women's Pro Basketball 2nd Half Winner
+KXWNBA2HSPREAD               Women's Pro Basketball 2nd Half Spread
+KXWNBA2HTOTAL                Women's Pro Basketball 2nd Half Total
+KXWNBA2HWINNER               Women's Pro Basketball 2nd Half Winner
+KXWNBA2QSPREAD               Women's Pro Basketball 2nd Quarter Spread
+KXWNBA2QTOTAL                Women's Pro Basketball 2nd Quarter Total
+KXWNBA2QWINNER               Women's Pro Basketball 2nd Quarter Winner
+KXWNBA3PT                    Women's Pro Basketball Player Threes
+KXWNBA3PTCONTEST             Women's Pro Basketball 3-Point Contest
+KXWNBA3PTCONTESTOU           Women's Pro Basketball 3-Point Contest Threes Made
+KXWNBA3PTROUND               Women's Pro Basketball 3-Point Contest Round Qualifiers
+KXWNBA3QSPREAD               Women's Pro Basketball 3rd Quarter Spread
+KXWNBA3QTOTAL                Women's Pro Basketball 3rd Quarter Total
+KXWNBA3QWINNER               Women's Pro Basketball 3rd Quarter Winner
+KXWNBA40PTS                  Women's Pro Basketball Player to Score 40 Points
+KXWNBA4QSPREAD               Women's Pro Basketball 4th Quarter Spread
+KXWNBA4QTOTAL                Women's Pro Basketball 4th Quarter Total
+KXWNBA4QWINNER               Women's Pro Basketball 4th Quarter Winner
+KXWNBA6POY                   WNBA Sixth Player of the Year
+KXWNBA7FIGS                  7 Figure WNBA salary
+KXWNBAALLDEFENSE             Women's Pro Basketball All-Defensive Teams
+KXWNBAALLROOKIE              Women's Pro Basketball All-Rookie Team
+KXWNBAALLSTARS               Women's Pro Basketball All-Star Selections
+KXWNBAALLTEAM                Women's Pro Basketball Teams
+KXWNBAASGAME                 WNBA All Star Game
+KXWNBAASGMVP                 WNBA All-Star Game MVP
+KXWNBAAST                    Women's Pro Basketball Player Assists
+KXWNBACCUP                   WNBA Commissioner's Cup Winner
+KXWNBACCUPMVP                WNBA Commissioner's Cup MVP
+KXWNBACOMPETE                Women's Pro Basketball Player to Compete
+KXWNBACOY                    WNBA Coach of the Year
+KXWNBADELAY                  WNBA Season Delay
+KXWNBADPOY                   WNBA Defensive Player of the Year
+KXWNBADRAFT1                 WNBA Draft 1st Pick
+KXWNBADRAFT2                 WNBA Draft 2nd Pick
+KXWNBADRAFT3                 WNBA Draft 3rd Pick
+KXWNBADRAFT4                 WNBA Draft 4th Pick
+KXWNBADRAFT5                 WNBA Draft 5th Pick
+KXWNBADRAFTTOP3              WNBA Draft Top 3
+KXWNBADRAFTTOP5              WNBA Draft Top 5
+KXWNBADUNK                   Women's Pro Basketball Player to Dunk
+KXWNBAEAST                   Women's Pro Basketball Eastern Conference Champion
+KXWNBAEAST1                  Women's Pro Basketball Eastern Conference #1 Seed
+KXWNBAFINAL                  Women's Pro Basketball Finals Qualifiers
+KXWNBAFINALSMVP              WNBA Finals MVP
+KXWNBAFIRSTTEAM              Women's Pro Basketball First Team
+KXWNBAGAME                   Women's Pro Basketball Game
+KXWNBAGAMESPLAYED            WNBA Games Played in a Season
+KXWNBAH2HPRA                 Women's Pro Basketball Head to Head Pts + Reb + Ast
+KXWNBAH2HPTS                 Women's Pro Basketball Head to Head Points
+KXWNBALAWSUIT                Women's Pro Basketball Lawsuit
+KXWNBAMATCHUP                WNBA Finals Matchup
+KXWNBAMIMP                   WNBA Most Improved Player of the Year
+KXWNBAMVP                    WNBA MVP
+KXWNBANEXTCOMMISH            Women's Pro Basketball Next Commissioner
+KXWNBANEXTTEAM               Women's Pro Basketball Next Team
+KXWNBAOT                     Women's Pro Basketball Overtime
+KXWNBAPLAYOFF                Women's Pro Basketball Playoff Qualifiers
+KXWNBAPLAYOFFHOST            Women's Pro Basketball Playoff Home Games
+KXWNBAPORTNOY                WNBA Portnoy ban
+KXWNBAPTS                    WNBA Player Points
+KXWNBAPTSRECORD              Women's Pro Basketball Single-Game Scoring Record
+KXWNBARAISE                  WNBA raise
+KXWNBAREB                    Women's Pro Basketball Player Rebounds
+KXWNBAROOKAS                 Women's Pro Basketball Rookie to be an All-Star
+KXWNBAROTY                   Pro Women's Basketball Rookie of the Year
+KXWNBAROY                    WNBA Rookie of the Year
+KXWNBASECONDTEAM             Women's Pro Basketball Second Team
+KXWNBASEMIFINAL              Women's Pro Basketball Semifinals Qualifiers
+KXWNBASERIES                 WNBA Playoff Series Winner
+KXWNBASERIESGAMES            WNBA Series Total Games
+KXWNBASERIESSCORE            WNBA Series Exact Score
+KXWNBASERIESSPREAD           WNBA Series Game Spread
+KXWNBASPREAD                 Women's Pro Basketball Spread
+KXWNBASSTARS                 Women's Pro Basketball Shooting Stars Contest
+KXWNBATEAMTOTAL              WNBA Team Totals
+KXWNBATOTAL                  Women's Pro Basketball Total
+KXWNBAWEST                   Women's Pro Basketball Western Conference Champion
+KXWNBAWEST1                  Women's Pro Basketball Western Conference #1 Seed
+KXWNBAWINS                   WNBA Win Totals
+KXWNBAWORSTREC               Women's Pro Basketball Worst Record
+KXWODIMATCH                  Women's ODI Cricket Match
+KXWPLGAME                    Women's Indian Premier League Cricket Game
+KXWSAL                       MLB American League champion
+KXWSNL                       MLB National League champion
+KXWT20WORLDCUP               Women's T20 World Cup Winner
+KXWTA                        Women's Tournament Winner
+KXWTA1RANK                   WTA #1 Ranked
+KXWTAACES                    WTA Tennis Aces
+KXWTAADVANCE                 WTA Stage Qualifiers
+KXWTAATX                     WTA Tour ATX Open
+KXWTABLETENNISMATCH          Women's Table Tennis Match
+KXWTACHALLENGERMATCH         Challenger WTA
+KXWTADDF                     WTA Tour Dubai Duty Free
+KXWTADOUBLES                 WTA Doubles Tennis Match
+KXWTAEXACTMATCH              WTA Exact Match Score
+KXWTAFINALS                  WTA Finals Champion
+KXWTAFINALSQUAL              Will Player Qualify for WTA Finals
+KXWTAGAME                    WTA Tennis Winner
+KXWTAGRANDSLAM               WTA Grand Slam
+KXWTAGTOTAL                  WTA Total Games
+KXWTAIT                      WTA Italian Open
+KXWTAIWO                     Indian Wells Open
+KXWTAMAD                     WTA Madrid
+KXWTAMATCH                   WTA Tennis Match
+KXWTAMIA                     WTA Miami
+KXWTAMOA                     WTA Tour Merida Open Akron
+KXWTANATSTAGE                How many players from country will reach stage at tournament?
+KXWTAROE                     WTA Round of Elimination
+KXWTASERENA                  Serena Williams WTA
+KXWTASETWINNER               WTA Set Winner
+KXWTATOURNWIN                Will player win tournament
+KXWTESTMATCH                 Women's Test Cricket Match
+KXWTTMATCH                   Women's Table Tennis Match
+KXYUGIOH                     Yu-Gi-Oh! TCG World Championship Winner
