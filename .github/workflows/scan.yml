@@ -43,6 +43,7 @@ jobs:
         run: python -m kalshi_scanner loop --max-minutes 27
         env:
           # Optional override, e.g. "KXMLBGAME,KXNHLGAME,KXNBAGAME". Set under Settings > Variables.
+          # Leave the variable unset to scan every default series; when set it REPLACES the defaults.
           KALSHI_SERIES: ${{ vars.KALSHI_SERIES }}
 
       - name: Commit new data

@@ -60,8 +60,8 @@ def cmd_settle(args, client) -> None:
 
 
 def cmd_discover(args, client) -> None:
-    keywords = (
-        # already scanned
+    keywords = (   # only used without --all-series
+        # the leagues the scanner started with
         "MLB", "NHL", "NBA", "NFL", "NCAA", "WNBA", "MLS", "EPL", "PREMIER", "LIGA", "SERIE",
         "BUNDES", "LIGUE", "CHAMPIONS", "UCL", "ATP", "WTA", "UFC", "TENNIS",
         # golf
@@ -75,11 +75,13 @@ def cmd_discover(args, client) -> None:
         "CHALLENGER", "ITF", "BOXING", "PFL", "F1", "FORMULA", "NASCAR", "INDYCAR",
         "ESPORT", "LEAGUE OF LEGENDS", "COUNTER-STRIKE", "DOTA", "VALORANT",
     )
-    rows = [s for s in client.list_series("Sports")
-            if any(k in (s.get("ticker", "") + s.get("title", "")).upper() for k in keywords)]
+    series = client.list_series("Sports")
+    rows = series if args.all_series else [
+        s for s in series if any(k in (s.get("ticker", "") + s.get("title", "")).upper() for k in keywords)]
     for s in sorted(rows, key=lambda s: s.get("ticker", "")):
         print(f"{s.get('ticker', ''):<28} {s.get('title', '')}")
-    print(f"\n{len(rows)} matching series. Set KALSHI_SERIES to a comma-separated list to scan them.")
+    kind = "series" if args.all_series else "matching series"
+    print(f"\n{len(rows)} {kind} (of {len(series)} in Sports). Set KALSHI_SERIES to a comma-separated list to scan them.")
 
 
 def main() -> None:
@@ -112,6 +114,8 @@ def main() -> None:
     parser.add_argument("--multi-per-game", action="store_true",
                         help="allow several paper trades in one game (they are correlated, so this inflates the sample size)")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
+    parser.add_argument("--all-series", action="store_true",
+                        help="discover: list every Sports series instead of only keyword matches")
     args = parser.parse_args()
 
     if args.command == "report":

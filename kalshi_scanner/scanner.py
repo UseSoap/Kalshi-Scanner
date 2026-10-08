@@ -61,14 +61,16 @@ SPORT_LABELS = {
 }
 DEFAULT_SERIES = list(SPORT_LABELS)
 
-# Leagues where a game can end in a draw. There "Team A wins" YES and "Team B wins" NO are NOT the same
-# bet (NO also wins on a draw), so the two sides of a game are never treated as interchangeable.
+# Leagues where a game can end in a draw or tie. There "Team A wins" YES and "Team B wins" NO are NOT the
+# same bet (NO also wins on a draw), so the two sides of a game are never treated as interchangeable.
+# Soccer is the obvious case; KBO and NPB regular-season games can also end tied after extra innings.
 DRAW_POSSIBLE = {"KXMLSGAME", "KXEPLGAME", "KXLALIGAGAME", "KXSERIEAGAME", "KXBUNDESLIGAGAME",
                  "KXLIGUE1GAME", "KXUCLGAME",
                  "KXUELGAME", "KXUECLGAME", "KXLIGAMXGAME", "KXEREDIVISIEGAME", "KXEFLCHAMPIONSHIPGAME",
                  "KXLIGAPORTUGALGAME", "KXSAUDIPLGAME", "KXBRASILEIROGAME", "KXCONMEBOLLIBGAME",
                  "KXSCOTTISHPREMGAME", "KXSERIEBGAME", "KXBUNDESLIGA2GAME", "KXLALIGA2GAME",
-                 "KXLIGUE2GAME", "KXFACUPGAME", "KXUSLGAME"}
+                 "KXLIGUE2GAME", "KXFACUPGAME", "KXUSLGAME",
+                 "KXKBOGAME", "KXNPBGAME"}
 
 
 def sport_of(series: str) -> str:
