@@ -145,21 +145,46 @@ def test_open_exposure_sums_risk_and_sorts_by_listed_end():
     assert insights.open_exposure([row()])["count"] == 0
 
 
-def snap(ticker, side, status, event="g1", ts="2026-10-07T00:00:00+00:00"):
-    return {"ts": ts, "ticker": ticker, "side": side, "event_ticker": event, "depth_status": status}
+def snap(ticker, side, status, event="g1", ts="2026-10-07T00:00:00+00:00", expiry="2026-10-07T02:00:00+00:00"):
+    return {"ts": ts, "ticker": ticker, "side": side, "event_ticker": event, "depth_status": status, "expiry": expiry}
 
 
-def test_scan_funnel_counts_each_contract_by_its_best_depth_result():
-    snaps = [snap("A", "yes", "thin"), snap("A", "yes", "ok"),           # thin first, then fillable: counts as fillable
-             snap("B", "no", "ok", event="g1"),                          # fillable but the game was already traded
-             snap("C", "yes", "thin", event="g2"), snap("D", "yes", "unknown", event="g3"),
-             snap("E", "yes", "unchecked", event="g4", ts="2026-10-08T00:00:00+00:00")]
-    f = insights.scan_funnel(snaps, [{"trade_id": "A|yes"}])
-    assert (f["rows"], f["contracts"], f["games"]) == (6, 5, 4)
-    assert (f["fillable"], f["thin_only"], f["unreadable_only"]) == (3, 1, 1)
-    assert (f["traded"], f["skipped"]) == (1, 2)
-    assert f["first"] < f["last"]
-    assert insights.scan_funnel([], []) is None
+def game(event, day, peak):
+    return {"event_ticker": event, "day": day, "peak_ask": str(peak)}
+
+
+def test_games_funnel_counts_games_not_contracts_and_marks_unlogged_days():
+    games = [game("g1", "2026-10-06", 92), game("g2", "2026-10-06", 86), game("g3", "2026-10-06", 84),
+             game("g6", "2026-10-07", 91)]
+    snaps = [snap("A", "yes", "thin", event="g1"), snap("A", "yes", "ok", event="g1"),    # thin first, then fillable
+             snap("B", "no", "ok", event="g1"),                                            # the mirror: same game
+             snap("D", "yes", "thin", event="g4", expiry="2026-10-06T02:00:00+00:00"),     # before games were logged
+             snap("C", "yes", "unknown", event="g6", expiry="2026-10-08T02:00:00+00:00")]
+    f = insights.games_funnel(games, snaps, [{"event_ticker": "g1"}])
+    by_day = {d["day"]: d for d in f["days"]}
+    assert by_day["2026-10-05"] == {"day": "2026-10-05", "observed": None, "hit": 1, "fillable": 0, "traded": 0}
+    assert by_day["2026-10-06"] == {"day": "2026-10-06", "observed": 3, "hit": 1, "fillable": 1, "traded": 1}
+    assert by_day["2026-10-07"] == {"day": "2026-10-07", "observed": 1, "hit": 1, "fillable": 0, "traded": 0}
+    assert f["first_logged_day"] == "2026-10-06"
+    assert f["never_hit"] == 2 and f["avg_peak"] == 85 and f["max_peak"] == 86
+    assert insights.games_funnel([], [], []) is None
+
+
+def test_games_funnel_counts_a_traded_game_even_without_snapshots_and_skips_undated_ones():
+    f = insights.games_funnel([], [], [{"event_ticker": "g1", "expiry": "2026-10-07T02:00:00+00:00"}])
+    assert f["days"] == [{"day": "2026-10-06", "observed": None, "hit": 1, "fillable": 1, "traded": 1}]
+    assert insights.games_funnel([], [{"event_ticker": "g1", "depth_status": "ok"}], []) is None   # no day to file it under
+
+
+def test_mirror_savings_reports_what_the_cheaper_side_saved():
+    trades = [row(entry_price=89, partner_fill=90, via_mirror=1),                 # cheaper side, below the floor
+              row(entry_price=91, partner_fill=91, via_mirror=0),                 # a tie
+              row(entry_price=90, partner_fill=93, via_mirror=0),                 # cheaper side, 3c
+              row(entry_price=90, partner_fill="", via_mirror=0)]                 # no priced alternative
+    m = insights.mirror_savings(trades)
+    assert (m["compared"], m["cheaper"], m["below_floor"]) == (3, 2, 1)
+    assert m["avg_saving_c"] == 2 and m["saved_usd"] == pytest.approx((1 + 3) * 100 / 100)
+    assert insights.mirror_savings([row()]) is None                               # older rows: nothing to report
 
 
 def test_load_snapshots_reads_every_day_and_tolerates_a_missing_folder(tmp_path):
@@ -195,12 +220,15 @@ def test_empty_group_row_shows_only_a_zero_count():
     assert report.table_row("95-96c", report.summarize([])).split() == ["95-96c", "0"]
 
 
-def make_data(tmp_path, trades, snapshots=None):
+def make_data(tmp_path, trades, snapshots=None, games=None):
     save_trades(trades, tmp_path)
+    if games:
+        (tmp_path / "games.csv").write_text("event_ticker,day,peak_ask\n" + "".join(
+            f"{g['event_ticker']},{g['day']},{g['peak_ask']}\n" for g in games))
     if snapshots:
         folder = tmp_path / "snapshots"
         folder.mkdir()
-        cols = ["ts", "ticker", "event_ticker", "side", "depth_status"]
+        cols = ["ts", "ticker", "event_ticker", "side", "depth_status", "expiry"]
         lines = [",".join(cols)] + [",".join(s[c] for c in cols) for s in snapshots]
         (folder / "2026-10-07.csv").write_text("\n".join(lines) + "\n")
 
@@ -212,14 +240,14 @@ def test_full_report_has_every_new_section(tmp_path):
     trades.append(row(trade_id="open|yes", status="open", won="", pnl_usd="", title="Open Team", event_ticker="eo",
                       expiry="2026-10-09T02:00:00+00:00", first_seen="2026-10-08T22:00:00+00:00", settled_at=""))
     snaps = [snap(f"t{i}", "yes", "ok", event=f"e{i}") for i in range(8)] + [snap("x", "no", "thin", event="ex")]
-    make_data(tmp_path, trades, snaps)
+    make_data(tmp_path, trades, snaps, games=[game("e0", "2026-10-01", 92), game("never", "2026-10-01", 85)])
     text = report.render(tmp_path, now=datetime(2026, 10, 9, 0, 0, tzinfo=timezone.utc))
     for expected in ("Data freshness", "Open positions: 1 trades", "Open Team", "ALL SETTLED", "INCONCLUSIVE",
                      "Win/loss size:", "Record 7W-1L", "Results by game day", "Max drawdown", "Current streak",
                      "How much data is enough", "If the true edge is +1 pt", "By entry price:", "By sport:",
                      "By sport and entry price:", "By side bought:", "Bought YES", "Bought NO",
                      "By bid/ask spread at entry:", "By entry time relative", "Fill quality", "Fees:",
-                     "Scan funnel", "Paper trades opened"):
+                     "Scan funnel by game day", "Hit floor", "never reached the floor peaked"):
         assert expected in text, expected
     assert "$-" not in text and "-$" not in text                           # no minus signs on money
 
@@ -234,4 +262,4 @@ def test_report_with_only_open_trades_still_shows_exposure_and_fills(tmp_path):
 def test_report_with_no_trades_but_snapshots_shows_the_funnel(tmp_path):
     make_data(tmp_path, [], [snap("A", "yes", "ok")])
     text = report.render(tmp_path)
-    assert "No paper fills yet" in text and "Scan funnel" in text
+    assert "No paper fills yet" in text and "Scan funnel by game day" in text

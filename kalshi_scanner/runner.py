@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from . import settle
 from .scanner import Config, new_diag, scan
 from .schedule import ScheduleConfig, make_plan
-from .storage import log_snapshots, record_new_trades
+from .storage import log_snapshots, record_games, record_new_trades
 
 SNAPSHOT_THROTTLE_S = 300   # in loop mode, re-log the same contract at most this often
 
@@ -30,6 +30,7 @@ def scan_cycle(client, cfg: Config, now: datetime, last_logged: dict | None = No
                 last_logged[key] = now
                 to_log.append(c)
     log_snapshots(to_log, now)
+    record_games(diag["games"], now, tz_name=cfg.timezone)
     return found, diag, record_new_trades(found, one_per_event=cfg.one_trade_per_event)
 
 

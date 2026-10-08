@@ -8,11 +8,11 @@ from zoneinfo import ZoneInfo
 
 from .insights import (
     REPORT_TZ, SIDE_ORDER, SPREAD_ORDER, TIMING_ORDER, daily_results, describe_when, edge_verdict,
-    equity_stats, fill_quality, latest, open_exposure, scan_funnel, side_label, spread_label,
+    equity_stats, fill_quality, games_funnel, latest, mirror_savings, open_exposure, side_label, spread_label,
     timing_label, trades_per_day, trades_to_separate, win_loss_stats, wilson_interval,  # noqa: F401
 )
 from .scanner import sport_of
-from .storage import load_snapshots, load_trades
+from .storage import load_games, load_snapshots, load_trades
 
 # Entry-price buckets in cents. The first catches anything under 90c (only if --min-price was lowered).
 BUCKETS = [(0, 90), (90, 93), (93, 95), (95, 96), (96, 97), (97, 98), (98, 99), (99, 100.01)]
@@ -277,6 +277,14 @@ def _fill_lines(trades: list[dict], done: list[dict]) -> list[str]:
                          f"than the quotes in total; at the quoted prices P&L would be about {_money(at_quote)}")
         lines.append("  (The quote and the order book are read moments apart, so gaps reflect fast-moving prices as well as")
         lines.append("  book depth. Fills well below the quote flatter the paper results; a real order may not get them.)")
+    m = mirror_savings(trades)
+    if m:
+        saving = (f"; the cheaper side saved {m['avg_saving_c']:.2f}c on average ({_money(m['saved_usd'])} in total)"
+                  if m["cheaper"] else "")
+        lines.append(f"  Cheaper-side rule: {m['cheaper']} of {m['compared']} trades with a priced alternative went to the "
+                     f"cheaper side{saving}")
+        if m["below_floor"]:
+            lines.append(f"  {m['below_floor']} trade(s) entered below the entry floor because the other side of the game reached it")
     lines.append(f"  Partial fills: {q['partial']} of {q['n']} filled fewer than {q['biggest']:.0f} contracts")
     if q["fee_pct_of_stake"] is not None:
         lines.append(f"  Fees: {_money(q['fees'])} total ({q['fee_pct_of_stake']:.2%} of money staked); "
@@ -286,27 +294,31 @@ def _fill_lines(trades: list[dict], done: list[dict]) -> list[str]:
     return lines + [""]
 
 
-def _funnel_lines(snapshots: list[dict], trades: list[dict]) -> list[str]:
-    f = scan_funnel(snapshots, trades)
+def _funnel_lines(games: list[dict], snapshots: list[dict], trades: list[dict]) -> list[str]:
+    f = games_funnel(games, snapshots, trades)
     if not f:
         return []
-
-    def row(label: str, value) -> str:
-        return f"  {label:<46}{value:>8}"
-
-    return [f"Scan funnel ({f['rows']:,} logged candidate rows):",
-            row(f"Qualifying contracts seen ({f['games']:,} games)", f"{f['contracts']:,}"),
-            row("Deep enough in the order book to fill", f"{f['fillable']:,}"),
-            row("Never deep enough (thin / order book unreadable)", f"{f['thin_only']:,} / {f['unreadable_only']:,}"),
-            row("Paper trades opened", f"{f['traded']:,}"),
-            row("Fillable but skipped (game already had a trade)", f"{f['skipped']:,}"),
-            ""]
+    lines = ["Scan funnel by game day (games, not contracts: the two sides of a game are one bet):",
+             f"  {'Date':<12}{'Observed':>10}{'Hit floor':>11}{'Fillable':>10}{'Traded':>8}"]
+    for d in f["days"][-10:]:
+        seen = "-" if d["observed"] is None else str(d["observed"])
+        lines.append(f"  {d['day']:<12}{seen:>10}{d['hit']:>11}{d['fillable']:>10}{d['traded']:>8}")
+    if f["first_logged_day"]:
+        lines.append(f"  Observed = games on that day's schedule that the scanner saw. It counts games that never reached")
+        lines.append(f"  the entry floor from {f['first_logged_day']} on; earlier days only know about games that did ('-').")
+    else:
+        lines.append("  Games that never reach the entry floor start being counted with the next scan.")
+    if f["never_hit"]:
+        lines.append(f"  The {f['never_hit']} observed games that never reached the floor peaked at an average of "
+                     f"{f['avg_peak']:.1f}c (highest {f['max_peak']:.0f}c)")
+    return lines + [""]
 
 
 def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
     now = now or datetime.now(timezone.utc)
     trades = load_trades(data_dir)
     snapshots = load_snapshots(data_dir)
+    games = load_games(data_dir)
     done = settled(trades)
     lines = [f"Paper trades: {len(trades)} total, {len(done)} settled, "
              f"{sum(1 for t in trades if t['status'] == 'open')} open"]
@@ -314,7 +326,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
     lines.append("")
     if not trades:
         lines.append("No paper fills yet. Let the scanner run through a few game windows.")
-        lines += [""] + _funnel_lines(snapshots, trades)
+        lines += [""] + _funnel_lines(games, snapshots, trades)
         return "\n".join(lines).rstrip()
     lines += _open_lines(trades)
     lines.append("Fills by sport and entry price (open and settled; 'avg size' is contracts per fill):")
@@ -322,7 +334,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
     lines.append("")
     if not done:
         lines.append("Nothing settled yet. Hit rates appear once games finish and Kalshi settles them.")
-        lines += [""] + _fill_lines(trades, done) + _funnel_lines(snapshots, trades)
+        lines += [""] + _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
         return "\n".join(lines).rstrip()
 
     overall = summarize(done)
@@ -346,7 +358,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
         if rows:
             lines += ["", title] + _table(rows)
     lines.append("")
-    lines += _fill_lines(trades, done) + _funnel_lines(snapshots, trades)
+    lines += _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
 
     lines += ["Edge exists only if hit rate beats the implied probability by more than fees AND the",
               "confidence interval stays above the break-even rate. Small samples will mislead you.",

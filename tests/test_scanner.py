@@ -286,3 +286,155 @@ def test_scan_cycle_applies_the_config_flag(tmp_path, monkeypatch):
     assert added == 1
     _, _, added = scan_cycle(client, Config(series=["KXMLBGAME"], one_trade_per_event=False), NOW)
     assert added == 1                                                           # the other contract, now allowed
+
+
+# ---- the two sides of a two-team game, and the cheaper-side rule ----
+
+EVENT = "KXMLBGAME-26OCT06NYYBOS"
+
+
+def pair(a_yes_ask, b_no_ask, series="KXMLBGAME", event=EVENT):
+    """Both markets of one game. 'A wins' YES and 'B wins' NO are the same bet, in separate books."""
+    a = market(ticker=f"{event}-NYY", event_ticker=event, yes_bid=a_yes_ask - 1, yes_ask=a_yes_ask,
+               no_bid=100 - a_yes_ask, no_ask=101 - a_yes_ask)
+    b = market(ticker=f"{event}-BOS", event_ticker=event, no_bid=b_no_ask - 1, no_ask=b_no_ask,
+               yes_bid=100 - b_no_ask, yes_ask=101 - b_no_ask)
+    return [a, b]
+
+
+class BookClient(FakeClient):
+    """Serves a real-looking book for each side: YES asks come from NO bids and vice versa."""
+
+    def __init__(self, markets, series="KXMLBGAME", thin=()):
+        super().__init__({series: markets})
+        self.thin = set(thin)
+
+    def get_orderbook(self, ticker):
+        qty = 3 if ticker in self.thin else 500
+        m = next(m for ms in self.by_series.values() for m in ms if m["ticker"] == ticker)
+        # Resting bids: NO bids at 100 - yes_ask (they fill YES buyers), YES bids at 100 - no_ask.
+        return {"orderbook": {"no": [[100 - m["yes_ask"], qty]], "yes": [[100 - m["no_ask"], qty]]}}
+
+
+def scan_pair(a, b, **cfg):
+    return scan(BookClient(pair(a, b)), Config(series=["KXMLBGAME"], **cfg), NOW)
+
+
+def test_the_other_side_of_a_game_is_offered_when_it_lags_the_floor():
+    found = {(c.ticker.rsplit("-", 1)[1], c.side): c for c in scan_pair(90, 89)}
+    assert set(found) == {("NYY", "yes"), ("BOS", "no")}
+    primary, mirror = found[("NYY", "yes")], found[("BOS", "no")]
+    assert not primary.via_mirror and mirror.via_mirror and mirror.ask == 89
+    assert primary.mirror_key == f"{EVENT}-BOS|no" and mirror.mirror_key == f"{EVENT}-NYY|yes"
+    assert mirror.depth_status == "ok" and mirror.fill_price == 89.0
+
+
+def test_mirror_tolerance_sets_how_far_below_the_floor_it_looks():
+    assert len(scan_pair(90, 88)) == 2                      # exactly 2c under the 90c floor is allowed
+    only = scan_pair(90, 87)
+    assert [c.side for c in only] == ["yes"] and only[0].mirror_key           # linked, but nothing extra offered
+    assert len(scan_pair(90, 87, mirror_tolerance=3.0)) == 2
+    assert len(scan_pair(90, 89, mirror_tolerance=0)) == 1                  # switched off
+
+
+def test_both_sides_reaching_the_floor_are_each_one_candidate():
+    found = scan_pair(91, 90)
+    assert len(found) == 2 and not any(c.via_mirror for c in found)
+
+
+def test_no_mirror_without_the_one_trade_per_game_rule():
+    assert len(scan_pair(90, 89, one_trade_per_event=False)) == 1
+
+
+def test_games_with_a_draw_or_with_more_than_two_markets_are_not_mirrored():
+    soccer = pair(90, 89, event="KXEPLGAME-26OCT06ARSCHE")
+    found = scan(BookClient(soccer, "KXEPLGAME"), Config(series=["KXEPLGAME"]), NOW)
+    assert len(found) == 1 and found[0].mirror_key == ""               # a draw makes NO a different bet
+    three_way = pair(90, 89) + [market(ticker=f"{EVENT}-TIE", event_ticker=EVENT, yes_bid=5, yes_ask=6, no_bid=94, no_ask=95)]
+    found = scan(BookClient(three_way), Config(series=["KXMLBGAME"]), NOW)
+    assert all(c.mirror_key == "" and not c.via_mirror for c in found)
+
+
+def trades_after(tmp_path, found):
+    from kalshi_scanner.storage import load_trades, record_new_trades
+    return record_new_trades(found, tmp_path), load_trades(tmp_path)
+
+
+def test_the_cheaper_side_gets_the_trade_even_when_it_is_under_the_floor(tmp_path):
+    added, trades = trades_after(tmp_path, scan_pair(90, 89))
+    assert added == 1
+    t = trades[0]
+    assert t["ticker"].endswith("-BOS") and t["side"] == "no" and t["entry_price"] == "89.0"
+    assert t["via_mirror"] == "1" and t["partner_fill"] == "90.0"
+
+
+def test_when_both_sides_qualify_the_cheaper_is_taken_and_ties_make_one_trade(tmp_path):
+    added, trades = trades_after(tmp_path, scan_pair(91, 90))
+    assert added == 1 and trades[0]["entry_price"] == "90.0" and trades[0]["via_mirror"] == "0"
+    assert trades[0]["partner_fill"] == "91.0"
+    added, trades = trades_after(tmp_path / "tie", scan_pair(91, 91))
+    assert added == 1 and trades[0]["partner_fill"] == "91.0"
+
+
+def test_a_thin_cheaper_side_is_passed_over(tmp_path):
+    client = BookClient(pair(90, 89), thin={f"{EVENT}-BOS"})
+    found = scan(client, Config(series=["KXMLBGAME"]), NOW)
+    added, trades = trades_after(tmp_path, found)
+    assert added == 1 and trades[0]["ticker"].endswith("-NYY") and trades[0]["partner_fill"] == ""
+
+
+def test_soccer_style_games_still_take_the_highest_priced_contract(tmp_path):
+    added, trades = trades_after(tmp_path, soccer_candidates(92, 97, 94))
+    assert added == 1 and trades[0]["ticker"].endswith("X1") and trades[0]["via_mirror"] == "0"
+
+
+def test_snapshot_files_keep_their_columns(tmp_path):
+    from kalshi_scanner.storage import SNAPSHOT_FIELDS, log_snapshots
+    assert "mirror_key" not in SNAPSHOT_FIELDS and "via_mirror" not in SNAPSHOT_FIELDS
+    log_snapshots(scan_pair(90, 89), NOW, tmp_path)                         # includes a mirror candidate
+    header, *rows = (tmp_path / "snapshots" / "2026-10-06.csv").read_text().splitlines()
+    assert header.split(",") == SNAPSHOT_FIELDS and len(rows) == 2
+
+
+# ---- games seen ----
+
+def test_diagnostics_record_every_game_and_its_peak_ask():
+    from kalshi_scanner.scanner import new_diag
+    diag = new_diag()
+    quiet = pair(86, 85, event="KXMLBGAME-26OCT06QUIET")
+    scan(BookClient(pair(90, 89) + quiet), Config(series=["KXMLBGAME"]), NOW, diag)
+    games = diag["games"]
+    assert set(games) == {EVENT, "KXMLBGAME-26OCT06QUIET"}
+    assert games[EVENT]["peak_ask"] == 90 and games["KXMLBGAME-26OCT06QUIET"]["peak_ask"] == 86
+    assert games[EVENT]["series"] == "KXMLBGAME" and games[EVENT]["expiry"] == "2026-10-07T02:30:00+00:00"
+
+
+def test_record_games_adds_raises_the_peak_and_skips_unchanged_scans(tmp_path):
+    from kalshi_scanner.storage import load_games, record_games
+    seen = {"E1": {"series": "KXNHLGAME", "expiry": "2026-10-07T02:30:00+00:00", "peak_ask": 84.0}}
+    assert record_games(seen, NOW, tmp_path) == 1
+    row = load_games(tmp_path)[0]
+    assert row["day"] == "2026-10-06" and row["sport"] == "NHL" and row["peak_ask"] == "84"   # 9:30 pm Central
+    stamp = (tmp_path / "games.csv").stat().st_mtime_ns
+    assert record_games(seen, NOW, tmp_path) == 0 and (tmp_path / "games.csv").stat().st_mtime_ns == stamp
+    later = datetime(2026, 10, 6, 20, 0, tzinfo=timezone.utc)
+    seen["E1"]["peak_ask"] = 91.5
+    seen["E2"] = {"series": "KXNBAGAME", "expiry": "2026-10-07T04:00:00+00:00", "peak_ask": 70.0}
+    assert record_games(seen, later, tmp_path) == 2
+    rows = {r["event_ticker"]: r for r in load_games(tmp_path)}
+    assert rows["E1"]["peak_ask"] == "91.5" and rows["E1"]["first_seen"] == "2026-10-06T18:00:00+00:00"
+    seen["E1"]["peak_ask"] = 80.0
+    assert record_games(seen, later, tmp_path) == 0                          # a lower ask never lowers the peak
+    assert record_games({}, later, tmp_path) == 0
+
+
+def test_scan_cycle_logs_games_and_trades_the_cheaper_side(tmp_path, monkeypatch):
+    from kalshi_scanner import storage
+    from kalshi_scanner.runner import scan_cycle
+    monkeypatch.setattr(storage, "DATA_DIR", tmp_path)
+    client = BookClient(pair(90, 89) + pair(80, 79, event="KXMLBGAME-26OCT06NOPE"))
+    found, diag, added = scan_cycle(client, Config(series=["KXMLBGAME"]), NOW)
+    assert added == 1 and len(found) == 2
+    games = {r["event_ticker"]: r for r in storage.load_games(tmp_path)}
+    assert set(games) == {EVENT, "KXMLBGAME-26OCT06NOPE"} and games["KXMLBGAME-26OCT06NOPE"]["peak_ask"] == "80"
+    assert storage.load_trades(tmp_path)[0]["via_mirror"] == "1"

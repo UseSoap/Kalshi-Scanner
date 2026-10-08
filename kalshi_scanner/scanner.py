@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from collections import Counter
-from dataclasses import dataclass, field
+from collections import Counter, defaultdict
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -35,6 +35,11 @@ SPORT_LABELS = {
     "KXUFCFIGHT": "UFC",
 }
 DEFAULT_SERIES = list(SPORT_LABELS)
+
+# Leagues where a game can end in a draw. There "Team A wins" YES and "Team B wins" NO are NOT the same
+# bet (NO also wins on a draw), so the two sides of a game are never treated as interchangeable.
+DRAW_POSSIBLE = {"KXMLSGAME", "KXEPLGAME", "KXLALIGAGAME", "KXSERIEAGAME", "KXBUNDESLIGAGAME",
+                 "KXLIGUE1GAME", "KXUCLGAME"}
 
 
 def sport_of(series: str) -> str:
@@ -68,6 +73,7 @@ class Config:
     expiry_grace_min: int = 180   # accept still-open markets this long past the expected end (overtime, delays)
     check_depth: bool = True      # fetch the order book and size the order to what can fill
     one_trade_per_event: bool = True   # one paper trade per game; correlated contracts are not extra samples
+    mirror_tolerance: float = 2.0      # cents below min_price at which the other side of the same bet is still offered
 
 
 @dataclass
@@ -95,6 +101,9 @@ class Candidate:
     depth_at_ask: float | None = None
     depth_status: str = "unchecked"   # unchecked | ok | thin | unknown
     fillable: int | None = None       # contracts fillable within the slippage limit, capped at Config.contracts
+    # Two-team games only (not logged in snapshots): the other side of the same bet, as "ticker|side".
+    mirror_key: str = ""
+    via_mirror: bool = False          # True if this contract was offered only because its mirror reached the floor
 
 
 def _num(value):
@@ -178,6 +187,12 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
         diag["same_day"] += 1
         for side, ask, bid in all_sides:
             diag["top"].append((ask, bid, market["ticker"], side))
+        # One entry per game (event), with the highest ask seen on any of its contracts. This is how the
+        # report knows how many games were on, including the ones that never reached the entry floor.
+        game = diag["games"].setdefault(market.get("event_ticker") or market["ticker"], {
+            "series": market.get("series_ticker") or market.get("event_ticker", "").split("-")[0],
+            "expiry": expiry.astimezone(timezone.utc).isoformat(timespec="seconds"), "peak_ask": 0.0})
+        game["peak_ask"] = max([game["peak_ask"]] + [ask for _side, ask, _bid in all_sides])
 
     out = []
     for side, ask, bid in all_sides:
@@ -245,7 +260,57 @@ def apply_depth(client, cand: Candidate, cfg: Config) -> Candidate:
 
 
 def new_diag() -> dict:
-    return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}, "expiries": set()}
+    return {"reasons": Counter(), "same_day": 0, "top": [], "per_series": {}, "expiries": set(), "games": {}}
+
+
+def _binary_pairs(markets: list[dict], series: str) -> dict[str, tuple[dict, dict]]:
+    """Games with exactly two markets (one per team) in a league where a draw is impossible.
+
+    In these games "Team A wins" YES and "Team B wins" NO pay out together: they are the same bet.
+    """
+    if series.upper() in DRAW_POSSIBLE:
+        return {}
+    by_event: dict[str, list[dict]] = defaultdict(list)
+    for m in markets:
+        if m.get("event_ticker"):
+            by_event[m["event_ticker"]].append(m)
+    return {ev: (ms[0], ms[1]) for ev, ms in by_event.items() if len(ms) == 2 and ms[0]["ticker"] != ms[1]["ticker"]}
+
+
+def _add_mirrors(client, markets: list[dict], found: list[Candidate], seen: set, now: datetime,
+                 cfg: Config, series: str) -> list[Candidate]:
+    """Link the two sides of each two-team bet, and offer the cheaper one when it lags the entry floor.
+
+    The two sides trade in separate order books, so one can sit a cent or two below the other. When a
+    side reaches the entry floor, its mirror is offered too, even if it is up to `cfg.mirror_tolerance`
+    cents under the floor, so the paper trade can go to whichever is cheaper. Every candidate in such a
+    game gets a `mirror_key` so the trade logic knows to prefer the lower price.
+    """
+    pairs = _binary_pairs(markets, series)
+    if not pairs:
+        return []
+    relaxed = replace(cfg, min_price=cfg.min_price - cfg.mirror_tolerance)
+    extra: list[Candidate] = []
+    for cand in list(found):
+        pair = pairs.get(cand.event_ticker)
+        if pair is None:
+            continue
+        partner = pair[1] if pair[0]["ticker"] == cand.ticker else pair[0]
+        opposite = "no" if cand.side == "yes" else "yes"
+        cand.mirror_key = f"{partner['ticker']}|{opposite}"
+        key = (partner["ticker"], opposite)
+        if key in seen or not (cfg.one_trade_per_event and cfg.mirror_tolerance > 0):
+            continue
+        seen.add(key)
+        for mirror in evaluate(partner, now, relaxed):
+            if mirror.side != opposite:
+                continue
+            mirror.mirror_key = f"{cand.ticker}|{cand.side}"
+            mirror.via_mirror = mirror.ask < cfg.min_price
+            if cfg.check_depth:
+                apply_depth(client, mirror, cfg)
+            extra.append(mirror)
+    return extra
 
 
 def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = None) -> list[Candidate]:
@@ -253,11 +318,11 @@ def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = N
     now = now or datetime.now(timezone.utc)
     found, seen = [], set()
     for series in cfg.series:
+        markets = list(client.list_markets(series_ticker=series, status="open"))
         if diag is not None:
-            diag["per_series"][series] = 0
-        for market in client.list_markets(series_ticker=series, status="open"):
-            if diag is not None:
-                diag["per_series"][series] += 1
+            diag["per_series"][series] = len(markets)
+        mine: list[Candidate] = []
+        for market in markets:
             market.setdefault("series_ticker", series)
             for cand in evaluate(market, now, cfg, diag):
                 key = (cand.ticker, cand.side)
@@ -270,5 +335,6 @@ def scan(client, cfg: Config, now: datetime | None = None, diag: dict | None = N
                         diag["reasons"][f"thin book (under {cfg.min_contracts} contracts fillable)"] += 1
                     elif diag is not None and cand.depth_status == "unknown":
                         diag["reasons"]["order book unreadable"] += 1
-                found.append(cand)
+                mine.append(cand)
+        found += mine + _add_mirrors(client, markets, mine, seen, now, cfg, series)
     return found

@@ -260,30 +260,78 @@ def open_exposure(trades: list[dict]):
 _DEPTH_RANK = {"ok": 3, "unchecked": 3, "thin": 2}   # anything else (unknown) ranks 1
 
 
-def scan_funnel(snapshots: list[dict], trades: list[dict]):
-    """What the scanner saw versus what it traded. A contract counts by its best depth result."""
-    if not snapshots:
-        return None
-    best: dict[str, int] = {}
-    games, stamps = set(), []
+def games_funnel(games: list[dict], snapshots: list[dict], trades: list[dict], tz_name: str = REPORT_TZ):
+    """Per game day: games observed, games that reached the entry floor, were fillable, and were traded.
+
+    Counts games, not contracts: the two sides of a game are the same bet. `games` is data/games.csv, which
+    records every game seen, including the ones that never reached the floor. Days before that log began
+    only know about games that did reach it (from the snapshots), so their "observed" count is None.
+    """
+    tz = ZoneInfo(tz_name)
+
+    def blank(day=None, logged=False, peak=None):
+        return {"day": day, "logged": logged, "rank": 0, "traded": False, "peak": peak}
+
+    def day_of(row):
+        ts = parse_ts(row.get("expiry"))
+        return ts.astimezone(tz).date().isoformat() if ts else None
+
+    per: dict[str, dict] = {g["event_ticker"]: blank(g.get("day") or None, True, num(g.get("peak_ask"))) for g in games}
     for r in snapshots:
-        key = f"{r.get('ticker')}|{r.get('side')}"
-        best[key] = max(best.get(key, 0), _DEPTH_RANK.get(r.get("depth_status") or "unchecked", 1))
         if r.get("event_ticker"):
-            games.add(r["event_ticker"])
-        ts = parse_ts(r.get("ts"))
-        if ts:
-            stamps.append(ts)
-    traded_ids = {t.get("trade_id") for t in trades}
-    fillable = [k for k, rank in best.items() if rank == 3]
-    traded = sum(1 for k in fillable if k in traded_ids)
-    return {
-        "rows": len(snapshots), "contracts": len(best), "games": len(games),
-        "fillable": len(fillable), "thin_only": sum(1 for r in best.values() if r == 2),
-        "unreadable_only": sum(1 for r in best.values() if r == 1),
-        "traded": traded, "skipped": len(fillable) - traded,
-        "first": min(stamps) if stamps else None, "last": max(stamps) if stamps else None,
-    }
+            g = per.setdefault(r["event_ticker"], blank())
+            g["day"] = g["day"] or day_of(r)
+            g["rank"] = max(g["rank"], _DEPTH_RANK.get(r.get("depth_status") or "unchecked", 1))
+    for t in trades:
+        if t.get("event_ticker"):
+            g = per.setdefault(t["event_ticker"], blank())
+            g["day"] = g["day"] or day_of(t)
+            g["traded"] = True
+            g["rank"] = max(g["rank"], 3)          # a paper trade means the contract was fillable
+
+    days: dict[str, dict] = defaultdict(lambda: {"logged": 0, "hit": 0, "fillable": 0, "traded": 0})
+    for g in per.values():
+        if not g["day"]:
+            continue
+        d = days[g["day"]]
+        d["logged"] += g["logged"]
+        d["hit"] += g["rank"] > 0
+        d["fillable"] += g["rank"] == 3
+        d["traded"] += g["traded"]
+    if not days:
+        return None
+    rows = []
+    for day in sorted(days):
+        d = days[day]
+        unlogged_hits = sum(1 for g in per.values() if g["day"] == day and not g["logged"] and g["rank"] > 0)
+        rows.append({"day": day, "observed": d["logged"] + unlogged_hits if d["logged"] else None,
+                     "hit": d["hit"], "fillable": d["fillable"], "traded": d["traded"]})
+    misses = [g["peak"] for g in per.values() if g["logged"] and g["rank"] == 0 and g["peak"] is not None]
+    logged_days = [r["day"] for r in rows if r["observed"] is not None]
+    return {"days": rows, "first_logged_day": logged_days[0] if logged_days else None,
+            "never_hit": len(misses), "avg_peak": sum(misses) / len(misses) if misses else None,
+            "max_peak": max(misses) if misses else None}
+
+
+def mirror_savings(trades: list[dict]):
+    """How the cheaper-side rule has played out: how often the other side was available, and what it saved."""
+    compared = better = below_floor = 0
+    gaps, saved_usd = [], 0.0
+    for t in trades:
+        if t.get("via_mirror") == "1":
+            below_floor += 1
+        entry, partner, size = num(t.get("entry_price")), num(t.get("partner_fill")), num(t.get("contracts"))
+        if entry is None or partner is None or size is None:
+            continue
+        compared += 1
+        if partner - entry > 1e-9:
+            better += 1
+            gaps.append(partner - entry)
+            saved_usd += (partner - entry) * size / 100.0
+    if not compared and not below_floor:
+        return None
+    return {"compared": compared, "cheaper": better, "avg_saving_c": sum(gaps) / len(gaps) if gaps else None,
+            "saved_usd": saved_usd, "below_floor": below_floor}
 
 
 def latest(rows: list[dict], field: str):

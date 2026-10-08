@@ -12,7 +12,7 @@ A GitHub Action runs an adaptive loop. An external scheduler (cron-job.org) star
 1. **Settles** any earlier paper trades whose games have finished, using Kalshi's recorded result.
 2. **Scans** the configured sports series for contracts that end today (US Central) where one side's ask is 90-99¢ and the bid/ask spread is 5¢ or less. The default series cover MLB, NHL, NBA, NFL, college football, men's college basketball, WNBA, MLS, the Premier League, La Liga, Serie A, the Bundesliga, Ligue 1, the Champions League, ATP and WTA tennis, and UFC. Leagues that are out of season just return no markets.
 3. **Checks the order book** for each candidate and sizes the paper order to what could actually fill: as many contracts as the book offers, up to 100, without paying more than the quoted ask plus 2¢ (and never above 99¢). The entry price is the *average fill price* across the levels used, not the top-of-book ask. If fewer than 5 contracts could fill, the book is "thin" and the candidate is logged but not traded. Tune with `--contracts`, `--min-contracts` and `--max-slippage`.
-4. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per game) in `data/trades.csv`, with the sport recorded and Kalshi's fee applied at the fill price and size.
+4. **Logs** each candidate to `data/snapshots/<date>.csv` and opens a paper trade (one per game) in `data/trades.csv`, with the sport recorded and Kalshi's fee applied at the fill price and size. In a two-team game it buys the **cheaper side of the same bet** (see below). It also records every game it saw, and the highest ask on any of its contracts, in `data/games.csv`, so the report can count games that never reached the entry floor.
 5. **Commits** the new data back to this repo.
 
 ## First-time setup
@@ -35,14 +35,15 @@ prints, in order:
 - **ALL SETTLED**, with the **break-even hit rate after fees** and the **edge** (hit rate minus break-even, in percentage points), plus a one-line verdict on whether the 95% confidence interval clears break-even. Every table below uses the same columns, and negative numbers show in parentheses.
 - **Win/loss size** (average win vs. average loss, profit factor), **results by game day** (daily and cumulative P&L, max drawdown, current streak), and **how much data is enough** (trades needed to prove a 1, 2 or 3 point edge, and to confirm the observed rate).
 - The same table **by price bucket, by sport, by sport within each bucket**, then **by side bought, by bid/ask spread, and by entry time** relative to the game's listed end.
-- **Fill quality** (entry price vs. the quote that flagged the trade, partial fills, fees, spread) and the **scan funnel** (contracts seen, fillable, traded, skipped).
+- **Fill quality** (entry price vs. the quote that flagged the trade, partial fills, fees, spread) and the **scan funnel by game day** (games observed, games that hit the entry floor, were fillable, and were traded; the two sides of a game count once).
 - A **synthetic combo simulation** (stack one favorite per game until the combined odds are about 50%, once per day).
 
 Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
 
 ## Things to know
 
-- **One paper trade per game.** Contracts in the same game move together (a soccer game has win, draw and loss contracts, and a game that flips can qualify on both sides), so counting each as a trade would overstate the sample size and make the confidence intervals look too tight. When several qualify at once the highest-priced one is taken; a game that already has a trade is skipped. Every candidate is still logged in the snapshots. `--multi-per-game` turns the rule off.
+- **One paper trade per game.** Contracts in the same game move together (a soccer game has win, draw and loss contracts, and a game that flips can qualify on both sides), so counting each as a trade would overstate the sample size and make the confidence intervals look too tight. A game that already has a trade is skipped, and every candidate is still logged in the snapshots. `--multi-per-game` turns the rule off.
+- **The cheaper side wins in two-team games.** "Team A wins" YES and "Team B wins" NO are the same bet, but they trade in separate order books and can sit a cent or two apart. When one side reaches the entry floor, the scanner also looks at the other side, even down to 2¢ under the floor (`--mirror-tolerance`, 0 turns it off), and the paper trade goes to whichever fills cheaper (ties go to the larger fill). Such a trade can therefore enter at 88-89¢ and lands in the `<90c` bucket; `trades.csv` records `via_mirror` (1 if the contract was itself under the floor) and `partner_fill` (the other side's price). This only applies where a draw is impossible. Soccer leagues keep the old rule (the contracts are different bets, so the highest-priced one is taken), as does any game with more than two markets.
 - **Fees are per order, rounded up to the next cent.** 1 contract at 98¢ pays a full cent in fees, while 100 contracts pay about 0.2¢ each. Because fills are now sized to the book, small fills carry proportionally heavier fees, so read hit rate vs. implied first and treat ROI on small fills as pessimistic. The fee rate in `kalshi_scanner/fees.py` (0.07) should be checked against Kalshi's current fee schedule.
 - **Combining legs does not create edge.** Multiplying 95-99% legs only changes variance. The combo simulation here is an upper bound, because real Kalshi combo markets carry market-maker margin. Same-sport legs on one day can also be correlated.
 - **"Ends today" uses the game's expected end time**, not Kalshi's `close_time`, which can be days later on sports markets.
@@ -59,7 +60,7 @@ Edge only exists if the realized hit rate beats the break-even rate after fees, 
 ```
 kalshi_scanner/   client, scanner, order book, fees, settlement, report (+ insights: extra stats), combo simulator
 tests/            mock-based tests (python -m pytest)
-data/             snapshots and paper trades, committed by the Action
+data/             snapshots, paper trades and games seen, committed by the Action
 notebooks/        Colab analysis notebook
 .github/workflows/scan.yml
 ```

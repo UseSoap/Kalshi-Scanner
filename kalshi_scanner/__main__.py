@@ -20,7 +20,8 @@ def _config(args) -> Config:
                   max_spread=args.max_spread, contracts=args.contracts,
                   min_contracts=args.min_contracts, max_slippage=args.max_slippage,
                   timezone=args.timezone, same_day_only=not args.any_day,
-                  check_depth=not args.skip_depth, one_trade_per_event=not args.multi_per_game)
+                  check_depth=not args.skip_depth, one_trade_per_event=not args.multi_per_game,
+                  mirror_tolerance=args.mirror_tolerance)
 
 
 def cmd_scan(args, client) -> None:
@@ -81,6 +82,9 @@ def main() -> None:
                         help="smallest fill worth recording; thinner books are skipped")
     parser.add_argument("--max-slippage", type=float, default=2.0,
                         help="never pay more than the quoted ask plus this many cents")
+    parser.add_argument("--mirror-tolerance", type=float, default=2.0,
+                        help="in two-team games, once one side reaches --min-price, also consider the other side "
+                             "of the same bet down to this many cents below it, and buy whichever is cheaper (0 = off)")
     parser.add_argument("--timezone", default="America/Chicago")
     parser.add_argument("--skip-depth", action="store_true",
                         help="do not check order-book depth (paper fills at the top ask, which is optimistic)")
