@@ -11,9 +11,8 @@ from .client import KalshiError
 from .fees import breakeven_probability, win_loss
 from .orderbook import fill_estimate, parse_book
 
-# Best-recollection series tickers for game-winner markets. I could not reach Kalshi's API
-# to verify them, so run `python -m kalshi_scanner discover` to list what Kalshi actually has
-# and override with the KALSHI_SERIES environment variable or --series. A ticker that does not
+# Series tickers for game-winner markets, confirmed against `python -m kalshi_scanner discover`.
+# Override with the KALSHI_SERIES environment variable or --series. A ticker that does not
 # exist (or a league that is out of season) simply returns no markets; it breaks nothing.
 SPORT_LABELS = {
     "KXMLBGAME": "MLB",
@@ -33,13 +32,43 @@ SPORT_LABELS = {
     "KXATPMATCH": "Tennis (ATP)",
     "KXWTAMATCH": "Tennis (WTA)",
     "KXUFCFIGHT": "UFC",
+    # Added after running `discover` (Oct 2026): all of these tickers were seen in Kalshi's series list.
+    # More soccer
+    "KXUELGAME": "Europa League",
+    "KXUECLGAME": "Conference League",
+    "KXLIGAMXGAME": "Liga MX",
+    "KXEREDIVISIEGAME": "Eredivisie",
+    "KXEFLCHAMPIONSHIPGAME": "EFL Championship",
+    "KXLIGAPORTUGALGAME": "Liga Portugal",
+    "KXSAUDIPLGAME": "Saudi Pro League",
+    "KXBRASILEIROGAME": "Brasileiro Serie A",
+    "KXCONMEBOLLIBGAME": "Copa Libertadores",
+    "KXSCOTTISHPREMGAME": "Scottish Premiership",
+    "KXSERIEBGAME": "Serie B",
+    "KXBUNDESLIGA2GAME": "Bundesliga 2",
+    "KXLALIGA2GAME": "La Liga 2",
+    "KXLIGUE2GAME": "Ligue 2",
+    "KXFACUPGAME": "FA Cup",
+    "KXUSLGAME": "USL Championship",
+    # More tennis (the plain ATP/WTA tour series are above)
+    "KXATPCHALLENGERMATCH": "Tennis (ATP Challenger)",
+    "KXWTACHALLENGERMATCH": "Tennis (WTA Challenger)",
+    "KXITFMATCH": "Tennis (ITF men)",
+    "KXITFWMATCH": "Tennis (ITF women)",
+    # Foreign baseball (plays overnight US time)
+    "KXKBOGAME": "KBO",
+    "KXNPBGAME": "NPB",
 }
 DEFAULT_SERIES = list(SPORT_LABELS)
 
 # Leagues where a game can end in a draw. There "Team A wins" YES and "Team B wins" NO are NOT the same
 # bet (NO also wins on a draw), so the two sides of a game are never treated as interchangeable.
 DRAW_POSSIBLE = {"KXMLSGAME", "KXEPLGAME", "KXLALIGAGAME", "KXSERIEAGAME", "KXBUNDESLIGAGAME",
-                 "KXLIGUE1GAME", "KXUCLGAME"}
+                 "KXLIGUE1GAME", "KXUCLGAME",
+                 "KXUELGAME", "KXUECLGAME", "KXLIGAMXGAME", "KXEREDIVISIEGAME", "KXEFLCHAMPIONSHIPGAME",
+                 "KXLIGAPORTUGALGAME", "KXSAUDIPLGAME", "KXBRASILEIROGAME", "KXCONMEBOLLIBGAME",
+                 "KXSCOTTISHPREMGAME", "KXSERIEBGAME", "KXBUNDESLIGA2GAME", "KXLALIGA2GAME",
+                 "KXLIGUE2GAME", "KXFACUPGAME", "KXUSLGAME"}
 
 
 def sport_of(series: str) -> str:
