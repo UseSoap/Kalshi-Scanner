@@ -1,4 +1,3 @@
-/content/kalshi-scanner
 KXA10REG                     A10 Regular Season Champions
 KXAACREG                     AAC Regular Season Champions
 KXACBGAME                    Spain Liga ACB Game
