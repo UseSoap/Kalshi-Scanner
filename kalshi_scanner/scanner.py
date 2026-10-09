@@ -136,6 +136,9 @@ class Candidate:
     # Two-team games only (not logged in snapshots): the other side of the same bet, as "ticker|side".
     mirror_key: str = ""
     via_mirror: bool = False          # True if this contract was offered only because its mirror reached the floor
+    # Loop mode only (not logged in snapshots): seconds this exact bid/ask has sat unchanged while the scanner
+    # was watching the contract. 0.0 on the first sighting, None when no state is kept (single `scan`).
+    quote_age_s: float | None = None
 
 
 def _num(value):

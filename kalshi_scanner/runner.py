@@ -17,10 +17,34 @@ def max_ask(diag: dict):
     return max((ask for ask, _bid, _t, _s in diag["top"]), default=None)
 
 
-def scan_cycle(client, cfg: Config, now: datetime, last_logged: dict | None = None):
+def track_quotes(found, now: datetime, state: dict) -> None:
+    """Stamp each candidate with how long its exact bid/ask has sat unchanged, as this loop has seen it.
+
+    `state` maps (ticker, side) -> ((ask, bid), first time that quote was seen). A quote that is new or has
+    moved gets age 0, so 0 means "first sighting or just changed", not "known fresh". Contracts that stop being
+    candidates are dropped, so a quote that returns later starts over instead of inheriting a stale age.
+    """
+    live = set()
+    for c in found:
+        key, quote = (c.ticker, c.side), (c.ask, c.bid)
+        live.add(key)
+        prev = state.get(key)
+        if prev is None or prev[0] != quote:
+            state[key] = (quote, now)
+            c.quote_age_s = 0.0
+        else:
+            c.quote_age_s = (now - prev[1]).total_seconds()
+    for key in [k for k in state if k not in live]:
+        del state[key]
+
+
+def scan_cycle(client, cfg: Config, now: datetime, last_logged: dict | None = None,
+               quote_state: dict | None = None):
     """Scan once, log snapshots, open paper trades. Returns (candidates, diag, new_trade_count)."""
     diag = new_diag()
     found = scan(client, cfg, now, diag)
+    if quote_state is not None:
+        track_quotes(found, now, quote_state)
     to_log = found
     if last_logged is not None:
         to_log = []
@@ -76,7 +100,7 @@ def run_loop(client, cfg: Config, sc: ScheduleConfig, max_minutes: float = 25.0,
     """
     start = now_fn()
     deadline = start + timedelta(minutes=max_minutes) if max_minutes else None
-    last_settle, last_logged = None, {}
+    last_settle, last_logged, quote_state = None, {}, {}
     cycles = trades = 0
     while True:
         now = now_fn()
@@ -85,7 +109,7 @@ def run_loop(client, cfg: Config, sc: ScheduleConfig, max_minutes: float = 25.0,
             last_settle = now
             if resolved:
                 log(f"settle: {resolved} trades resolved")
-        found, diag, added = scan_cycle(client, cfg, now, last_logged)
+        found, diag, added = scan_cycle(client, cfg, now, last_logged, quote_state)
         cycles += 1
         trades += added
         plan = make_plan(now, diag["expiries"], max_ask(diag), sc)

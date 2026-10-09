@@ -139,6 +139,12 @@ def _col(text: str) -> str:
 
 
 LABEL_W = 24
+BANNER_W = 100
+
+
+def banner(title: str, width: int = BANNER_W) -> list[str]:
+    """A section header: a blank line, a rule, the title in capitals, a rule."""
+    return ["", "=" * width, title.upper(), "=" * width]
 
 
 def table_header(width: int = LABEL_W) -> str:
@@ -320,24 +326,27 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
     snapshots = load_snapshots(data_dir)
     games = load_games(data_dir)
     done = settled(trades)
-    lines = [f"Paper trades: {len(trades)} total, {len(done)} settled, "
-             f"{sum(1 for t in trades if t['status'] == 'open')} open"]
+    lines = banner("1. Status")[1:]          # no leading blank line at the top of the report
+    lines.append(f"Paper trades: {len(trades)} total, {len(done)} settled, "
+                 f"{sum(1 for t in trades if t['status'] == 'open')} open")
     lines += _freshness_lines(trades, snapshots, now)
     lines.append("")
     if not trades:
         lines.append("No paper fills yet. Let the scanner run through a few game windows.")
-        lines += [""] + _funnel_lines(games, snapshots, trades)
+        lines += banner("4. Execution quality") + _funnel_lines(games, snapshots, trades)
         return "\n".join(lines).rstrip()
     lines += _open_lines(trades)
-    lines.append("Fills by sport and entry price (open and settled; 'avg size' is contracts per fill):")
-    lines += ["  " + row for row in fills_table(trades)]
-    lines.append("")
     if not done:
+        lines += banner("3. Breakdowns")
+        lines.append("Fills by sport and entry price (open and settled; 'avg size' is contracts per fill):")
+        lines += ["  " + row for row in fills_table(trades)]
+        lines.append("")
         lines.append("Nothing settled yet. Hit rates appear once games finish and Kalshi settles them.")
-        lines += [""] + _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
+        lines += banner("4. Execution quality") + _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
         return "\n".join(lines).rstrip()
 
     overall = summarize(done)
+    lines += banner("2. Overall result")
     lines += _table([("ALL SETTLED", overall)])
     lines += ["  n = trades, W-L = wins-losses, hit = win rate, implied = average entry price, b/e = break-even hit",
               "  rate after fees, edge = hit minus b/e in percentage points. Parentheses mean negative.",
@@ -345,7 +354,10 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
               ""]
     lines += _win_loss_lines(done) + _daily_lines(done) + _sample_lines(overall, trades)
 
-    lines += ["By entry price:"] + _table(by_bucket(done)) + ["", "By sport:"] + _table(by_sport(done))
+    lines += banner("3. Breakdowns")
+    lines.append("Fills by sport and entry price (open and settled; 'avg size' is contracts per fill):")
+    lines += ["  " + row for row in fills_table(trades)]
+    lines += ["", "By entry price:"] + _table(by_bucket(done)) + ["", "By sport:"] + _table(by_sport(done))
     lines += ["", "By sport and entry price:", "  " + table_header(LABEL_W + 2)]
     for sport, rows in by_sport_and_bucket(done):
         lines.append(f"  {sport}")
@@ -358,6 +370,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
         if rows:
             lines += ["", title] + _table(rows)
     lines.append("")
+    lines += banner("4. Execution quality")
     lines += _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
 
     lines += ["Edge exists only if hit rate beats the implied probability by more than fees AND the",

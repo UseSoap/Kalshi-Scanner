@@ -15,7 +15,7 @@ DATA_DIR = Path(os.environ.get("KALSHI_DATA_DIR", "data"))
 
 # Candidate fields that are working state for the trade logic, not part of the snapshot files. Keeping them
 # out means the snapshot columns never change, so day files that already exist stay valid to append to.
-_INTERNAL_FIELDS = {"mirror_key", "via_mirror"}
+_INTERNAL_FIELDS = {"mirror_key", "via_mirror", "quote_age_s"}
 SNAPSHOT_FIELDS = [f.name for f in fields(Candidate) if f.name not in _INTERNAL_FIELDS]
 TRADE_FIELDS = [
     "trade_id", "first_seen", "ticker", "event_ticker", "series", "sport", "title", "side",
@@ -24,6 +24,9 @@ TRADE_FIELDS = [
     # via_mirror: "1" if the trade is on a contract that was below the entry floor itself and was taken
     # because the other side of the same bet reached it. partner_fill: that other side's fill price.
     "via_mirror", "partner_fill",
+    # quote_age_s: seconds the entry quote had sat unchanged when the trade opened, as the scanner saw it
+    # (0 = first sighting or just changed; blank on trades opened before this was tracked).
+    "quote_age_s",
 ]
 # Second-tier ("wait for 95c") paper trades live in their own file so they can never leak into the main
 # results. Each row is a copy of a main trade's contract, bought later at the higher price, plus the link back.
@@ -97,6 +100,7 @@ def _trade_row(c: Candidate, trade_id: str, via_mirror: str = "0", partner_fill=
         "fee_usd": c.fee_usd, "status": "open", "result": "", "won": "",
         "pnl_usd": "", "settled_at": "",
         "via_mirror": via_mirror, "partner_fill": partner_fill,
+        "quote_age_s": "" if c.quote_age_s is None else f"{c.quote_age_s:.0f}",
     }
 
 

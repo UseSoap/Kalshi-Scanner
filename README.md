@@ -40,6 +40,12 @@ prints, in order:
 
 Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
 
+## Pre-registered hypothesis: late entries cover
+
+`python -m kalshi_scanner report` is split into numbered sections (status, overall result, breakdowns, execution quality, hypothesis, second tier, combo simulation). Section 5 tracks one hypothesis that was fixed before any data counted toward it: paper entries made in the final 30 minutes before a game's listed end, or after it, beat their break-even rate. The definition, the 150-settled-trade stop rule, the success rule (95% CI lower bound above break-even) and the start time live as constants at the top of `kalshi_scanner/hypothesis.py`. Do not edit them while the test runs; a different cutoff is a new hypothesis with a new start time. Trades opened before the start time are shown as "exploratory" and never counted.
+
+Because a late fill can be real on paper but unavailable to a real order, the section also compares late and other entries on book size, partial fills, spread, fills better than the quote, and `quote_age_s` (how long the scanner saw the exact bid/ask unchanged; 0 means first sighting or just moved, blank on trades opened before this was tracked).
+
 ## Things to know
 
 - **Second tier: wait for 95c (separate experiment).** When a contract that already has a main paper trade later reaches a 95c ask, a second paper trade on that same contract is logged to `data/trades_95.csv` (never to `trades.csv`). The report prints it as its own "SECOND TIER" section after the combo simulation, and none of it feeds the main P&L. Because both trades are the same contract they win or lose together, so the comparison is about the price paid and about the games that never reached 95c (what waiting gives up). Only main trades opened after the tier was switched on (`data/trades_95_start.txt`) are compared. Tune with `--second-tier-ask` or turn off with `--no-second-tier`.

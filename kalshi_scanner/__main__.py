@@ -6,7 +6,7 @@ import argparse
 import os
 from datetime import datetime, timezone
 
-from . import combos, report, settle, tiers
+from . import combos, hypothesis, report, settle, tiers
 from .client import KalshiClient
 from .runner import run_loop, scan_cycle, verbose_lines
 from .scanner import Config, DEFAULT_SERIES
@@ -125,10 +125,11 @@ def main() -> None:
 
     if args.command == "report":
         print(report.render())
-        print()
-        print(combos.render())
-        print()
+        print(hypothesis.render())
+        print("\n".join(report.banner("6. Second tier")))
         print(tiers.render(tier_ask=args.second_tier_ask))
+        print("\n".join(report.banner("7. Combo simulation")))
+        print(combos.render())
         return
 
     client = KalshiClient()
