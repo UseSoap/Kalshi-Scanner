@@ -45,20 +45,24 @@ def summarize(trades: list[dict]) -> dict:
 
     `breakeven` is the hit rate at which the group's expected P&L is zero after fees: the money at
     risk (stake plus fee) divided by the contracts bought, since each contract pays $1 if it wins.
-    `edge` is the observed hit rate minus that break-even.
+    `whit` is the hit rate weighted by contracts (winning contracts / contracts bought), which is what dollars
+    follow: a win on a thin fill counts for less than a loss on a full one. `edge` is `whit` minus break-even,
+    so it agrees with P&L. The plain `hit_rate` and its interval still count every trade once.
     """
     n = len(trades)
     wins = sum(1 for t in trades if t["won"] == "1")
     staked = sum(float(t["entry_price"]) * int(float(t["contracts"])) / 100.0 + float(t["fee_usd"]) for t in trades)
     contracts = sum(int(float(t["contracts"])) for t in trades)
+    won_contracts = sum(int(float(t["contracts"])) for t in trades if t["won"] == "1")
     pnl = sum(float(t["pnl_usd"]) for t in trades)
     implied = (sum(float(t["entry_price"]) for t in trades) / n / 100.0) if n else 0.0
     lo, hi = wilson_interval(wins, n)
     breakeven = staked / contracts if contracts else 0.0
+    whit = won_contracts / contracts if contracts else 0.0
     return {
-        "n": n, "wins": wins, "hit_rate": wins / n if n else 0.0,
+        "n": n, "wins": wins, "hit_rate": wins / n if n else 0.0, "whit": whit,
         "ci_low": lo, "ci_high": hi, "avg_implied": implied,
-        "breakeven": breakeven, "edge": (wins / n - breakeven) if n else 0.0,
+        "breakeven": breakeven, "edge": (whit - breakeven) if n else 0.0,
         "pnl_usd": pnl, "roi": pnl / staked if staked else 0.0,
     }
 
@@ -148,7 +152,7 @@ def banner(title: str, width: int = BANNER_W) -> list[str]:
 
 
 def table_header(width: int = LABEL_W) -> str:
-    return " " * width + (f" {'n':>4} {'W-L':>7} {'hit':>6} {'95% CI':>12} {'implied':>8} {'b/e':>6}"
+    return " " * width + (f" {'n':>4} {'W-L':>7} {'hit':>6} {'wtd hit':>8} {'95% CI':>12} {'implied':>8} {'b/e':>6}"
                           f" {'edge':>6} {'P&L':>11} {'ROI':>9}")
 
 
@@ -157,7 +161,7 @@ def table_row(label: str, s: dict, width: int = LABEL_W) -> str:
         return f"{label:<{width}} {0:>4}"
     record = f"{s['wins']}-{s['n'] - s['wins']}"
     interval = f"{s['ci_low'] * 100:.1f}-{s['ci_high'] * 100:.1f}%"
-    return (f"{label:<{width}} {s['n']:>4} {record:>7} {s['hit_rate']:>6.1%} {interval:>12} "
+    return (f"{label:<{width}} {s['n']:>4} {record:>7} {s['hit_rate']:>6.1%} {s['whit']:>8.1%} {interval:>12} "
             f"{s['avg_implied']:>8.1%} {s['breakeven']:>6.1%} {_col(_pts(s['edge'] * 100)):>6} "
             f"{_col(_money(s['pnl_usd'])):>11} {_col(_pct(s['roi'])):>9}")
 
@@ -348,8 +352,9 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
     overall = summarize(done)
     lines += banner("2. Overall result")
     lines += _table([("ALL SETTLED", overall)])
-    lines += ["  n = trades, W-L = wins-losses, hit = win rate, implied = average entry price, b/e = break-even hit",
-              "  rate after fees, edge = hit minus b/e in percentage points. Parentheses mean negative.",
+    lines += ["  n = trades, W-L = wins-losses, hit = win rate (each trade counts once; the 95% CI is on this), wtd hit =",
+              "  win rate weighted by contracts (what dollars follow), implied = average entry price, b/e = break-even rate",
+              "  after fees, edge = wtd hit minus b/e in percentage points. Parentheses mean negative.",
               "  " + edge_verdict(overall["hit_rate"], overall["ci_low"], overall["ci_high"], overall["breakeven"]),
               ""]
     lines += _win_loss_lines(done) + _daily_lines(done) + _sample_lines(overall, trades)

@@ -40,6 +40,10 @@ prints, in order:
 
 Edge only exists if the realized hit rate beats the break-even rate after fees, and the confidence interval stays above it. Early on, intervals are very wide, so don't trust a few days of data.
 
+### Hit rate vs weighted hit rate
+
+Every table shows `hit` (each trade counts once, and the 95% interval is built on it) and `wtd hit` (winning contracts divided by contracts bought). Break-even is also per contract, so `edge` is `wtd hit` minus `b/e` and always agrees in sign with P&L. The two hit rates differ when fills are uneven, for example when thin-book partial fills win and full-size fills lose. The verdict lines and the hypothesis test still use the plain hit rate and its interval.
+
 ## Pre-registered hypothesis: late entries cover
 
 `python -m kalshi_scanner report` is split into numbered sections (status, overall result, breakdowns, execution quality, hypothesis, second tier, combo simulation). Section 5 tracks one hypothesis that was fixed before any data counted toward it: paper entries made in the final 30 minutes before a game's listed end, or after it, beat their break-even rate. The definition, the 150-settled-trade stop rule, the success rule (95% CI lower bound above break-even) and the start time live as constants at the top of `kalshi_scanner/hypothesis.py`. Do not edit them while the test runs; a different cutoff is a new hypothesis with a new start time. Trades opened before the start time are shown as "exploratory" and never counted.
