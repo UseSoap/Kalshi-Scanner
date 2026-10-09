@@ -113,11 +113,11 @@ def test_render_has_separate_sections_and_does_not_touch_main_report(tmp_path):
     build_scenario(tmp_path)
     main_report = report.render(tmp_path, NOW)
     text = tiers.render(tmp_path)
-    for expected in ("SECOND TIER", "1. Same games, two entry prices", "2. Games the 95c tier skipped",
+    for expected in ("What this tests", "1. Same games, two entry prices", "2. Games the 95c tier skipped",
                      "3. Games already at 95c+", "4. Each rule as a whole", "NOT added to the main report"):
         assert expected in text
     assert report.render(tmp_path, NOW) == main_report
-    assert "SECOND TIER" not in main_report and "trades_95" not in main_report
+    assert "What this tests" not in main_report and "trades_95" not in main_report
 
 
 def test_render_before_start_and_before_settlement(tmp_path):

@@ -65,8 +65,9 @@ def split_cohort(base: list[dict], tier: list[dict], tier_ask: float, start) -> 
 
 
 def render(data_dir: Path | None = None, tier_ask: float = 95.0) -> str:
-    title = f"SECOND TIER: waiting for {tier_ask:g}c vs the main trigger (separate from the P&L above)"
-    lines = [title, "-" * len(title)]
+    # The report's "6. Second tier" banner is printed by __main__; this is the description under it.
+    lines = [f"What this tests: does waiting until the same contract reaches {tier_ask:g}c beat buying at the main trigger?",
+             "Kept apart from the main P&L: it reads data/trades_95.csv only and is never added to sections 1-5."]
     start = tier_start(data_dir)
     if start is None:
         lines.append("Not started yet: the second tier begins logging on the next scan after this code is deployed.")
