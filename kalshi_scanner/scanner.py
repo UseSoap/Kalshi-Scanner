@@ -105,6 +105,7 @@ class Config:
     check_depth: bool = True      # fetch the order book and size the order to what can fill
     one_trade_per_event: bool = True   # one paper trade per game; correlated contracts are not extra samples
     mirror_tolerance: float = 2.0      # cents below min_price at which the other side of the same bet is still offered
+    second_tier_ask: float | None = 95.0   # also log a separate paper trade when a traded contract reaches this ask (None = off)
 
 
 @dataclass

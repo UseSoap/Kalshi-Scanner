@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from . import settle
 from .scanner import Config, new_diag, scan
 from .schedule import ScheduleConfig, make_plan
-from .storage import log_snapshots, record_games, record_new_trades
+from .storage import log_snapshots, record_games, record_new_trades, record_tier_trades
 
 SNAPSHOT_THROTTLE_S = 300   # in loop mode, re-log the same contract at most this often
 
@@ -31,7 +31,11 @@ def scan_cycle(client, cfg: Config, now: datetime, last_logged: dict | None = No
                 to_log.append(c)
     log_snapshots(to_log, now)
     record_games(diag["games"], now, tz_name=cfg.timezone)
-    return found, diag, record_new_trades(found, one_per_event=cfg.one_trade_per_event)
+    added = record_new_trades(found, one_per_event=cfg.one_trade_per_event)
+    # The 95c tier is a separate experiment: it never changes `added` or the main trades file.
+    diag["tier_added"] = (record_tier_trades(found, tier_ask=cfg.second_tier_ask, now=now)
+                          if cfg.second_tier_ask is not None else 0)
+    return found, diag, added
 
 
 def verbose_lines(found, diag, added) -> list[str]:
@@ -53,7 +57,8 @@ def verbose_lines(found, diag, added) -> list[str]:
     if stats and not any(stats.values()):
         lines.append("WARNING: no open markets returned for any series. The series tickers are probably "
                      "wrong; run `python -m kalshi_scanner discover` and set KALSHI_SERIES.")
-    lines.append(f"scan: {len(found)} candidates, {added} new paper trades")
+    lines.append(f"scan: {len(found)} candidates, {added} new paper trades"
+                 + (f", {diag['tier_added']} new second-tier trades" if diag.get("tier_added") else ""))
     for c in sorted(found, key=lambda c: -c.ask)[:15]:
         fill = f"{c.fill_price:.2f}c" if c.fill_price is not None else "n/a"
         size = f"x{c.contracts}" if c.depth_status == "ok" else f"fillable={c.fillable}"

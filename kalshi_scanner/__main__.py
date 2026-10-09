@@ -6,7 +6,7 @@ import argparse
 import os
 from datetime import datetime, timezone
 
-from . import combos, report, settle
+from . import combos, report, settle, tiers
 from .client import KalshiClient
 from .runner import run_loop, scan_cycle, verbose_lines
 from .scanner import Config, DEFAULT_SERIES
@@ -21,7 +21,8 @@ def _config(args) -> Config:
                   min_contracts=args.min_contracts, max_slippage=args.max_slippage,
                   timezone=args.timezone, same_day_only=not args.any_day,
                   check_depth=not args.skip_depth, one_trade_per_event=not args.multi_per_game,
-                  mirror_tolerance=args.mirror_tolerance)
+                  mirror_tolerance=args.mirror_tolerance,
+                  second_tier_ask=None if args.no_second_tier else args.second_tier_ask)
 
 
 def cmd_scan(args, client) -> None:
@@ -100,6 +101,10 @@ def main() -> None:
     parser.add_argument("--mirror-tolerance", type=float, default=2.0,
                         help="in two-team games, once one side reaches --min-price, also consider the other side "
                              "of the same bet down to this many cents below it, and buy whichever is cheaper (0 = off)")
+    parser.add_argument("--second-tier-ask", type=float, default=95.0,
+                        help="also open a separate paper trade (data/trades_95.csv) when a contract that already has "
+                             "a main trade reaches this ask, to compare waiting with buying at the main trigger")
+    parser.add_argument("--no-second-tier", action="store_true", help="turn the second-tier trades off")
     parser.add_argument("--timezone", default="America/Chicago")
     parser.add_argument("--skip-depth", action="store_true",
                         help="do not check order-book depth (paper fills at the top ask, which is optimistic)")
@@ -122,6 +127,8 @@ def main() -> None:
         print(report.render())
         print()
         print(combos.render())
+        print()
+        print(tiers.render(tier_ask=args.second_tier_ask))
         return
 
     client = KalshiClient()

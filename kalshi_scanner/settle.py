@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .client import KalshiError
 from .scanner import parse_ts
-from .storage import load_trades, save_trades
+from .storage import TIER_FILE, load_trades, save_trades
 
 SETTLED_STATUSES = {"settled", "finalized"}
 
@@ -39,22 +39,29 @@ def settle_trade(trade: dict, market: dict, now: datetime) -> bool:
 
 
 def settle_open_trades(client, now: datetime | None = None, data_dir: Path | None = None) -> int:
-    """Check every open trade whose expected end time has passed. Returns count settled."""
+    """Check every open trade whose expected end time has passed. Returns count settled.
+
+    Covers the main trades and the separate second-tier trades (trades_95.csv); each file is
+    saved on its own, so one never alters the other.
+    """
     now = now or datetime.now(timezone.utc)
-    trades = load_trades(data_dir)
     changed = 0
-    for trade in trades:
-        if trade["status"] != "open":
-            continue
-        expiry = parse_ts(trade["expiry"])
-        if expiry and expiry > now:
-            continue
-        try:
-            market = client.get_market(trade["ticker"])
-        except KalshiError:
-            continue
-        if settle_trade(trade, market, now):
-            changed += 1
-    if changed:
-        save_trades(trades, data_dir)
+    for name in ("trades.csv", TIER_FILE):
+        trades = load_trades(data_dir, name)
+        resolved = 0
+        for trade in trades:
+            if trade["status"] != "open":
+                continue
+            expiry = parse_ts(trade["expiry"])
+            if expiry and expiry > now:
+                continue
+            try:
+                market = client.get_market(trade["ticker"])
+            except KalshiError:
+                continue
+            if settle_trade(trade, market, now):
+                resolved += 1
+        if resolved:
+            save_trades(trades, data_dir, name)
+        changed += resolved
     return changed

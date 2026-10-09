@@ -25,6 +25,13 @@ TRADE_FIELDS = [
     # because the other side of the same bet reached it. partner_fill: that other side's fill price.
     "via_mirror", "partner_fill",
 ]
+# Second-tier ("wait for 95c") paper trades live in their own file so they can never leak into the main
+# results. Each row is a copy of a main trade's contract, bought later at the higher price, plus the link back.
+TIER_FILE = "trades_95.csv"
+TIER_FIELDS = TRADE_FIELDS + ["tier_ask", "base_trade_id", "base_entry_price"]
+# Written once, the first time a scan runs with the tier on. Main trades opened before it never had a chance
+# to get a tier trade, so the tier analysis only looks at main trades opened at or after this moment.
+TIER_START_FILE = "trades_95_start.txt"
 GAME_FIELDS = ["event_ticker", "series", "sport", "day", "expiry", "first_seen", "peak_ask"]
 
 
@@ -57,24 +64,40 @@ def load_snapshots(data_dir: Path | None = None) -> list[dict]:
     return rows
 
 
-def load_trades(data_dir: Path | None = None) -> list[dict]:
-    path = (data_dir or DATA_DIR) / "trades.csv"
+def load_trades(data_dir: Path | None = None, name: str = "trades.csv") -> list[dict]:
+    path = (data_dir or DATA_DIR) / name
     if not path.exists():
         return []
     with path.open(newline="") as fh:
         return list(csv.DictReader(fh))
 
 
-def save_trades(trades: list[dict], data_dir: Path | None = None) -> None:
-    path = (data_dir or DATA_DIR) / "trades.csv"
+def save_trades(trades: list[dict], data_dir: Path | None = None, name: str = "trades.csv") -> None:
+    path = (data_dir or DATA_DIR) / name
+    field_names = TIER_FIELDS if name == TIER_FILE else TRADE_FIELDS
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
     with tmp.open("w", newline="") as fh:
-        writer = csv.DictWriter(fh, fieldnames=TRADE_FIELDS)
+        writer = csv.DictWriter(fh, fieldnames=field_names)
         writer.writeheader()
         for row in trades:
-            writer.writerow({k: row.get(k, "") for k in TRADE_FIELDS})
+            writer.writerow({k: row.get(k, "") for k in field_names})
     tmp.replace(path)
+
+
+def _trade_row(c: Candidate, trade_id: str, via_mirror: str = "0", partner_fill="") -> dict:
+    """The trades.csv row for a freshly opened paper trade on candidate `c`."""
+    return {
+        "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,
+        "event_ticker": c.event_ticker, "series": c.series, "sport": sport_of(c.series), "title": c.title,
+        "side": c.side, "entry_price": c.fill_price if c.fill_price is not None else c.ask,
+        "best_ask": c.ask, "depth_at_ask": c.depth_at_ask if c.depth_at_ask is not None else "", "bid": c.bid if c.bid is not None else "",
+        "spread": c.spread if c.spread is not None else "", "volume": c.volume,
+        "open_interest": c.open_interest, "expiry": c.expiry, "contracts": c.contracts,
+        "fee_usd": c.fee_usd, "status": "open", "result": "", "won": "",
+        "pnl_usd": "", "settled_at": "",
+        "via_mirror": via_mirror, "partner_fill": partner_fill,
+    }
 
 
 def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None,
@@ -118,20 +141,65 @@ def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None,
         if c.event_ticker:
             events.add(c.event_ticker)
         added += 1
-        trades.append({
-            "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,
-            "event_ticker": c.event_ticker, "series": c.series, "sport": sport_of(c.series), "title": c.title,
-            "side": c.side, "entry_price": c.fill_price if c.fill_price is not None else c.ask,
-            "best_ask": c.ask, "depth_at_ask": c.depth_at_ask if c.depth_at_ask is not None else "", "bid": c.bid if c.bid is not None else "",
-            "spread": c.spread if c.spread is not None else "", "volume": c.volume,
-            "open_interest": c.open_interest, "expiry": c.expiry, "contracts": c.contracts,
-            "fee_usd": c.fee_usd, "status": "open", "result": "", "won": "",
-            "pnl_usd": "", "settled_at": "",
-            "via_mirror": "1" if c.via_mirror else "0",
-            "partner_fill": fill_of.get(c.mirror_key, "") if c.mirror_key else "",
-        })
+        trades.append(_trade_row(c, trade_id, via_mirror="1" if c.via_mirror else "0",
+                                 partner_fill=fill_of.get(c.mirror_key, "") if c.mirror_key else ""))
     if added:
         save_trades(trades, data_dir)
+    return added
+
+
+# --- second tier: the same contract, bought again only once it reaches a higher price ---------------
+
+def tier_start(data_dir: Path | None = None) -> datetime | None:
+    path = (data_dir or DATA_DIR) / TIER_START_FILE
+    if not path.exists():
+        return None
+    try:
+        return datetime.fromisoformat(path.read_text().strip())
+    except ValueError:
+        return None
+
+
+def record_tier_trades(candidates: list[Candidate], data_dir: Path | None = None, tier_ask: float = 95.0,
+                       now: datetime | None = None) -> int:
+    """Open a second-tier paper trade the first time a contract that already has a main trade reaches `tier_ask`.
+
+    This answers "would waiting for 95c have been better than buying at the first 90c+ price?" on the very
+    same game. Rules:
+
+    - Only the exact contract (ticker and side) the main trade bought is eligible, so both trades win or lose
+      together and any difference between them is purely the price paid.
+    - The trigger is the quoted ask reaching `tier_ask`; the entry is the average fill price, sized to the
+      book exactly like a main trade (so a thin book at 95c does not count until it can fill).
+    - One tier trade per main trade. Rows go to trades_95.csv, never to trades.csv, so the main report's
+      numbers do not change. A game whose first price was already 95c+ gets a tier trade in the same scan
+      (the row records base_entry_price so the analysis can set those aside).
+
+    Returns the number of tier trades added.
+    """
+    marker = (data_dir or DATA_DIR) / TIER_START_FILE
+    if not marker.exists():
+        marker.parent.mkdir(parents=True, exist_ok=True)
+        marker.write_text((now or datetime.now(ZoneInfo("UTC"))).astimezone(ZoneInfo("UTC")).isoformat(timespec="seconds") + "\n")
+    base = {t["trade_id"]: t for t in load_trades(data_dir) if t["status"] == "open"}
+    if not base:
+        return 0
+    tier = load_trades(data_dir, TIER_FILE)
+    known = {t["base_trade_id"] for t in tier}
+    added = 0
+    for c in candidates:
+        base_id = f"{c.ticker}|{c.side}"
+        if base_id not in base or base_id in known:
+            continue
+        if c.depth_status not in ("ok", "unchecked") or c.ask < tier_ask:
+            continue
+        known.add(base_id)
+        added += 1
+        row = _trade_row(c, f"{base_id}|{tier_ask:g}")
+        row.update(tier_ask=f"{tier_ask:g}", base_trade_id=base_id, base_entry_price=base[base_id]["entry_price"])
+        tier.append(row)
+    if added:
+        save_trades(tier, data_dir, TIER_FILE)
     return added
 
 
