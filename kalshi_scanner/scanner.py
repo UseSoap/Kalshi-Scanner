@@ -150,6 +150,15 @@ def _num(value):
         return None
 
 
+def count_field(market: dict, name: str) -> int:
+    """Read a count such as `volume` or `open_interest`. Kalshi's current API returns these as `<name>_fp`
+    (fixed-point strings like "301538.66"); older responses used a plain `<name>`. Missing means 0."""
+    value = _num(market.get(name))
+    if value is None:
+        value = _num(market.get(f"{name}_fp"))
+    return int(value or 0)
+
+
 def price_cents(market: dict, name: str):
     """Read a price in cents, preferring sub-penny `<name>_dollars` fields when present."""
     dollars = _num(market.get(f"{name}_dollars"))
@@ -213,7 +222,7 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
     tz = ZoneInfo(cfg.timezone)
     if cfg.same_day_only and expiry.astimezone(tz).date() != now.astimezone(tz).date():
         return reject("ends on another day")
-    volume = int(_num(market.get("volume")) or 0)
+    volume = count_field(market, "volume")
     if volume < cfg.min_volume:
         return reject("volume too low")
 
@@ -252,7 +261,7 @@ def evaluate(market: dict, now: datetime, cfg: Config, diag: dict | None = None)
             bid=bid,
             spread=spread,
             volume=volume,
-            open_interest=int(_num(market.get("open_interest")) or 0),
+            open_interest=count_field(market, "open_interest"),
             expiry=expiry.astimezone(timezone.utc).isoformat(timespec="seconds"),
             contracts=cfg.contracts,
             fee_usd=fee,

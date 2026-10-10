@@ -16,6 +16,7 @@ from pathlib import Path
 from .insights import TIMING_ORDER, edge_verdict, num, timing_label
 from .report import _table, banner, settled, sport_label, summarize
 from .scanner import parse_ts
+from .startstate import STATE_ORDER, state_of
 from .storage import load_trades
 
 # ---- frozen definition ---------------------------------------------------------------------------------
@@ -106,6 +107,12 @@ def render(data_dir: Path | None = None) -> str:
     tennis = [t for t in late if sport_label(t).startswith("Tennis")]
     other = [t for t in late if not sport_label(t).startswith("Tennis")]
     out += _table([("late: tennis", summarize(tennis)), ("late: everything else", summarize(other))])
+
+    # Exploratory only: it never feeds the verdict above. "After listed end" can mean play is over time or that
+    # a match was delayed and has not started, so split the late group by what the scanner knew at entry.
+    out += ["", "Late group split by start state (exploratory; a late label can hide a match that had not started):"]
+    out += _table([(f"late: {s}", summarize([t for t in late if state_of(t) == s]))
+                   for s in STATE_ORDER if any(state_of(t) == s for t in late)] or [("late: none settled", summarize([]))])
 
     out += ["", "Could a real order have gotten these fills? (stale-quote check; all entries, open and settled)",
             _execution_row("late", late_all), _execution_row("control", control_all),

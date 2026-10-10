@@ -11,8 +11,11 @@ from .insights import (
     equity_stats, fill_quality, games_funnel, latest, mirror_savings, open_exposure, side_label, spread_label,
     timing_label, trades_per_day, trades_to_separate, win_loss_stats, wilson_interval,  # noqa: F401
 )
-from .scanner import sport_of
+from .scanner import parse_ts, sport_of
+from .startstate import STATE_ORDER, state_of
 from .storage import load_games, load_snapshots, load_trades
+
+OVERDUE_HOURS = 6   # an open trade this long past its listed end is delayed, suspended, or stuck in settlement
 
 # Entry-price buckets in cents. The first catches anything under 90c (only if --min-price was lowered).
 BUCKETS = [(0, 90), (90, 93), (93, 95), (95, 96), (96, 97), (97, 98), (98, 99), (99, 100.01)]
@@ -180,7 +183,30 @@ def _freshness_lines(trades: list[dict], snapshots: list[dict], now: datetime) -
     return ["Data freshness (nothing is logged when no games are on):"] + lines if lines else []
 
 
-def _open_lines(trades: list[dict]) -> list[str]:
+def overdue_open(trades: list[dict], now: datetime, hours: float = OVERDUE_HOURS) -> list[dict]:
+    """Open trades whose listed game end passed more than `hours` ago, oldest first."""
+    out = []
+    for t in trades:
+        end = parse_ts(t.get("expiry"))
+        if t.get("status") == "open" and end and (now - end).total_seconds() > hours * 3600:
+            out.append(t)
+    return sorted(out, key=lambda t: parse_ts(t["expiry"]))
+
+
+def _void_lines(trades: list[dict]) -> list[str]:
+    """Trades that ended with neither side winning (a match that never started pays 50c). Kept out of hit rates,
+    but their P&L is real money, so it is shown here."""
+    void = [t for t in trades if t.get("status") == "void"]
+    if not void:
+        return []
+    pnl = sum(float(t.get("pnl_usd") or 0.0) for t in void)
+    assumed = sum(1 for t in void if t.get("result") == "half_assumed")
+    note = f" ({assumed} booked at an assumed 50c; check them)" if assumed else ""
+    return [f"Voided / half-refund settlements: {len(void)} trades, P&L {_money(pnl)}{note}. "
+            f"Not counted as wins or losses below.", ""]
+
+
+def _open_lines(trades: list[dict], now: datetime | None = None) -> list[str]:
     ex = open_exposure(trades)
     if not ex["count"]:
         return ["Open positions: none", ""]
@@ -192,6 +218,14 @@ def _open_lines(trades: list[dict]) -> list[str]:
         lines.append(f"  {when:<22} {u['title'][:34]:<34} {u['side'].upper():<3} {u['price']:.1f}c x{int(u['contracts'])}")
     if len(ex["upcoming"]) > 5:
         lines.append(f"  ... and {len(ex['upcoming']) - 5} more")
+    stuck = overdue_open(trades, now) if now else []
+    if stuck:
+        lines.append(f"  {len(stuck)} open trade(s) are more than {OVERDUE_HOURS}h past their listed end (match delayed, "
+                     f"suspended, or awaiting settlement; a match that never starts pays 50c):")
+        for t in stuck[:5]:
+            end = parse_ts(t["expiry"]).astimezone(tz).strftime("%b %d %I:%M %p")
+            lines.append(f"    ended {end}  {(t.get('title') or t['ticker'])[:34]:<34} {t['side'].upper():<3} "
+                         f"{float(t['entry_price']):.1f}c x{int(float(t['contracts']))}")
     return lines + [""]
 
 
@@ -339,7 +373,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
         lines.append("No paper fills yet. Let the scanner run through a few game windows.")
         lines += banner("4. Execution quality") + _funnel_lines(games, snapshots, trades)
         return "\n".join(lines).rstrip()
-    lines += _open_lines(trades)
+    lines += _open_lines(trades, now) + _void_lines(trades)
     if not done:
         lines += banner("3. Breakdowns")
         lines.append("Fills by sport and entry price (open and settled; 'avg size' is contracts per fill):")
@@ -370,11 +404,15 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
 
     for title, key_fn, order in (("By side bought:", side_label, SIDE_ORDER),
                                  ("By bid/ask spread at entry:", spread_label, SPREAD_ORDER),
-                                 ("By entry time relative to the game's listed end:", timing_label, TIMING_ORDER)):
+                                 ("By entry time relative to the game's listed end:", timing_label, TIMING_ORDER),
+                                 ("By start state at entry (had play started when we bought?):", state_of, STATE_ORDER)):
         rows = group_rows(done, key_fn, order)
         if rows:
             lines += ["", title] + _table(rows)
-    lines.append("")
+    lines += ["  prematch_certain = entered 4h+ before the listed end, so play cannot have started. live_inferred = the game's",
+              "  top ask had climbed 8c+ since first seen. prematch_likely = 90+ min out and the price had barely moved.",
+              "  unknown = none of those. This is inference from prices and clocks, not a live feed. Trades opened before the",
+              "  label existed can only be prematch_certain or unknown (labelled from lead time alone).", ""]
     lines += banner("4. Execution quality")
     lines += _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
 

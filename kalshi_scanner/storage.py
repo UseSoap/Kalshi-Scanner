@@ -10,6 +10,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .scanner import Candidate, sport_of
+from .startstate import classify_candidate
 
 DATA_DIR = Path(os.environ.get("KALSHI_DATA_DIR", "data"))
 
@@ -27,6 +28,9 @@ TRADE_FIELDS = [
     # quote_age_s: seconds the entry quote had sat unchanged when the trade opened, as the scanner saw it
     # (0 = first sighting or just changed; blank on trades opened before this was tracked).
     "quote_age_s",
+    # start_state: best guess at whether play had started when the trade opened (see startstate.py). Written once,
+    # at entry, from what the scanner knew then.
+    "start_state",
 ]
 # Second-tier ("wait for 95c") paper trades live in their own file so they can never leak into the main
 # results. Each row is a copy of a main trade's contract, bought later at the higher price, plus the link back.
@@ -35,7 +39,8 @@ TIER_FIELDS = TRADE_FIELDS + ["tier_ask", "base_trade_id", "base_entry_price"]
 # Written once, the first time a scan runs with the tier on. Main trades opened before it never had a chance
 # to get a tier trade, so the tier analysis only looks at main trades opened at or after this moment.
 TIER_START_FILE = "trades_95_start.txt"
-GAME_FIELDS = ["event_ticker", "series", "sport", "day", "expiry", "first_seen", "peak_ask"]
+# first_ask: the game's top ask the first time the scanner saw it (blank on games recorded before this existed).
+GAME_FIELDS = ["event_ticker", "series", "sport", "day", "expiry", "first_seen", "peak_ask", "first_ask"]
 
 
 def _append_rows(path: Path, field_names: list[str], rows: list[dict]) -> None:
@@ -88,7 +93,7 @@ def save_trades(trades: list[dict], data_dir: Path | None = None, name: str = "t
     tmp.replace(path)
 
 
-def _trade_row(c: Candidate, trade_id: str, via_mirror: str = "0", partner_fill="") -> dict:
+def _trade_row(c: Candidate, trade_id: str, via_mirror: str = "0", partner_fill="", start_state: str = "") -> dict:
     """The trades.csv row for a freshly opened paper trade on candidate `c`."""
     return {
         "trade_id": trade_id, "first_seen": c.ts, "ticker": c.ticker,
@@ -101,6 +106,7 @@ def _trade_row(c: Candidate, trade_id: str, via_mirror: str = "0", partner_fill=
         "pnl_usd": "", "settled_at": "",
         "via_mirror": via_mirror, "partner_fill": partner_fill,
         "quote_age_s": "" if c.quote_age_s is None else f"{c.quote_age_s:.0f}",
+        "start_state": start_state,
     }
 
 
@@ -126,6 +132,7 @@ def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None,
     trades = load_trades(data_dir)
     known = {t["trade_id"] for t in trades}
     events = {t["event_ticker"] for t in trades if t.get("event_ticker")}
+    games = {g["event_ticker"]: g for g in load_games(data_dir)}
     added = 0
 
     def price(c: Candidate) -> float:
@@ -146,7 +153,8 @@ def record_new_trades(candidates: list[Candidate], data_dir: Path | None = None,
             events.add(c.event_ticker)
         added += 1
         trades.append(_trade_row(c, trade_id, via_mirror="1" if c.via_mirror else "0",
-                                 partner_fill=fill_of.get(c.mirror_key, "") if c.mirror_key else ""))
+                                 partner_fill=fill_of.get(c.mirror_key, "") if c.mirror_key else "",
+                                 start_state=classify_candidate(c, games.get(c.event_ticker))))
     if added:
         save_trades(trades, data_dir)
     return added
@@ -238,7 +246,7 @@ def record_games(observed: dict, now: datetime, data_dir: Path | None = None,
             expiry = datetime.fromisoformat(info["expiry"])
             rows[event] = {"event_ticker": event, "series": info["series"], "sport": sport_of(info["series"]),
                            "day": expiry.astimezone(tz).date().isoformat(), "expiry": info["expiry"],
-                           "first_seen": stamp, "peak_ask": f"{peak:g}"}
+                           "first_seen": stamp, "peak_ask": f"{peak:g}", "first_ask": f"{peak:g}"}
             changed += 1
         elif peak > float(row.get("peak_ask") or 0.0):
             row["peak_ask"] = f"{peak:g}"
