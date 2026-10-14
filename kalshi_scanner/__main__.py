@@ -10,6 +10,7 @@ from . import combos, hypothesis, report, settle, tiers
 from .client import KalshiClient
 from .runner import run_loop, scan_cycle, verbose_lines
 from .scanner import Config, DEFAULT_SERIES
+from .storage import load_trades
 from .schedule import ScheduleConfig
 
 
@@ -119,17 +120,22 @@ def main() -> None:
     parser.add_argument("--multi-per-game", action="store_true",
                         help="allow several paper trades in one game (they are correlated, so this inflates the sample size)")
     parser.add_argument("--any-day", action="store_true", help="do not restrict to contracts ending today")
+    parser.add_argument("--exclude-sport", action="append", metavar="NAME",
+                        help="report: leave a sport out of sections 1-4 and 7. Repeat it or comma-separate names. "
+                             "'tennis' drops every Tennis (...) label; a full label like 'Tennis (ATP)' drops just that "
+                             "one. Names match whole labels, not substrings.")
     parser.add_argument("--all-series", action="store_true",
                         help="discover: list every Sports series instead of only keyword matches")
     args = parser.parse_args()
 
     if args.command == "report":
-        print(report.render())
+        excluded = report.parse_sport_names(args.exclude_sport)
+        print(report.render(exclude=excluded))
         print(hypothesis.render())
         print("\n".join(report.banner("6. Second tier")))
         print(tiers.render(tier_ask=args.second_tier_ask))
         print("\n".join(report.banner("7. Combo simulation")))
-        print(combos.render())
+        print(combos.render(trades=report.exclude_sports(load_trades(), excluded) if excluded else None))
         return
 
     client = KalshiClient()

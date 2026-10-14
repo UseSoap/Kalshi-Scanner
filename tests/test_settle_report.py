@@ -147,3 +147,70 @@ def test_render_full_report_has_sport_and_price_sections(tmp_path):
     text = report.render(tmp_path)
     for expected in ("By entry price:", "By sport:", "By sport and entry price:", "MLB", "NHL", "96-97c"):
         assert expected in text
+
+
+# ---- --exclude-sport ----
+
+def _save(tmp_path, trades):
+    from kalshi_scanner.storage import save_trades, TRADE_FIELDS
+    rows = []
+    for i, t in enumerate(trades):
+        row = {k: "" for k in TRADE_FIELDS}
+        row.update(t, trade_id=f"t{i}", ticker=f"t{i}", result="yes", pnl_usd=t["pnl_usd"])
+        rows.append(row)
+    save_trades(rows, tmp_path)
+
+
+def mixed_trades():
+    return [
+        trade("a1", 96, True, series="KXATPCHALLENGERMATCH"), trade("a2", 96, True, series="KXITFMMATCH"),
+        trade("n1", 96, True, series="KXNBAGAME"), trade("w1", 96, False, series="KXWNBAGAME"),
+        trade("m1", 96, True, series="KXMLBGAME"),
+    ]
+
+
+def test_sport_exclusion_matches_whole_labels_or_family_never_substrings():
+    assert report.sport_excluded("Tennis (ITF men)", ["tennis"])             # family, any case
+    assert report.sport_excluded("Tennis (ATP)", ["Tennis (ATP)"])           # exact label
+    assert not report.sport_excluded("Tennis (ATP Challenger)", ["Tennis (ATP)"])
+    assert not report.sport_excluded("WNBA", ["NBA"])                         # not a substring match
+    assert not report.sport_excluded("La Liga 2", ["La Liga"])
+    assert report.parse_sport_names(["Tennis, NHL", "MLB", " "]) == ["Tennis", "NHL", "MLB"]
+
+
+def test_exclude_sports_filters_trades_and_reports_typos():
+    ts = [dict(t, sport=report.sport_label(t)) for t in sample_trades()]
+    assert len(report.exclude_sports(ts, [])) == len(ts)
+    assert {report.sport_label(t) for t in report.exclude_sports(ts, ["mlb"])} == {"NHL", "Premier League"}
+    assert report.unmatched_sport_names(ts, ["MLB", "Tenis"]) == ["Tenis"]
+
+
+def test_render_with_exclusion_recomputes_everything_from_the_kept_trades(tmp_path):
+    from kalshi_scanner.scanner import sport_of
+    trades = mixed_trades()
+    for t in trades:
+        t["sport"] = sport_of(t["series"])
+    _save(tmp_path, trades)
+    full = report.render(tmp_path)
+    cut = report.render(tmp_path, exclude=["NBA"])
+    assert "FILTER: excluding NBA. Showing 4 of 5 trades" in cut and "FILTER" not in full
+    assert "WNBA" in cut                                                      # NBA excluded, WNBA kept
+    assert "Paper trades: 4 total, 4 settled" in cut and "Paper trades: 5 total, 5 settled" in full
+    tennis_cut = report.render(tmp_path, exclude=["Tennis"])
+    assert "Tennis" not in tennis_cut.split("By sport:")[1]
+    assert "WARNING: no trades match Tenis" in report.render(tmp_path, exclude=["Tenis"])
+
+
+def test_render_when_the_filter_removes_everything(tmp_path):
+    from kalshi_scanner.scanner import sport_of
+    t = trade("x", 96, True, series="KXMLBGAME")
+    t["sport"] = sport_of(t["series"])
+    _save(tmp_path, [t])
+    text = report.render(tmp_path, exclude=["MLB"])
+    assert "No trades remain after the sport filter" in text and "No paper fills yet" not in text
+
+
+def test_combo_render_accepts_prefiltered_trades(tmp_path):
+    legs = [trade(f"e{i}", 97, True) for i in range(30)]
+    assert "days=1" in combos.render(tmp_path, trades=legs)
+    assert combos.render(tmp_path, trades=[]) == "Combo simulation: no day has enough settled legs yet."

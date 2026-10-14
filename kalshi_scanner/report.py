@@ -39,6 +39,35 @@ def sport_label(trade: dict) -> str:
     return trade.get("sport") or sport_of(trade.get("series", ""))
 
 
+def sport_group(label: str) -> str:
+    """The sport family of a label: 'Tennis (ITF men)' -> 'Tennis'; labels without a bracket are their own family."""
+    return label.split(" (", 1)[0]
+
+
+def parse_sport_names(values) -> list[str]:
+    """Flatten repeated/comma-separated CLI values ('Tennis,NHL') into a clean list of names."""
+    return [n.strip() for v in (values or []) for n in str(v).split(",") if n.strip()]
+
+
+def sport_excluded(label: str, names: list[str]) -> bool:
+    """True if `label` is one of `names`. Matches the whole label or its family, case-insensitively, and never a
+    substring: 'tennis' drops every Tennis (...) label, 'Tennis (ATP)' only ATP, and 'NBA' does not drop 'WNBA'."""
+    wanted = {n.lower() for n in names}
+    return label.lower() in wanted or sport_group(label).lower() in wanted
+
+
+def exclude_sports(trades: list[dict], names: list[str]) -> list[dict]:
+    if not names:
+        return trades
+    return [t for t in trades if not sport_excluded(sport_label(t), names)]
+
+
+def unmatched_sport_names(trades: list[dict], names: list[str]) -> list[str]:
+    """Names that match no trade at all, which usually means a typo."""
+    labels = {sport_label(t) for t in trades}
+    return [n for n in names if not any(sport_excluded(label, [n]) for label in labels)]
+
+
 def settled(trades: list[dict]) -> list[dict]:
     return [t for t in trades if t["status"] == "settled"]
 
@@ -358,20 +387,36 @@ def _funnel_lines(games: list[dict], snapshots: list[dict], trades: list[dict]) 
     return lines + [""]
 
 
-def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
+def _filter_lines(names: list[str], kept: int, total: int, unmatched: list[str]) -> list[str]:
+    lines = [f"FILTER: excluding {', '.join(names)}. Showing {kept} of {total} trades. Sections 1-4 and 7 use the "
+             f"filtered trades;",
+             "  section 5 (frozen pre-registered test) and section 6 (second tier) always use every sport.",
+             "  The scan funnel and the 'last candidate logged' time are not filtered by sport."]
+    if unmatched:
+        lines.append(f"  WARNING: no trades match {', '.join(unmatched)} (check the spelling against the By sport table).")
+    return lines + [""]
+
+
+def render(data_dir: Path | None = None, now: datetime | None = None, exclude: list[str] | None = None) -> str:
     now = now or datetime.now(timezone.utc)
-    trades = load_trades(data_dir)
+    all_trades = load_trades(data_dir)
+    names = parse_sport_names(exclude)
+    trades = exclude_sports(all_trades, names)
     snapshots = load_snapshots(data_dir)
     games = load_games(data_dir)
     done = settled(trades)
     lines = banner("1. Status")[1:]          # no leading blank line at the top of the report
+    if names:
+        lines += _filter_lines(names, len(trades), len(all_trades), unmatched_sport_names(all_trades, names))
     lines.append(f"Paper trades: {len(trades)} total, {len(done)} settled, "
                  f"{sum(1 for t in trades if t['status'] == 'open')} open")
     lines += _freshness_lines(trades, snapshots, now)
     lines.append("")
+    funnel = (lambda: []) if names else (lambda: _funnel_lines(games, snapshots, trades))
     if not trades:
-        lines.append("No paper fills yet. Let the scanner run through a few game windows.")
-        lines += banner("4. Execution quality") + _funnel_lines(games, snapshots, trades)
+        lines.append("No trades remain after the sport filter." if all_trades
+                     else "No paper fills yet. Let the scanner run through a few game windows.")
+        lines += banner("4. Execution quality") + funnel()
         return "\n".join(lines).rstrip()
     lines += _open_lines(trades, now) + _void_lines(trades)
     if not done:
@@ -380,7 +425,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
         lines += ["  " + row for row in fills_table(trades)]
         lines.append("")
         lines.append("Nothing settled yet. Hit rates appear once games finish and Kalshi settles them.")
-        lines += banner("4. Execution quality") + _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
+        lines += banner("4. Execution quality") + _fill_lines(trades, done) + funnel()
         return "\n".join(lines).rstrip()
 
     overall = summarize(done)
@@ -414,7 +459,7 @@ def render(data_dir: Path | None = None, now: datetime | None = None) -> str:
               "  unknown = none of those. This is inference from prices and clocks, not a live feed. Trades opened before the",
               "  label existed can only be prematch_certain or unknown (labelled from lead time alone).", ""]
     lines += banner("4. Execution quality")
-    lines += _fill_lines(trades, done) + _funnel_lines(games, snapshots, trades)
+    lines += _fill_lines(trades, done) + funnel()
 
     lines += ["Edge exists only if hit rate beats the implied probability by more than fees AND the",
               "confidence interval stays above the break-even rate. Small samples will mislead you.",

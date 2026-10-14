@@ -67,8 +67,8 @@ def _signed(x: float) -> str:
     return f"({abs(x):.2f})" if x < 0 else f"{x:.2f} "
 
 
-def render(data_dir: Path | None = None, target_prob: float = 0.5) -> str:
-    results = simulate(load_trades(data_dir), target_prob)
+def render(data_dir: Path | None = None, target_prob: float = 0.5, trades: list[dict] | None = None) -> str:
+    results = simulate(load_trades(data_dir) if trades is None else trades, target_prob)
     if not results:
         return "Combo simulation: no day has enough settled legs yet."
     n = len(results)
