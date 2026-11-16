@@ -1,5 +1,11 @@
 # Kalshi-Scanner
 
+> **New: EV scanner.** A second, separate tool compares Kalshi NBA/NHL moneylines with Pinnacle's devigged
+> fair price, paper-trades anything +EV after fees, tracks closing line value, and sends phone alerts.
+> It runs on its own schedule (`ev-scan` workflow), writes to `data/ev/`, and is documented in
+> [`docs/EV_SETUP.md`](docs/EV_SETUP.md). Live results: [`data/ev/STATUS.md`](data/ev/STATUS.md).
+> Everything below describes the original 90c scanner.
+
 A **paper-trading** scanner for near-certain Kalshi sports contracts. It places no orders and needs no Kalshi credentials. Its job is to answer one question with real data before any money is risked:
 
 > When a same-day sports contract is priced at 90-99¢, does it actually win more often than the price implies, after fees? And does the answer differ by sport or by price?
@@ -73,13 +79,14 @@ Because a late fill can be real on paper but unavailable to a real order, the se
 ## Layout
 
 ```
+ev_betting/       EV scanner: devig, board, paper trades, ntfy alerts (docs/EV_SETUP.md)
 kalshi_scanner/   client, scanner, order book, fees, settlement, report (+ insights: extra stats), combo simulator
 tests/            mock-based tests (python -m pytest)
 docs/             kalshi_series.txt: Sports series that matched `discover`'s keywords (ticker, title), Oct 2026.
                   Regenerate with `python -m kalshi_scanner discover`, or add `--all-series` for the full list.
 data/             snapshots, paper trades and games seen, committed by the Action
 notebooks/        Colab analysis notebook
-.github/workflows/scan.yml
+.github/workflows/scan.yml, ev-scan.yml
 ```
 
 Live trading is intentionally **not** implemented. If the paper results show a real edge, it would be added later with Kalshi's demo environment first, API keys stored only in GitHub/Colab secrets, dry-run by default, and hard caps on position size and daily loss.
