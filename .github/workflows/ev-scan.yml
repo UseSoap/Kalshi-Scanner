@@ -1,0 +1,78 @@
+name: ev-scan
+
+# Kalshi vs. Pinnacle +EV scanner with automatic paper trading. Places no real orders.
+#
+# Schedule: every 2 hours from 11 AM to 11 PM Central (17:17-05:17 UTC; Central Standard Time).
+# 7 runs a day x 2 sports = about 420 Odds API credits a month, inside the free plan's 500.
+# Each extra sport in EV_SPORTS adds about 210 credits a month. GitHub may start scheduled runs
+# a few minutes late; that's fine at this cadence. Minute :17 avoids GitHub's busy :00/:30 slots.
+on:
+  schedule:
+    - cron: "17 17,19,21,23,1,3,5 * * *"
+  workflow_dispatch:
+    inputs:
+      test_notification:
+        description: "Only send a test phone notification (no scan)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # commit data/ev back to the repo
+
+concurrency:
+  group: ev-scan
+  cancel-in-progress: false
+
+jobs:
+  ev-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      # Optional settings: Settings > Secrets and variables > Actions > Variables. Unset = default.
+      EV_SPORTS: ${{ vars.EV_SPORTS }}               # default "nba,nhl"
+      EV_BANKROLL: ${{ vars.EV_BANKROLL }}           # default 350 (starting paper bankroll)
+      EV_KELLY: ${{ vars.EV_KELLY }}                 # default 0.25
+      EV_MAX_STAKE: ${{ vars.EV_MAX_STAKE }}         # default 0.02
+      EV_MIN_EV: ${{ vars.EV_MIN_EV }}               # default 0.02
+      EV_MAX_LINE_AGE: ${{ vars.EV_MAX_LINE_AGE }}   # default 15 (minutes)
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Test notification
+        if: ${{ inputs.test_notification }}
+        run: python -m ev_betting notify-test
+
+      - name: Settle, scan, paper trade, notify
+        if: ${{ !inputs.test_notification }}
+        run: python -m ev_betting run
+
+      - name: Commit data
+        if: ${{ always() && !inputs.test_notification }}
+        run: |
+          git config user.name "ev-scanner-bot"
+          git config user.email "ev-scanner-bot@users.noreply.github.com"
+          git add -A data/ev
+          if git diff --cached --quiet; then
+            echo "No new data."
+          else
+            git commit -m "data(ev): $(date -u +%Y-%m-%dT%H:%MZ)"
+            for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+          fi
+
+      - name: Alert on failure
+        if: ${{ failure() && env.NTFY_TOPIC != '' }}
+        run: |
+          curl -s -H "Title: EV scanner run failed" -H "Priority: high" -H "Tags: warning" \
+            -d "Open the Actions tab in UseSoap/Kalshi-Scanner for the log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            "https://ntfy.sh/$NTFY_TOPIC"
