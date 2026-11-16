@@ -1,2 +1,3 @@
 run_at,sports,credits_remaining,pinnacle_games,kalshi_games,matched,stale,plus_ev,opened,settled,error
 2026-11-16T06:17:09+00:00,"nba,nhl",,0,77,0,0,0,0,0,"ODDS_API_KEY secret is not set, so no Pinnacle lines were pulled (settling still ran)."
+2026-11-16T06:22:40+00:00,"nba,nhl",496,10,77,10,0,0,0,0,
