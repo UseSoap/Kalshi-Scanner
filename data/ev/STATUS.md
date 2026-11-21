@@ -1,6 +1,6 @@
 # EV scanner status
 
-Last run: **Fri Nov 20, 9:57 PM CT** · Odds API credits left: 477
+Last run: **Sat Nov 21, 7:27 AM CT** · Odds API credits left: 475
 
 ## Paper results
 
@@ -12,60 +12,58 @@ Last run: **Fri Nov 20, 9:57 PM CT** · Odds API credits left: 477
 
 | Sport | Pinnacle games | Not started | Kalshi games | Matched | Stale lines | +EV |
 |---|---|---|---|---|---|---|
-| NBA | 8 | 5 | 33 | 5 | 0 | 0 |
+| NBA | 6 | 6 | 30 | 6 | 0 | 0 |
 | NHL | 14 | 14 | 56 | 14 | 0 | 0 |
 
-## Board (38 contracts, best edge first)
+## Board (40 contracts, best edge first)
 
 | Status | EV % | Team | Kalshi ask | Fair | Fair odds | Game | Start (CT) | Line age |
 |---|---|---|---|---|---|---|---|---|
-| no edge | -1.9 | Dallas Mavericks | 66c | 66.3% | -197 | Los Angeles Clippers @ Dallas Mavericks | Sat 7:10 PM | 0.1 |
-| no edge | -2.5 | Buffalo Sabres | 42c | 42.6% | +135 | Buffalo Sabres @ Florida Panthers | Sat 5:00 PM | 0.1 |
-| no edge | -2.5 | Minnesota Timberwolves | 67c | 66.8% | -201 | Memphis Grizzlies @ Minnesota Timberwolves | Sat 7:10 PM | 0.1 |
-| no edge | -3.1 | New York Knicks | 66c | 65.5% | -190 | Portland Trail Blazers @ New York Knicks | Sat 6:40 PM | 0.1 |
-| no edge | -3.3 | Vegas Golden Knights | 56c | 55.8% | -126 | Vegas Golden Knights @ Winnipeg Jets | Sat 6:00 PM | 0.1 |
-| no edge | -3.4 | Ottawa Senators | 62c | 61.5% | -159 | Los Angeles Kings @ Ottawa Senators | Sat 6:00 PM | 0.1 |
-| no edge | -3.9 | San Jose Sharks | 52c | 51.7% | -107 | Seattle Kraken @ San Jose Sharks | Sat 9:00 PM | 0.1 |
-| no edge | -4.0 | Vancouver Canucks | 27c | 27.3% | +267 | Minnesota Wild @ Vancouver Canucks | Sat 9:00 PM | 0.1 |
-| no edge | -4.0 | Washington Capitals | 47c | 46.8% | +114 | Washington Capitals @ Boston Bruins | Sat 6:00 PM | 0.1 |
-| no edge | -4.1 | Los Angeles Kings | 38c | 38.0% | +163 | Los Angeles Kings @ Ottawa Senators | Sat 6:00 PM | 0.1 |
-| no edge | -4.4 | Chicago Blackhawks | 42c | 41.8% | +139 | Chicago Blackhawks @ Calgary Flames | Sat 2:30 PM | 0.1 |
-| no edge | -4.4 | New Jersey Devils | 55c | 54.2% | -118 | New Jersey Devils @ St Louis Blues | Sat 6:00 PM | 0.1 |
-| no edge | -4.5 | St Louis Blues | 46c | 45.6% | +119 | New Jersey Devils @ St Louis Blues | Sat 6:00 PM | 0.1 |
-| no edge | -4.5 | Philadelphia 76ers | 86c | 82.9% | -485 | Milwaukee Bucks @ Philadelphia 76ers | Sat 12:10 PM | 0.1 |
-| no edge | -4.6 | Calgary Flames | 59c | 57.9% | -137 | Chicago Blackhawks @ Calgary Flames | Sat 2:30 PM | 0.1 |
-| no edge | -4.7 | Carolina Hurricanes | 64c | 62.6% | -167 | Edmonton Oilers @ Carolina Hurricanes | Sat 12:00 PM | 0.1 |
-| no edge | -4.8 | Toronto Maple Leafs | 54c | 53.1% | -113 | Columbus Blue Jackets @ Toronto Maple Leafs | Sat 6:00 PM | 0.1 |
-| no edge | -4.8 | Boston Bruins | 54c | 53.1% | -113 | Washington Capitals @ Boston Bruins | Sat 6:00 PM | 0.1 |
-| no edge | -4.9 | Detroit Red Wings | 49c | 48.3% | +107 | New York Islanders @ Detroit Red Wings | Sat 6:00 PM | 0.1 |
-| no edge | -4.9 | Seattle Kraken | 49c | 48.3% | +107 | Seattle Kraken @ San Jose Sharks | Sat 9:00 PM | 0.1 |
-| no edge | -4.9 | Minnesota Wild | 74c | 71.6% | -253 | Minnesota Wild @ Vancouver Canucks | Sat 9:00 PM | 0.1 |
-| no edge | -5.1 | Montréal Canadiens | 61c | 59.5% | -147 | Philadelphia Flyers @ Montréal Canadiens | Sat 6:00 PM | 0.1 |
-| no edge | -5.4 | Anaheim Ducks | 41c | 40.4% | +148 | Anaheim Ducks @ Utah Mammoth | Sat 8:00 PM | 0.1 |
-| no edge | -5.5 | Milwaukee Bucks | 15c | 15.0% | +566 | Milwaukee Bucks @ Philadelphia 76ers | Sat 12:10 PM | 0.1 |
-| no edge | -5.5 | Utah Mammoth | 61c | 59.2% | -145 | Anaheim Ducks @ Utah Mammoth | Sat 8:00 PM | 0.1 |
-| no edge | -5.5 | Nashville Predators | 57c | 55.5% | -125 | Pittsburgh Penguins @ Nashville Predators | Sat 5:00 PM | 0.1 |
-| no edge | -5.6 | New York Islanders | 53c | 51.7% | -107 | New York Islanders @ Detroit Red Wings | Sat 6:00 PM | 0.1 |
-| no edge | -6.0 | Columbus Blue Jackets | 48c | 46.8% | +114 | Columbus Blue Jackets @ Toronto Maple Leafs | Sat 6:00 PM | 0.1 |
-| no edge | -6.0 | Florida Panthers | 59c | 57.1% | -133 | Buffalo Sabres @ Florida Panthers | Sat 5:00 PM | 0.1 |
-| no edge | -6.0 | Winnipeg Jets | 45c | 43.9% | +128 | Vegas Golden Knights @ Winnipeg Jets | Sat 6:00 PM | 0.1 |
-| no edge | -6.1 | Philadelphia Flyers | 41c | 40.1% | +149 | Philadelphia Flyers @ Montréal Canadiens | Sat 6:00 PM | 0.1 |
-| no edge | -7.0 | Edmonton Oilers | 38c | 36.9% | +171 | Edmonton Oilers @ Carolina Hurricanes | Sat 12:00 PM | 0.1 |
-| no edge | -7.2 | Pittsburgh Penguins | 46c | 44.3% | +126 | Pittsburgh Penguins @ Nashville Predators | Sat 5:00 PM | 0.1 |
-| no edge | -7.7 | Portland Trail Blazers | 35c | 33.8% | +196 | Portland Trail Blazers @ New York Knicks | Sat 6:40 PM | 0.1 |
-| no edge | -9.0 | Memphis Grizzlies | 34c | 32.4% | +209 | Memphis Grizzlies @ Minnesota Timberwolves | Sat 7:10 PM | 0.1 |
-| no edge | -12.5 | Los Angeles Clippers | 36c | 32.9% | +204 | Los Angeles Clippers @ Dallas Mavericks | Sat 7:10 PM | 0.1 |
-| no Pinnacle line |  | San Antonio Spurs | 91c |  |  | New Orleans Pelicans @ San Antonio Spurs | Sat 7:10 PM |  |
-| no Pinnacle line |  | New Orleans Pelicans | 11c |  |  | New Orleans Pelicans @ San Antonio Spurs | Sat 7:10 PM |  |
+| no edge | -1.6 | San Antonio Spurs | 91c | 90.1% | -916 | New Orleans Pelicans @ San Antonio Spurs | Sat 7:10 PM | 0.5 |
+| no edge | -2.1 | Montréal Canadiens | 59c | 59.4% | -146 | Philadelphia Flyers @ Montréal Canadiens | Sat 6:00 PM | 0.4 |
+| no edge | -2.2 | Edmonton Oilers | 35c | 35.8% | +179 | Edmonton Oilers @ Carolina Hurricanes | Sat 12:00 PM | 0.4 |
+| no edge | -2.2 | Boston Celtics | 87c | 85.9% | -608 | Boston Celtics @ Sacramento Kings | Sat 9:10 PM | 0.5 |
+| no edge | -2.4 | Minnesota Timberwolves | 69c | 68.8% | -221 | Memphis Grizzlies @ Minnesota Timberwolves | Sat 7:10 PM | 0.5 |
+| no edge | -2.5 | New Jersey Devils | 54c | 54.3% | -119 | New Jersey Devils @ St Louis Blues | Sat 6:00 PM | 0.4 |
+| no edge | -2.6 | Dallas Mavericks | 66c | 65.8% | -193 | Los Angeles Clippers @ Dallas Mavericks | Sat 7:10 PM | 0.5 |
+| no edge | -2.7 | Calgary Flames | 59c | 59.1% | -144 | Chicago Blackhawks @ Calgary Flames | Sat 2:30 PM | 0.4 |
+| no edge | -2.9 | Florida Panthers | 58c | 58.0% | -138 | Buffalo Sabres @ Florida Panthers | Sat 5:00 PM | 0.4 |
+| no edge | -2.9 | Philadelphia 76ers | 84c | 82.5% | -470 | Milwaukee Bucks @ Philadelphia 76ers | Sat 12:10 PM | 0.5 |
+| no edge | -3.2 | San Jose Sharks | 52c | 52.0% | -109 | Seattle Kraken @ San Jose Sharks | Sat 9:00 PM | 0.4 |
+| no edge | -3.3 | Washington Capitals | 46c | 46.2% | +117 | Washington Capitals @ Boston Bruins | Sat 6:00 PM | 0.4 |
+| no edge | -3.4 | New York Islanders | 54c | 53.8% | -117 | New York Islanders @ Detroit Red Wings | Sat 6:00 PM | 0.4 |
+| no edge | -3.6 | Detroit Red Wings | 46c | 46.0% | +117 | New York Islanders @ Detroit Red Wings | Sat 6:00 PM | 0.4 |
+| no edge | -3.7 | Boston Bruins | 54c | 53.7% | -116 | Washington Capitals @ Boston Bruins | Sat 6:00 PM | 0.4 |
+| no edge | -3.7 | Los Angeles Kings | 38c | 38.2% | +162 | Los Angeles Kings @ Ottawa Senators | Sat 6:00 PM | 0.4 |
+| no edge | -3.8 | Toronto Maple Leafs | 51c | 50.8% | -103 | Columbus Blue Jackets @ Toronto Maple Leafs | Sat 6:00 PM | 0.4 |
+| no edge | -4.1 | Utah Mammoth | 60c | 59.2% | -145 | Anaheim Ducks @ Utah Mammoth | Sat 8:00 PM | 0.4 |
+| no edge | -4.2 | Minnesota Wild | 74c | 72.2% | -260 | Minnesota Wild @ Vancouver Canucks | Sat 9:00 PM | 0.4 |
+| no edge | -4.3 | Nashville Predators | 57c | 56.2% | -128 | Pittsburgh Penguins @ Nashville Predators | Sat 5:00 PM | 0.4 |
+| no edge | -4.8 | Vegas Golden Knights | 56c | 54.9% | -122 | Vegas Golden Knights @ Winnipeg Jets | Sat 6:00 PM | 0.4 |
+| no edge | -4.9 | Columbus Blue Jackets | 50c | 49.2% | +103 | Columbus Blue Jackets @ Toronto Maple Leafs | Sat 6:00 PM | 0.4 |
+| no edge | -4.9 | Chicago Blackhawks | 41c | 40.6% | +146 | Chicago Blackhawks @ Calgary Flames | Sat 2:30 PM | 0.4 |
+| no edge | -5.0 | Ottawa Senators | 63c | 61.4% | -159 | Los Angeles Kings @ Ottawa Senators | Sat 6:00 PM | 0.4 |
+| no edge | -5.1 | New York Knicks | 66c | 64.1% | -179 | Portland Trail Blazers @ New York Knicks | Sat 6:40 PM | 0.5 |
+| no edge | -5.1 | Anaheim Ducks | 41c | 40.5% | +147 | Anaheim Ducks @ Utah Mammoth | Sat 8:00 PM | 0.4 |
+| no edge | -5.6 | Seattle Kraken | 49c | 47.9% | +109 | Seattle Kraken @ San Jose Sharks | Sat 9:00 PM | 0.4 |
+| no edge | -5.8 | Philadelphia Flyers | 41c | 40.2% | +149 | Philadelphia Flyers @ Montréal Canadiens | Sat 6:00 PM | 0.4 |
+| no edge | -5.8 | Carolina Hurricanes | 66c | 63.7% | -175 | Edmonton Oilers @ Carolina Hurricanes | Sat 12:00 PM | 0.4 |
+| no edge | -6.0 | Winnipeg Jets | 46c | 44.9% | +123 | Vegas Golden Knights @ Winnipeg Jets | Sat 6:00 PM | 0.4 |
+| no edge | -6.5 | Portland Trail Blazers | 36c | 35.2% | +184 | Portland Trail Blazers @ New York Knicks | Sat 6:40 PM | 0.5 |
+| no edge | -6.6 | St Louis Blues | 47c | 45.5% | +120 | New Jersey Devils @ St Louis Blues | Sat 6:00 PM | 0.4 |
+| no edge | -6.7 | Pittsburgh Penguins | 45c | 43.6% | +129 | Pittsburgh Penguins @ Nashville Predators | Sat 5:00 PM | 0.4 |
+| no edge | -6.8 | Buffalo Sabres | 43c | 41.7% | +140 | Buffalo Sabres @ Florida Panthers | Sat 5:00 PM | 0.4 |
+| no edge | -8.5 | Vancouver Canucks | 28c | 26.9% | +271 | Minnesota Wild @ Vancouver Canucks | Sat 9:00 PM | 0.4 |
+| no edge | -11.2 | Los Angeles Clippers | 36c | 33.4% | +200 | Los Angeles Clippers @ Dallas Mavericks | Sat 7:10 PM | 0.5 |
+| no edge | -12.8 | Milwaukee Bucks | 17c | 15.7% | +538 | Milwaukee Bucks @ Philadelphia 76ers | Sat 12:10 PM | 0.5 |
+| no edge | -14.8 | Memphis Grizzlies | 34c | 30.3% | +230 | Memphis Grizzlies @ Minnesota Timberwolves | Sat 7:10 PM | 0.5 |
+| no edge | -23.8 | New Orleans Pelicans | 10c | 8.1% | +1135 | New Orleans Pelicans @ San Antonio Spurs | Sat 7:10 PM | 0.5 |
+| no edge | -24.2 | Sacramento Kings | 14c | 11.2% | +789 | Boston Celtics @ Sacramento Kings | Sat 9:10 PM | 0.5 |
 
-## Kalshi games without a Pinnacle line yet (70)
+## Kalshi games without a Pinnacle line yet (66)
 
 Usually games further out than Pinnacle has posted, or games already under way.
 
-- NBA: Houston wins [KXNBAGAME-26NOV20HOUDEN]
-- NBA: Utah wins [KXNBAGAME-26NOV20PHXUTA]
-- NBA: Sacramento wins [KXNBAGAME-26NOV20SACLAL]
-- NBA: Sacramento wins [KXNBAGAME-26NOV21BOSSAC]
 - NBA: Golden State wins [KXNBAGAME-26NOV22BOSGSW]
 - NBA: Utah wins [KXNBAGAME-26NOV22DALUTA]
 - NBA: Denver wins [KXNBAGAME-26NOV22DENCHI]
@@ -102,3 +100,7 @@ Usually games further out than Pinnacle has posted, or games already under way.
 - NHL: San Jose wins [KXNHLGAME-26NOV23MINSJ]
 - NHL: Toronto wins [KXNHLGAME-26NOV23TORNYI]
 - NHL: Winnipeg wins [KXNHLGAME-26NOV23UTAWPG]
+- NHL: Vegas wins [KXNHLGAME-26NOV24VGKEDM]
+- NHL: Tampa Bay wins [KXNHLGAME-26NOV25CARTB]
+- NHL: Pittsburgh wins [KXNHLGAME-26NOV25CGYPIT]
+- NHL: Seattle wins [KXNHLGAME-26NOV25CHISEA]
