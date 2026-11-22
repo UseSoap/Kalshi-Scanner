@@ -1,6 +1,6 @@
 # EV scanner status
 
-Last run: **Sat Nov 21, 9:08 PM CT** · Odds API credits left: 471
+Last run: **Sun Nov 22, 5:17 AM CT** · Odds API credits left: 469
 
 ## Paper results
 
@@ -12,45 +12,42 @@ Last run: **Sat Nov 21, 9:08 PM CT** · Odds API credits left: 471
 
 | Sport | Pinnacle games | Not started | Kalshi games | Matched | Stale lines | +EV |
 |---|---|---|---|---|---|---|
-| NBA | 10 | 6 | 39 | 6 | 0 | 0 |
-| NHL | 9 | 5 | 57 | 5 | 0 | 0 |
+| NBA | 7 | 7 | 35 | 7 | 0 | 0 |
+| NHL | 5 | 5 | 55 | 5 | 0 | 0 |
 
-## Board (22 contracts, best edge first)
+## Board (24 contracts, best edge first)
 
 | Status | EV % | Team | Kalshi ask | Fair | Fair odds | Game | Start (CT) | Line age |
 |---|---|---|---|---|---|---|---|---|
-| no edge | -0.1 | Boston Celtics | 82c | 82.9% | -486 | Boston Celtics @ Sacramento Kings | Sat 9:10 PM | 0.2 |
-| no edge | -2.4 | Orlando Magic | 68c | 67.9% | -211 | Orlando Magic @ Washington Wizards | Sun 6:10 PM | 0.2 |
-| no edge | -4.0 | Detroit Pistons | 57c | 56.4% | -129 | Detroit Pistons @ Atlanta Hawks | Sun 2:40 PM | 0.2 |
-| no edge | -4.2 | Denver Nuggets | 78c | 75.9% | -314 | Denver Nuggets @ Chicago Bulls | Sun 6:10 PM | 0.2 |
-| no edge | -7.2 | Atlanta Hawks | 45c | 43.4% | +131 | Detroit Pistons @ Atlanta Hawks | Sun 2:40 PM | 0.2 |
-| no edge | -11.9 | Washington Wizards | 34c | 31.3% | +219 | Orlando Magic @ Washington Wizards | Sun 6:10 PM | 0.2 |
-| no edge | -14.0 | Chicago Bulls | 25c | 22.6% | +342 | Denver Nuggets @ Chicago Bulls | Sun 6:10 PM | 0.2 |
-| no edge | -24.4 | Sacramento Kings | 20c | 16.0% | +526 | Boston Celtics @ Sacramento Kings | Sat 9:10 PM | 0.2 |
-| no Pinnacle line |  | Golden State Warriors | 24c |  |  | Boston Celtics @ Golden State Warriors | Sun 7:40 PM |  |
-| no Pinnacle line |  | Boston Celtics | 76c |  |  | Boston Celtics @ Golden State Warriors | Sun 7:40 PM |  |
-| no Pinnacle line |  | Oklahoma City Thunder | 45c |  |  | Oklahoma City Thunder @ Miami Heat | Sun 5:10 PM |  |
-| no Pinnacle line |  | Miami Heat | 56c |  |  | Oklahoma City Thunder @ Miami Heat | Sun 5:10 PM |  |
-| no Pinnacle line |  | Tampa Bay Lightning | 67c |  |  | Buffalo Sabres @ Tampa Bay Lightning | Sun 4:10 PM |  |
-| no Pinnacle line |  | Buffalo Sabres | 35c |  |  | Buffalo Sabres @ Tampa Bay Lightning | Sun 4:10 PM |  |
-| no Pinnacle line |  | New York Rangers | 43c |  |  | Carolina Hurricanes @ New York Rangers | Sun 11:40 AM |  |
-| no Pinnacle line |  | Carolina Hurricanes | 59c |  |  | Carolina Hurricanes @ New York Rangers | Sun 11:40 AM |  |
-| no Pinnacle line |  | Vancouver Canucks | 51c |  |  | Chicago Blackhawks @ Vancouver Canucks | Sun 7:10 PM |  |
-| no Pinnacle line |  | Chicago Blackhawks | 50c |  |  | Chicago Blackhawks @ Vancouver Canucks | Sun 7:10 PM |  |
-| no Pinnacle line |  | St Louis Blues | 48c |  |  | Edmonton Oilers @ St Louis Blues | Sun 6:10 PM |  |
-| no Pinnacle line |  | Edmonton Oilers | 53c |  |  | Edmonton Oilers @ St Louis Blues | Sun 6:10 PM |  |
-| no Pinnacle line |  | Pittsburgh Penguins | 33c |  |  | Pittsburgh Penguins @ Dallas Stars | Sun 6:10 PM |  |
-| no Pinnacle line |  | Dallas Stars | 68c |  |  | Pittsburgh Penguins @ Dallas Stars | Sun 6:10 PM |  |
+| no edge | -2.5 | Orlando Magic | 66c | 65.9% | -193 | Orlando Magic @ Washington Wizards | Sun 6:10 PM | 0.1 |
+| no edge | -2.6 | Dallas Stars | 67c | 66.7% | -201 | Pittsburgh Penguins @ Dallas Stars | Sun 6:10 PM | 0.3 |
+| no edge | -3.0 | New York Knicks | 77c | 75.9% | -315 | Indiana Pacers @ New York Knicks | Sun 7:10 PM | 0.1 |
+| no edge | -3.2 | Dallas Mavericks | 54c | 54.0% | -117 | Dallas Mavericks @ Utah Jazz | Sun 6:10 PM | 0.1 |
+| no edge | -3.3 | Carolina Hurricanes | 60c | 59.7% | -148 | Carolina Hurricanes @ New York Rangers | Sun 11:40 AM | 0.3 |
+| no edge | -3.8 | Miami Heat | 59c | 58.4% | -140 | Oklahoma City Thunder @ Miami Heat | Sun 5:10 PM | 0.1 |
+| no edge | -3.9 | Chicago Blackhawks | 52c | 51.7% | -107 | Chicago Blackhawks @ Vancouver Canucks | Sun 7:10 PM | 0.3 |
+| no edge | -3.9 | St Louis Blues | 50c | 49.7% | +101 | Edmonton Oilers @ St Louis Blues | Sun 6:10 PM | 0.3 |
+| no edge | -3.9 | Boston Celtics | 78c | 76.1% | -318 | Boston Celtics @ Golden State Warriors | Sun 7:40 PM | 0.1 |
+| no edge | -4.2 | Denver Nuggets | 77c | 75.0% | -299 | Denver Nuggets @ Chicago Bulls | Sun 6:10 PM | 0.1 |
+| no edge | -4.2 | Tampa Bay Lightning | 66c | 64.7% | -183 | Buffalo Sabres @ Tampa Bay Lightning | Sun 4:10 PM | 0.3 |
+| no edge | -4.9 | Vancouver Canucks | 49c | 48.3% | +107 | Chicago Blackhawks @ Vancouver Canucks | Sun 7:10 PM | 0.3 |
+| no edge | -5.1 | Atlanta Hawks | 47c | 46.2% | +116 | Detroit Pistons @ Atlanta Hawks | Sun 2:40 PM | 0.1 |
+| no edge | -5.4 | Buffalo Sabres | 35c | 34.6% | +189 | Buffalo Sabres @ Tampa Bay Lightning | Sun 4:10 PM | 0.3 |
+| no edge | -5.5 | Detroit Pistons | 55c | 53.6% | -115 | Detroit Pistons @ Atlanta Hawks | Sun 2:40 PM | 0.1 |
+| no edge | -5.7 | Oklahoma City Thunder | 42c | 41.2% | +143 | Oklahoma City Thunder @ Miami Heat | Sun 5:10 PM | 0.1 |
+| no edge | -5.9 | Utah Jazz | 47c | 45.9% | +118 | Dallas Mavericks @ Utah Jazz | Sun 6:10 PM | 0.1 |
+| no edge | -6.1 | Chicago Bulls | 24c | 23.7% | +321 | Denver Nuggets @ Chicago Bulls | Sun 6:10 PM | 0.1 |
+| no edge | -6.5 | New York Rangers | 41c | 39.9% | +150 | Carolina Hurricanes @ New York Rangers | Sun 11:40 AM | 0.3 |
+| no edge | -6.5 | Edmonton Oilers | 52c | 50.3% | -101 | Edmonton Oilers @ St Louis Blues | Sun 6:10 PM | 0.3 |
+| no edge | -7.1 | Golden State Warriors | 23c | 22.5% | +344 | Boston Celtics @ Golden State Warriors | Sun 7:40 PM | 0.1 |
+| no edge | -8.9 | Pittsburgh Penguins | 34c | 32.4% | +208 | Pittsburgh Penguins @ Dallas Stars | Sun 6:10 PM | 0.3 |
+| no edge | -8.9 | Washington Wizards | 35c | 33.3% | +200 | Orlando Magic @ Washington Wizards | Sun 6:10 PM | 0.1 |
+| no edge | -14.1 | Indiana Pacers | 25c | 22.6% | +342 | Indiana Pacers @ New York Knicks | Sun 7:10 PM | 0.1 |
 
-## Kalshi games without a Pinnacle line yet (85)
+## Kalshi games without a Pinnacle line yet (78)
 
 Usually games further out than Pinnacle has posted, or games already under way.
 
-- NBA: Los Angeles C wins [KXNBAGAME-26NOV21LACDAL]
-- NBA: Minnesota wins [KXNBAGAME-26NOV21MEMMIN]
-- NBA: San Antonio wins [KXNBAGAME-26NOV21NOPSAS]
-- NBA: Utah wins [KXNBAGAME-26NOV22DALUTA]
-- NBA: New York wins [KXNBAGAME-26NOV22INDNYK]
 - NBA: Minnesota wins [KXNBAGAME-26NOV23BKNMIN]
 - NBA: Cleveland wins [KXNBAGAME-26NOV23CLECHI]
 - NBA: Los Angeles C wins [KXNBAGAME-26NOV23LACHOU]
@@ -79,10 +76,15 @@ Usually games further out than Pinnacle has posted, or games already under way.
 - NBA: San Antonio wins [KXNBAGAME-26NOV27LALSAS]
 - NBA: New Orleans wins [KXNBAGAME-26NOV27NOPLAC]
 - NBA: Philadelphia wins [KXNBAGAME-26NOV27PHIIND]
-- NHL: Utah wins [KXNHLGAME-26NOV21ANAUTA]
-- NHL: Vancouver wins [KXNHLGAME-26NOV21MINVAN]
-- NHL: San Jose wins [KXNHLGAME-26NOV21SEASJ]
 - NHL: Seattle wins [KXNHLGAME-26NOV23ANASEA]
 - NHL: New Jersey wins [KXNHLGAME-26NOV23CBJNJ]
 - NHL: Ottawa wins [KXNHLGAME-26NOV23CGYOTT]
 - NHL: Montreal wins [KXNHLGAME-26NOV23LAMTL]
+- NHL: San Jose wins [KXNHLGAME-26NOV23MINSJ]
+- NHL: Toronto wins [KXNHLGAME-26NOV23TORNYI]
+- NHL: Winnipeg wins [KXNHLGAME-26NOV23UTAWPG]
+- NHL: Vegas wins [KXNHLGAME-26NOV24VGKEDM]
+- NHL: Tampa Bay wins [KXNHLGAME-26NOV25CARTB]
+- NHL: Pittsburgh wins [KXNHLGAME-26NOV25CGYPIT]
+- NHL: Seattle wins [KXNHLGAME-26NOV25CHISEA]
+- NHL: Montreal wins [KXNHLGAME-26NOV25MTLCOL]
