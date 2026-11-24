@@ -1,6 +1,6 @@
 # EV scanner status
 
-Last run: **Mon Nov 23, 9:20 PM CT** · Odds API credits left: 461
+Last run: **Tue Nov 24, 9:51 AM CT** · Odds API credits left: 459
 
 ## Paper results
 
@@ -12,38 +12,37 @@ Last run: **Mon Nov 23, 9:20 PM CT** · Odds API credits left: 461
 
 | Sport | Pinnacle games | Not started | Kalshi games | Matched | Stale lines | +EV |
 |---|---|---|---|---|---|---|
-| NBA | 8 | 3 | 35 | 3 | 0 | 0 |
-| NHL | 6 | 1 | 54 | 1 | 0 | 0 |
+| NBA | 7 | 7 | 30 | 7 | 0 | 0 |
+| NHL | 1 | 1 | 51 | 1 | 0 | 0 |
 
-## Board (8 contracts, best edge first)
+## Board (16 contracts, best edge first)
 
 | Status | EV % | Team | Kalshi ask | Fair | Fair odds | Game | Start (CT) | Line age |
 |---|---|---|---|---|---|---|---|---|
-| no edge | -1.2 | Boston Celtics | 79c | 79.2% | -381 | Boston Celtics @ Washington Wizards | Tue 7:10 PM | 0.1 |
-| no edge | -3.6 | Denver Nuggets | 75c | 73.5% | -278 | Dallas Mavericks @ Denver Nuggets | Tue 9:10 PM | 0.1 |
-| no edge | -4.1 | Vegas Golden Knights | 52c | 51.5% | -106 | Vegas Golden Knights @ Edmonton Oilers | Tue 7:00 PM | 0.1 |
-| no edge | -4.4 | Detroit Pistons | 55c | 54.2% | -118 | Detroit Pistons @ Orlando Magic | Tue 6:11 PM | 0.1 |
-| no edge | -6.5 | Orlando Magic | 47c | 45.6% | +119 | Detroit Pistons @ Orlando Magic | Tue 6:11 PM | 0.1 |
-| no edge | -6.5 | Edmonton Oilers | 50c | 48.4% | +107 | Vegas Golden Knights @ Edmonton Oilers | Tue 7:00 PM | 0.1 |
-| no edge | -11.6 | Dallas Mavericks | 27c | 25.1% | +298 | Dallas Mavericks @ Denver Nuggets | Tue 9:10 PM | 0.1 |
-| no edge | -13.3 | Washington Wizards | 21c | 19.2% | +420 | Boston Celtics @ Washington Wizards | Tue 7:10 PM | 0.1 |
+| no edge | -1.3 | Denver Nuggets | 72c | 72.4% | -263 | Dallas Mavericks @ Denver Nuggets | Tue 9:10 PM | 0.1 |
+| no edge | -2.8 | Boston Celtics | 80c | 78.9% | -373 | Boston Celtics @ Washington Wizards | Tue 7:10 PM | 0.1 |
+| no edge | -3.5 | Detroit Pistons | 56c | 55.7% | -126 | Detroit Pistons @ Orlando Magic | Tue 6:11 PM | 0.1 |
+| no edge | -4.0 | Edmonton Oilers | 48c | 47.8% | +109 | Vegas Golden Knights @ Edmonton Oilers | Tue 7:10 PM | 0.1 |
+| no edge | -4.7 | Vegas Golden Knights | 53c | 52.2% | -109 | Vegas Golden Knights @ Edmonton Oilers | Tue 7:10 PM | 0.1 |
+| no edge | -5.7 | Orlando Magic | 45c | 44.1% | +127 | Detroit Pistons @ Orlando Magic | Tue 6:11 PM | 0.1 |
+| no edge | -10.8 | Washington Wizards | 21c | 19.8% | +406 | Boston Celtics @ Washington Wizards | Tue 7:10 PM | 0.1 |
+| no edge | -12.8 | Dallas Mavericks | 29c | 26.5% | +277 | Dallas Mavericks @ Denver Nuggets | Tue 9:10 PM | 0.1 |
+| no Pinnacle line |  | New York Knicks | 67c |  |  | Cleveland Cavaliers @ New York Knicks | Wed 6:40 PM |  |
+| no Pinnacle line |  | Cleveland Cavaliers | 34c |  |  | Cleveland Cavaliers @ New York Knicks | Wed 6:40 PM |  |
+| no Pinnacle line |  | Philadelphia 76ers | 59c |  |  | Miami Heat @ Philadelphia 76ers | Wed 4:10 PM |  |
+| no Pinnacle line |  | Miami Heat | 42c |  |  | Miami Heat @ Philadelphia 76ers | Wed 4:10 PM |  |
+| no Pinnacle line |  | Oklahoma City Thunder | 55c |  |  | Minnesota Timberwolves @ Oklahoma City Thunder | Wed 6:40 PM |  |
+| no Pinnacle line |  | Minnesota Timberwolves | 47c |  |  | Minnesota Timberwolves @ Oklahoma City Thunder | Wed 6:40 PM |  |
+| no Pinnacle line |  | Phoenix Suns | 24c |  |  | Phoenix Suns @ Houston Rockets | Wed 7:40 PM |  |
+| no Pinnacle line |  | Houston Rockets | 77c |  |  | Phoenix Suns @ Houston Rockets | Wed 7:40 PM |  |
 
-## Kalshi games without a Pinnacle line yet (85)
+## Kalshi games without a Pinnacle line yet (73)
 
 Usually games further out than Pinnacle has posted, or games already under way.
 
-- NBA: Cleveland wins [KXNBAGAME-26NOV23CLECHI]
-- NBA: Los Angeles C wins [KXNBAGAME-26NOV23LACHOU]
-- NBA: Phoenix wins [KXNBAGAME-26NOV23PHXNOP]
-- NBA: San Antonio wins [KXNBAGAME-26NOV23SASSAC]
-- NBA: Utah wins [KXNBAGAME-26NOV23UTALAL]
 - NBA: Milwaukee wins [KXNBAGAME-26NOV25BKNMIL]
 - NBA: Chicago wins [KXNBAGAME-26NOV25CHICHA]
-- NBA: New York wins [KXNBAGAME-26NOV25CLENYK]
 - NBA: Memphis wins [KXNBAGAME-26NOV25LACMEM]
-- NBA: Philadelphia wins [KXNBAGAME-26NOV25MIAPHI]
-- NBA: Oklahoma City wins [KXNBAGAME-26NOV25MINOKC]
-- NBA: Phoenix wins [KXNBAGAME-26NOV25PHXHOU]
 - NBA: Sacramento wins [KXNBAGAME-26NOV25SACGSW]
 - NBA: San Antonio wins [KXNBAGAME-26NOV25SASPOR]
 - NBA: Boston wins [KXNBAGAME-26NOV27ATLBOS]
@@ -64,11 +63,20 @@ Usually games further out than Pinnacle has posted, or games already under way.
 - NBA: Philadelphia wins [KXNBAGAME-26NOV28PHIHOU]
 - NBA: Miami wins [KXNBAGAME-26NOV29MIACLE]
 - NBA: Sacramento wins [KXNBAGAME-26NOV29MINSAC]
-- NHL: Seattle wins [KXNHLGAME-26NOV23ANASEA]
-- NHL: Ottawa wins [KXNHLGAME-26NOV23CGYOTT]
-- NHL: Montreal wins [KXNHLGAME-26NOV23LAMTL]
-- NHL: San Jose wins [KXNHLGAME-26NOV23MINSJ]
 - NHL: Tampa Bay wins [KXNHLGAME-26NOV25CARTB]
 - NHL: Pittsburgh wins [KXNHLGAME-26NOV25CGYPIT]
 - NHL: Seattle wins [KXNHLGAME-26NOV25CHISEA]
 - NHL: Montreal wins [KXNHLGAME-26NOV25MTLCOL]
+- NHL: New Jersey wins [KXNHLGAME-26NOV25NJCBJ]
+- NHL: Nashville wins [KXNHLGAME-26NOV25NSHDAL]
+- NHL: New York R wins [KXNHLGAME-26NOV25NYRBUF]
+- NHL: Ottawa wins [KXNHLGAME-26NOV25OTTFLA]
+- NHL: Washington wins [KXNHLGAME-26NOV25PHIWSH]
+- NHL: San Jose wins [KXNHLGAME-26NOV25SJANA]
+- NHL: St. Louis wins [KXNHLGAME-26NOV25STLNYI]
+- NHL: Utah wins [KXNHLGAME-26NOV25UTAMIN]
+- NHL: Vancouver wins [KXNHLGAME-26NOV25VANDET]
+- NHL: Winnipeg wins [KXNHLGAME-26NOV25WPGBOS]
+- NHL: New Jersey wins [KXNHLGAME-26NOV27CGYNJ]
+- NHL: Minnesota wins [KXNHLGAME-26NOV27COLMIN]
+- NHL: St. Louis wins [KXNHLGAME-26NOV27DALSTL]

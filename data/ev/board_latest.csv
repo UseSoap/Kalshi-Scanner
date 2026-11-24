@@ -1,9 +1,17 @@
 status,ev_pct,sport,team,kalshi_ask_c,fair_prob,fair_american,game,start_utc,line_age_min,sharp_books,sharp_decimal,fair_multiplicative,fair_additive,fair_power,fair_shin,ticker,event_ticker
-no edge,-1.18,NBA,Boston Celtics,79.0,0.7922,-381,Boston Celtics @ Washington Wizards,2026-11-25T01:10:00Z,0.1,pinnacle,1.22,0.7922,0.8023,0.8078,0.8023,KXNBAGAME-26NOV24BOSWAS-BOS,KXNBAGAME-26NOV24BOSWAS
-no edge,-3.64,NBA,Denver Nuggets,75.0,0.7354,-278,Dallas Mavericks @ Denver Nuggets,2026-11-25T03:10:00Z,0.1,pinnacle,1.31,0.7354,0.7443,0.7491,0.7443,KXNBAGAME-26NOV24DALDEN-DEN,KXNBAGAME-26NOV24DALDEN
-no edge,-4.09,NHL,Vegas Golden Knights,52.0,0.5155,-106,Vegas Golden Knights @ Edmonton Oilers,2026-11-25T01:00:00Z,0.1,pinnacle,1.88,0.5155,0.516,0.5162,0.516,KXNHLGAME-26NOV24VGKEDM-VGK,KXNHLGAME-26NOV24VGKEDM
-no edge,-4.43,NBA,Detroit Pistons,55.0,0.5422,-118,Detroit Pistons @ Orlando Magic,2026-11-25T00:11:00Z,0.1,pinnacle,1.79,0.5422,0.5435,0.5441,0.5435,KXNBAGAME-26NOV24DETORL-DET,KXNBAGAME-26NOV24DETORL
-no edge,-6.47,NBA,Orlando Magic,47.0,0.4559,+119,Detroit Pistons @ Orlando Magic,2026-11-25T00:11:00Z,0.1,pinnacle,2.12,0.4578,0.4565,0.4559,0.4565,KXNBAGAME-26NOV24DETORL-ORL,KXNBAGAME-26NOV24DETORL
-no edge,-6.51,NHL,Edmonton Oilers,50.0,0.4838,+107,Vegas Golden Knights @ Edmonton Oilers,2026-11-25T01:00:00Z,0.1,pinnacle,2.0,0.4845,0.484,0.4838,0.484,KXNHLGAME-26NOV24VGKEDM-EDM,KXNHLGAME-26NOV24VGKEDM
-no edge,-11.57,NBA,Dallas Mavericks,27.0,0.2509,+298,Dallas Mavericks @ Denver Nuggets,2026-11-25T03:10:00Z,0.1,pinnacle,3.64,0.2646,0.2557,0.2509,0.2557,KXNBAGAME-26NOV24DALDEN-DAL,KXNBAGAME-26NOV24DALDEN
-no edge,-13.28,NBA,Washington Wizards,21.0,0.1922,+420,Boston Celtics @ Washington Wizards,2026-11-25T01:10:00Z,0.1,pinnacle,4.65,0.2078,0.1977,0.1922,0.1977,KXNBAGAME-26NOV24BOSWAS-WAS,KXNBAGAME-26NOV24BOSWAS
+no edge,-1.34,NBA,Denver Nuggets,72.0,0.7243,-263,Dallas Mavericks @ Denver Nuggets,2026-11-25T03:10:00Z,0.1,pinnacle,1.34,0.7243,0.7311,0.7346,0.7311,KXNBAGAME-26NOV24DALDEN-DEN,KXNBAGAME-26NOV24DALDEN
+no edge,-2.78,NBA,Boston Celtics,80.0,0.7887,-373,Boston Celtics @ Washington Wizards,2026-11-25T01:10:00Z,0.1,pinnacle,1.23,0.7887,0.7976,0.8023,0.7976,KXNBAGAME-26NOV24BOSWAS-BOS,KXNBAGAME-26NOV24BOSWAS
+no edge,-3.51,NBA,Detroit Pistons,56.0,0.557,-126,Detroit Pistons @ Orlando Magic,2026-11-25T00:11:00Z,0.1,pinnacle,1.75,0.557,0.5584,0.5592,0.5584,KXNBAGAME-26NOV24DETORL-DET,KXNBAGAME-26NOV24DETORL
+no edge,-4.02,NHL,Edmonton Oilers,48.0,0.4775,+109,Vegas Golden Knights @ Edmonton Oilers,2026-11-25T01:10:00Z,0.1,pinnacle,2.04,0.4783,0.4777,0.4775,0.4777,KXNHLGAME-26NOV24VGKEDM-EDM,KXNHLGAME-26NOV24VGKEDM
+no edge,-4.69,NHL,Vegas Golden Knights,53.0,0.5217,-109,Vegas Golden Knights @ Edmonton Oilers,2026-11-25T01:10:00Z,0.1,pinnacle,1.87,0.5217,0.5223,0.5225,0.5223,KXNHLGAME-26NOV24VGKEDM-VGK,KXNHLGAME-26NOV24VGKEDM
+no edge,-5.67,NBA,Orlando Magic,45.0,0.4408,+127,Detroit Pistons @ Orlando Magic,2026-11-25T00:11:00Z,0.1,pinnacle,2.2,0.443,0.4416,0.4408,0.4416,KXNBAGAME-26NOV24DETORL-ORL,KXNBAGAME-26NOV24DETORL
+no edge,-10.81,NBA,Washington Wizards,21.0,0.1977,+406,Boston Celtics @ Washington Wizards,2026-11-25T01:10:00Z,0.1,pinnacle,4.59,0.2113,0.2024,0.1977,0.2024,KXNBAGAME-26NOV24BOSWAS-WAS,KXNBAGAME-26NOV24BOSWAS
+no edge,-12.81,NBA,Dallas Mavericks,29.0,0.2654,+277,Dallas Mavericks @ Denver Nuggets,2026-11-25T03:10:00Z,0.1,pinnacle,3.52,0.2757,0.2689,0.2654,0.2689,KXNBAGAME-26NOV24DALDEN-DAL,KXNBAGAME-26NOV24DALDEN
+no Pinnacle line,,NBA,New York Knicks,67.0,,,Cleveland Cavaliers @ New York Knicks,2026-11-26T00:40:00Z,,,,,,,,KXNBAGAME-26NOV25CLENYK-NYK,KXNBAGAME-26NOV25CLENYK
+no Pinnacle line,,NBA,Cleveland Cavaliers,34.0,,,Cleveland Cavaliers @ New York Knicks,2026-11-26T00:40:00Z,,,,,,,,KXNBAGAME-26NOV25CLENYK-CLE,KXNBAGAME-26NOV25CLENYK
+no Pinnacle line,,NBA,Philadelphia 76ers,59.0,,,Miami Heat @ Philadelphia 76ers,2026-11-25T22:10:00Z,,,,,,,,KXNBAGAME-26NOV25MIAPHI-PHI,KXNBAGAME-26NOV25MIAPHI
+no Pinnacle line,,NBA,Miami Heat,42.0,,,Miami Heat @ Philadelphia 76ers,2026-11-25T22:10:00Z,,,,,,,,KXNBAGAME-26NOV25MIAPHI-MIA,KXNBAGAME-26NOV25MIAPHI
+no Pinnacle line,,NBA,Oklahoma City Thunder,55.0,,,Minnesota Timberwolves @ Oklahoma City Thunder,2026-11-26T00:40:00Z,,,,,,,,KXNBAGAME-26NOV25MINOKC-OKC,KXNBAGAME-26NOV25MINOKC
+no Pinnacle line,,NBA,Minnesota Timberwolves,47.0,,,Minnesota Timberwolves @ Oklahoma City Thunder,2026-11-26T00:40:00Z,,,,,,,,KXNBAGAME-26NOV25MINOKC-MIN,KXNBAGAME-26NOV25MINOKC
+no Pinnacle line,,NBA,Phoenix Suns,24.0,,,Phoenix Suns @ Houston Rockets,2026-11-26T01:40:00Z,,,,,,,,KXNBAGAME-26NOV25PHXHOU-PHX,KXNBAGAME-26NOV25PHXHOU
+no Pinnacle line,,NBA,Houston Rockets,77.0,,,Phoenix Suns @ Houston Rockets,2026-11-26T01:40:00Z,,,,,,,,KXNBAGAME-26NOV25PHXHOU-HOU,KXNBAGAME-26NOV25PHXHOU
