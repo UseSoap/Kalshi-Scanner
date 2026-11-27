@@ -1,41 +1,53 @@
 status,ev_pct,sport,team,kalshi_ask_c,fair_prob,fair_american,game,start_utc,line_age_min,sharp_books,sharp_decimal,fair_multiplicative,fair_additive,fair_power,fair_shin,ticker,event_ticker
-no Pinnacle line,,NBA,Boston Celtics,78.0,,,Atlanta Hawks @ Boston Celtics,2026-11-28T01:10:00Z,,,,,,,,KXNBAGAME-26NOV27ATLBOS-BOS,KXNBAGAME-26NOV27ATLBOS
-no Pinnacle line,,NBA,Atlanta Hawks,25.0,,,Atlanta Hawks @ Boston Celtics,2026-11-28T01:10:00Z,,,,,,,,KXNBAGAME-26NOV27ATLBOS-ATL,KXNBAGAME-26NOV27ATLBOS
-no Pinnacle line,,NBA,Utah Jazz,23.0,,,Denver Nuggets @ Utah Jazz,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27DENUTA-UTA,KXNBAGAME-26NOV27DENUTA
-no Pinnacle line,,NBA,Denver Nuggets,79.0,,,Denver Nuggets @ Utah Jazz,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27DENUTA-DEN,KXNBAGAME-26NOV27DENUTA
-no Pinnacle line,,NBA,San Antonio Spurs,66.0,,,Los Angeles Lakers @ San Antonio Spurs,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27LALSAS-SAS,KXNBAGAME-26NOV27LALSAS
-no Pinnacle line,,NBA,Los Angeles Lakers,41.0,,,Los Angeles Lakers @ San Antonio Spurs,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27LALSAS-LAL,KXNBAGAME-26NOV27LALSAS
-no Pinnacle line,,NBA,New York Knicks,65.0,,,Miami Heat @ New York Knicks,2026-11-28T00:10:00Z,,,,,,,,KXNBAGAME-26NOV27MIANYK-NYK,KXNBAGAME-26NOV27MIANYK
-no Pinnacle line,,NBA,Miami Heat,42.0,,,Miami Heat @ New York Knicks,2026-11-28T00:10:00Z,,,,,,,,KXNBAGAME-26NOV27MIANYK-MIA,KXNBAGAME-26NOV27MIANYK
-no Pinnacle line,,NBA,Philadelphia 76ers,64.0,,,Philadelphia 76ers @ Indiana Pacers,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27PHIIND-PHI,KXNBAGAME-26NOV27PHIIND
-no Pinnacle line,,NBA,Indiana Pacers,41.0,,,Philadelphia 76ers @ Indiana Pacers,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27PHIIND-IND,KXNBAGAME-26NOV27PHIIND
-no Pinnacle line,,NHL,New Jersey Devils,73.0,,,Calgary Flames @ New Jersey Devils,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27CGYNJ-NJ,KXNHLGAME-26NOV27CGYNJ
-no Pinnacle line,,NHL,Calgary Flames,29.0,,,Calgary Flames @ New Jersey Devils,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27CGYNJ-CGY,KXNHLGAME-26NOV27CGYNJ
-no Pinnacle line,,NHL,Minnesota Wild,56.0,,,Colorado Avalanche @ Minnesota Wild,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27COLMIN-MIN,KXNHLGAME-26NOV27COLMIN
-no Pinnacle line,,NHL,Colorado Avalanche,46.0,,,Colorado Avalanche @ Minnesota Wild,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27COLMIN-COL,KXNHLGAME-26NOV27COLMIN
-no Pinnacle line,,NHL,St Louis Blues,47.0,,,Dallas Stars @ St Louis Blues,2026-11-27T19:00:00Z,,,,,,,,KXNHLGAME-26NOV27DALSTL-STL,KXNHLGAME-26NOV27DALSTL
-no Pinnacle line,,NHL,Dallas Stars,56.0,,,Dallas Stars @ St Louis Blues,2026-11-27T19:00:00Z,,,,,,,,KXNHLGAME-26NOV27DALSTL-DAL,KXNHLGAME-26NOV27DALSTL
-no Pinnacle line,,NHL,Detroit Red Wings,48.0,,,Detroit Red Wings @ Columbus Blue Jackets,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27DETCBJ-DET,KXNHLGAME-26NOV27DETCBJ
-no Pinnacle line,,NHL,Columbus Blue Jackets,56.0,,,Detroit Red Wings @ Columbus Blue Jackets,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27DETCBJ-CBJ,KXNHLGAME-26NOV27DETCBJ
-no Pinnacle line,,NHL,Washington Capitals,53.0,,,Florida Panthers @ Washington Capitals,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27FLAWSH-WSH,KXNHLGAME-26NOV27FLAWSH
-no Pinnacle line,,NHL,Florida Panthers,49.0,,,Florida Panthers @ Washington Capitals,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27FLAWSH-FLA,KXNHLGAME-26NOV27FLAWSH
-no Pinnacle line,,NHL,Los Angeles Kings,52.0,,,Los Angeles Kings @ Anaheim Ducks,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27LAANA-LA,KXNHLGAME-26NOV27LAANA
-no Pinnacle line,,NHL,Anaheim Ducks,53.0,,,Los Angeles Kings @ Anaheim Ducks,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27LAANA-ANA,KXNHLGAME-26NOV27LAANA
-no Pinnacle line,,NHL,New York Rangers,63.0,,,New York Rangers @ Chicago Blackhawks,2026-11-27T22:30:00Z,,,,,,,,KXNHLGAME-26NOV27NYRCHI-NYR,KXNHLGAME-26NOV27NYRCHI
-no Pinnacle line,,NHL,Chicago Blackhawks,39.0,,,New York Rangers @ Chicago Blackhawks,2026-11-27T22:30:00Z,,,,,,,,KXNHLGAME-26NOV27NYRCHI-CHI,KXNHLGAME-26NOV27NYRCHI
-no Pinnacle line,,NHL,Tampa Bay Lightning,59.0,,,Ottawa Senators @ Tampa Bay Lightning,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27OTTTB-TB,KXNHLGAME-26NOV27OTTTB
-no Pinnacle line,,NHL,Ottawa Senators,44.0,,,Ottawa Senators @ Tampa Bay Lightning,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27OTTTB-OTT,KXNHLGAME-26NOV27OTTTB
-no Pinnacle line,,NHL,Pittsburgh Penguins,46.0,,,Pittsburgh Penguins @ Buffalo Sabres,2026-11-28T01:00:00Z,,,,,,,,KXNHLGAME-26NOV27PITBUF-PIT,KXNHLGAME-26NOV27PITBUF
-no Pinnacle line,,NHL,Buffalo Sabres,61.0,,,Pittsburgh Penguins @ Buffalo Sabres,2026-11-28T01:00:00Z,,,,,,,,KXNHLGAME-26NOV27PITBUF-BUF,KXNHLGAME-26NOV27PITBUF
-no Pinnacle line,,NHL,Seattle Kraken,38.0,,,Seattle Kraken @ Edmonton Oilers,2026-11-28T01:00:00Z,,,,,,,,KXNHLGAME-26NOV27SEAEDM-SEA,KXNHLGAME-26NOV27SEAEDM
-no Pinnacle line,,NHL,Edmonton Oilers,69.0,,,Seattle Kraken @ Edmonton Oilers,2026-11-28T01:00:00Z,,,,,,,,KXNHLGAME-26NOV27SEAEDM-EDM,KXNHLGAME-26NOV27SEAEDM
-no Pinnacle line,,NHL,Toronto Maple Leafs,42.0,,,Toronto Maple Leafs @ Boston Bruins,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27TORBOS-TOR,KXNHLGAME-26NOV27TORBOS
-no Pinnacle line,,NHL,Boston Bruins,63.0,,,Toronto Maple Leafs @ Boston Bruins,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27TORBOS-BOS,KXNHLGAME-26NOV27TORBOS
-no Pinnacle line,,NHL,Utah Mammoth,53.0,,,Utah Mammoth @ Nashville Predators,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27UTANSH-UTA,KXNHLGAME-26NOV27UTANSH
-no Pinnacle line,,NHL,Nashville Predators,54.0,,,Utah Mammoth @ Nashville Predators,2026-11-27T18:00:00Z,,,,,,,,KXNHLGAME-26NOV27UTANSH-NSH,KXNHLGAME-26NOV27UTANSH
-no Pinnacle line,,NHL,Vancouver Canucks,38.0,,,Vancouver Canucks @ Philadelphia Flyers,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27VANPHI-VAN,KXNHLGAME-26NOV27VANPHI
-no Pinnacle line,,NHL,Philadelphia Flyers,68.0,,,Vancouver Canucks @ Philadelphia Flyers,2026-11-27T20:00:00Z,,,,,,,,KXNHLGAME-26NOV27VANPHI-PHI,KXNHLGAME-26NOV27VANPHI
-no Pinnacle line,,NHL,Vegas Golden Knights,67.0,,,Vegas Golden Knights @ San Jose Sharks,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27VGKSJ-VGK,KXNHLGAME-26NOV27VGKSJ
-no Pinnacle line,,NHL,San Jose Sharks,37.0,,,Vegas Golden Knights @ San Jose Sharks,2026-11-27T21:00:00Z,,,,,,,,KXNHLGAME-26NOV27VGKSJ-SJ,KXNHLGAME-26NOV27VGKSJ
-no Pinnacle line,,NHL,Winnipeg Jets,48.0,,,Winnipeg Jets @ New York Islanders,2026-11-28T00:30:00Z,,,,,,,,KXNHLGAME-26NOV27WPGNYI-WPG,KXNHLGAME-26NOV27WPGNYI
-no Pinnacle line,,NHL,New York Islanders,57.0,,,Winnipeg Jets @ New York Islanders,2026-11-28T00:30:00Z,,,,,,,,KXNHLGAME-26NOV27WPGNYI-NYI,KXNHLGAME-26NOV27WPGNYI
+no edge,-1.74,NHL,Toronto Maple Leafs,40.0,0.4096,+144,Toronto Maple Leafs @ Boston Bruins,2026-11-27T18:00:00Z,0.0,pinnacle,2.36,0.4129,0.4107,0.4096,0.4107,KXNHLGAME-26NOV27TORBOS-TOR,KXNHLGAME-26NOV27TORBOS
+no edge,-2.39,NHL,Florida Panthers,50.0,0.5051,-102,Florida Panthers @ Washington Capitals,2026-11-27T20:00:00Z,0.0,pinnacle,1.93,0.5051,0.5053,0.5053,0.5053,KXNHLGAME-26NOV27FLAWSH-FLA,KXNHLGAME-26NOV27FLAWSH
+no edge,-2.94,NHL,Vegas Golden Knights,65.0,0.6464,-183,Vegas Golden Knights @ San Jose Sharks,2026-11-27T21:00:00Z,0.0,pinnacle,1.51,0.6464,0.65,0.6517,0.65,KXNHLGAME-26NOV27VGKSJ-VGK,KXNHLGAME-26NOV27VGKSJ
+no edge,-3.14,NHL,New York Rangers,62.0,0.6165,-161,New York Rangers @ Chicago Blackhawks,2026-11-27T22:30:00Z,0.0,pinnacle,1.58,0.6165,0.6196,0.6211,0.6196,KXNHLGAME-26NOV27NYRCHI-NYR,KXNHLGAME-26NOV27NYRCHI
+no edge,-3.4,NHL,New Jersey Devils,72.0,0.7091,-244,Calgary Flames @ New Jersey Devils,2026-11-27T18:00:00Z,0.0,pinnacle,1.37,0.7091,0.7153,0.7184,0.7153,KXNHLGAME-26NOV27CGYNJ-NJ,KXNHLGAME-26NOV27CGYNJ
+no edge,-3.41,NHL,Edmonton Oilers,67.0,0.6621,-196,Seattle Kraken @ Edmonton Oilers,2026-11-28T01:00:00Z,0.0,pinnacle,1.47,0.6621,0.6665,0.6687,0.6665,KXNHLGAME-26NOV27SEAEDM-EDM,KXNHLGAME-26NOV27SEAEDM
+no edge,-3.82,NHL,Nashville Predators,49.0,0.4881,+105,Utah Mammoth @ Nashville Predators,2026-11-27T18:00:00Z,0.0,pinnacle,2.0,0.4885,0.4882,0.4881,0.4882,KXNHLGAME-26NOV27UTANSH-NSH,KXNHLGAME-26NOV27UTANSH
+no edge,-3.9,NHL,Anaheim Ducks,50.0,0.4973,+101,Los Angeles Kings @ Anaheim Ducks,2026-11-27T21:00:00Z,0.0,pinnacle,1.96,0.4974,0.4974,0.4973,0.4974,KXNHLGAME-26NOV27LAANA-ANA,KXNHLGAME-26NOV27LAANA
+no edge,-3.95,NHL,New York Islanders,56.0,0.5544,-124,Winnipeg Jets @ New York Islanders,2026-11-28T00:30:00Z,0.0,pinnacle,1.76,0.5544,0.5558,0.5564,0.5558,KXNHLGAME-26NOV27WPGNYI-NYI,KXNHLGAME-26NOV27WPGNYI
+no edge,-4.23,NHL,Philadelphia Flyers,70.0,0.6844,-217,Vancouver Canucks @ Philadelphia Flyers,2026-11-27T20:00:00Z,0.0,pinnacle,1.42,0.6844,0.6898,0.6924,0.6898,KXNHLGAME-26NOV27VANPHI-PHI,KXNHLGAME-26NOV27VANPHI
+no edge,-4.26,NHL,Buffalo Sabres,59.0,0.581,-139,Pittsburgh Penguins @ Buffalo Sabres,2026-11-28T01:00:00Z,0.0,pinnacle,1.68,0.581,0.583,0.584,0.583,KXNHLGAME-26NOV27PITBUF-BUF,KXNHLGAME-26NOV27PITBUF
+no edge,-4.38,NHL,Detroit Red Wings,46.0,0.4565,+119,Detroit Red Wings @ Columbus Blue Jackets,2026-11-27T20:00:00Z,0.0,pinnacle,2.13,0.458,0.457,0.4565,0.457,KXNHLGAME-26NOV27DETCBJ-DET,KXNHLGAME-26NOV27DETCBJ
+no edge,-4.41,NHL,Washington Capitals,50.0,0.4947,+102,Florida Panthers @ Washington Capitals,2026-11-27T20:00:00Z,0.0,pinnacle,1.97,0.4949,0.4947,0.4947,0.4947,KXNHLGAME-26NOV27FLAWSH-WSH,KXNHLGAME-26NOV27FLAWSH
+no edge,-4.47,NHL,Columbus Blue Jackets,55.0,0.542,-118,Detroit Red Wings @ Columbus Blue Jackets,2026-11-27T20:00:00Z,0.0,pinnacle,1.8,0.542,0.543,0.5435,0.543,KXNHLGAME-26NOV27DETCBJ-CBJ,KXNHLGAME-26NOV27DETCBJ
+no edge,-4.52,NHL,Dallas Stars,57.0,0.5606,-128,Dallas Stars @ St Louis Blues,2026-11-27T19:00:00Z,0.0,pinnacle,1.74,0.5606,0.5621,0.5629,0.5621,KXNHLGAME-26NOV27DALSTL-DAL,KXNHLGAME-26NOV27DALSTL
+no edge,-4.82,NHL,San Jose Sharks,35.0,0.3483,+187,Vegas Golden Knights @ San Jose Sharks,2026-11-27T21:00:00Z,0.0,pinnacle,2.76,0.3536,0.35,0.3483,0.35,KXNHLGAME-26NOV27VGKSJ-SJ,KXNHLGAME-26NOV27VGKSJ
+no edge,-4.83,NHL,Utah Mammoth,52.0,0.5115,-105,Utah Mammoth @ Nashville Predators,2026-11-27T18:00:00Z,0.0,pinnacle,1.91,0.5115,0.5118,0.5119,0.5118,KXNHLGAME-26NOV27UTANSH-UTA,KXNHLGAME-26NOV27UTANSH
+no edge,-4.95,NHL,Tampa Bay Lightning,57.0,0.5581,-126,Ottawa Senators @ Tampa Bay Lightning,2026-11-27T20:00:00Z,0.0,pinnacle,1.75,0.5581,0.5595,0.5601,0.5595,KXNHLGAME-26NOV27OTTTB-TB,KXNHLGAME-26NOV27OTTTB
+no edge,-5.25,NHL,Colorado Avalanche,47.0,0.4618,+117,Colorado Avalanche @ Minnesota Wild,2026-11-27T21:00:00Z,0.0,pinnacle,2.11,0.4631,0.4622,0.4618,0.4622,KXNHLGAME-26NOV27COLMIN-COL,KXNHLGAME-26NOV27COLMIN
+no edge,-5.36,NHL,Minnesota Wild,55.0,0.5369,-116,Colorado Avalanche @ Minnesota Wild,2026-11-27T21:00:00Z,0.0,pinnacle,1.82,0.5369,0.5378,0.5382,0.5378,KXNHLGAME-26NOV27COLMIN-MIN,KXNHLGAME-26NOV27COLMIN
+no edge,-5.88,NHL,Ottawa Senators,45.0,0.4399,+127,Ottawa Senators @ Tampa Bay Lightning,2026-11-27T20:00:00Z,0.0,pinnacle,2.21,0.4419,0.4405,0.4399,0.4405,KXNHLGAME-26NOV27OTTTB-OTT,KXNHLGAME-26NOV27OTTTB
+no edge,-6.32,NHL,Boston Bruins,61.0,0.5871,-142,Toronto Maple Leafs @ Boston Bruins,2026-11-27T18:00:00Z,0.0,pinnacle,1.66,0.5871,0.5893,0.5904,0.5893,KXNHLGAME-26NOV27TORBOS-BOS,KXNHLGAME-26NOV27TORBOS
+no edge,-6.46,NHL,St Louis Blues,45.0,0.4371,+129,Dallas Stars @ St Louis Blues,2026-11-27T19:00:00Z,0.0,pinnacle,2.22,0.4394,0.4379,0.4371,0.4379,KXNHLGAME-26NOV27DALSTL-STL,KXNHLGAME-26NOV27DALSTL
+no edge,-6.49,NHL,Los Angeles Kings,52.0,0.5026,-101,Los Angeles Kings @ Anaheim Ducks,2026-11-27T21:00:00Z,0.0,pinnacle,1.94,0.5026,0.5026,0.5027,0.5026,KXNHLGAME-26NOV27LAANA-LA,KXNHLGAME-26NOV27LAANA
+no edge,-6.83,NHL,Chicago Blackhawks,39.0,0.3789,+164,New York Rangers @ Chicago Blackhawks,2026-11-27T22:30:00Z,0.0,pinnacle,2.54,0.3835,0.3804,0.3789,0.3804,KXNHLGAME-26NOV27NYRCHI-CHI,KXNHLGAME-26NOV27NYRCHI
+no edge,-6.96,NHL,Pittsburgh Penguins,43.0,0.416,+140,Pittsburgh Penguins @ Buffalo Sabres,2026-11-28T01:00:00Z,0.0,pinnacle,2.33,0.419,0.417,0.416,0.417,KXNHLGAME-26NOV27PITBUF-PIT,KXNHLGAME-26NOV27PITBUF
+no edge,-7.08,NHL,Winnipeg Jets,46.0,0.4436,+125,Winnipeg Jets @ New York Islanders,2026-11-28T00:30:00Z,0.0,pinnacle,2.19,0.4456,0.4442,0.4436,0.4442,KXNHLGAME-26NOV27WPGNYI-WPG,KXNHLGAME-26NOV27WPGNYI
+no edge,-8.25,NHL,Vancouver Canucks,32.0,0.3076,+225,Vancouver Canucks @ Philadelphia Flyers,2026-11-27T20:00:00Z,0.0,pinnacle,3.08,0.3156,0.3102,0.3076,0.3102,KXNHLGAME-26NOV27VANPHI-VAN,KXNHLGAME-26NOV27VANPHI
+no edge,-9.47,NHL,Seattle Kraken,35.0,0.3313,+202,Seattle Kraken @ Edmonton Oilers,2026-11-28T01:00:00Z,0.0,pinnacle,2.88,0.3379,0.3335,0.3313,0.3335,KXNHLGAME-26NOV27SEAEDM-SEA,KXNHLGAME-26NOV27SEAEDM
+no edge,-10.51,NHL,Calgary Flames,30.0,0.2816,+255,Calgary Flames @ New Jersey Devils,2026-11-27T18:00:00Z,0.0,pinnacle,3.34,0.2909,0.2847,0.2816,0.2847,KXNHLGAME-26NOV27CGYNJ-CGY,KXNHLGAME-26NOV27CGYNJ
+no Pinnacle line,,NBA,Boston Celtics,79.0,,,Atlanta Hawks @ Boston Celtics,2026-11-28T01:10:00Z,,,,,,,,KXNBAGAME-26NOV27ATLBOS-BOS,KXNBAGAME-26NOV27ATLBOS
+no Pinnacle line,,NBA,Atlanta Hawks,23.0,,,Atlanta Hawks @ Boston Celtics,2026-11-28T01:10:00Z,,,,,,,,KXNBAGAME-26NOV27ATLBOS-ATL,KXNBAGAME-26NOV27ATLBOS
+no Pinnacle line,,NBA,Toronto Raptors,74.0,,,Brooklyn Nets @ Toronto Raptors,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27BKNTOR-TOR,KXNBAGAME-26NOV27BKNTOR
+no Pinnacle line,,NBA,Brooklyn Nets,27.0,,,Brooklyn Nets @ Toronto Raptors,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27BKNTOR-BKN,KXNBAGAME-26NOV27BKNTOR
+no Pinnacle line,,NBA,Phoenix Suns,56.0,,,Dallas Mavericks @ Phoenix Suns,2026-11-28T02:10:00Z,,,,,,,,KXNBAGAME-26NOV27DALPHX-PHX,KXNBAGAME-26NOV27DALPHX
+no Pinnacle line,,NBA,Dallas Mavericks,46.0,,,Dallas Mavericks @ Phoenix Suns,2026-11-28T02:10:00Z,,,,,,,,KXNBAGAME-26NOV27DALPHX-DAL,KXNBAGAME-26NOV27DALPHX
+no Pinnacle line,,NBA,Utah Jazz,21.0,,,Denver Nuggets @ Utah Jazz,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27DENUTA-UTA,KXNBAGAME-26NOV27DENUTA
+no Pinnacle line,,NBA,Denver Nuggets,80.0,,,Denver Nuggets @ Utah Jazz,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27DENUTA-DEN,KXNBAGAME-26NOV27DENUTA
+no Pinnacle line,,NBA,Portland Trail Blazers,77.0,,,Golden State Warriors @ Portland Trail Blazers,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27GSWPOR-POR,KXNBAGAME-26NOV27GSWPOR
+no Pinnacle line,,NBA,Golden State Warriors,24.0,,,Golden State Warriors @ Portland Trail Blazers,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27GSWPOR-GSW,KXNBAGAME-26NOV27GSWPOR
+no Pinnacle line,,NBA,San Antonio Spurs,65.0,,,Los Angeles Lakers @ San Antonio Spurs,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27LALSAS-SAS,KXNBAGAME-26NOV27LALSAS
+no Pinnacle line,,NBA,Los Angeles Lakers,37.0,,,Los Angeles Lakers @ San Antonio Spurs,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27LALSAS-LAL,KXNBAGAME-26NOV27LALSAS
+no Pinnacle line,,NBA,Minnesota Timberwolves,61.0,,,Memphis Grizzlies @ Minnesota Timberwolves,2026-11-28T01:40:00Z,,,,,,,,KXNBAGAME-26NOV27MEMMIN-MIN,KXNBAGAME-26NOV27MEMMIN
+no Pinnacle line,,NBA,Memphis Grizzlies,41.0,,,Memphis Grizzlies @ Minnesota Timberwolves,2026-11-28T01:40:00Z,,,,,,,,KXNBAGAME-26NOV27MEMMIN-MEM,KXNBAGAME-26NOV27MEMMIN
+no Pinnacle line,,NBA,New York Knicks,61.0,,,Miami Heat @ New York Knicks,2026-11-28T00:10:00Z,,,,,,,,KXNBAGAME-26NOV27MIANYK-NYK,KXNBAGAME-26NOV27MIANYK
+no Pinnacle line,,NBA,Miami Heat,41.0,,,Miami Heat @ New York Knicks,2026-11-28T00:10:00Z,,,,,,,,KXNBAGAME-26NOV27MIANYK-MIA,KXNBAGAME-26NOV27MIANYK
+no Pinnacle line,,NBA,Milwaukee Bucks,23.0,,,Milwaukee Bucks @ Detroit Pistons,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27MILDET-MIL,KXNBAGAME-26NOV27MILDET
+no Pinnacle line,,NBA,Detroit Pistons,78.0,,,Milwaukee Bucks @ Detroit Pistons,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27MILDET-DET,KXNBAGAME-26NOV27MILDET
+no Pinnacle line,,NBA,New Orleans Pelicans,43.0,,,New Orleans Pelicans @ Los Angeles Clippers,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27NOPLAC-NOP,KXNBAGAME-26NOV27NOPLAC
+no Pinnacle line,,NBA,Los Angeles Clippers,59.0,,,New Orleans Pelicans @ Los Angeles Clippers,2026-11-28T02:40:00Z,,,,,,,,KXNBAGAME-26NOV27NOPLAC-LAC,KXNBAGAME-26NOV27NOPLAC
+no Pinnacle line,,NBA,Philadelphia 76ers,60.0,,,Philadelphia 76ers @ Indiana Pacers,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27PHIIND-PHI,KXNBAGAME-26NOV27PHIIND
+no Pinnacle line,,NBA,Indiana Pacers,42.0,,,Philadelphia 76ers @ Indiana Pacers,2026-11-28T00:40:00Z,,,,,,,,KXNBAGAME-26NOV27PHIIND-IND,KXNBAGAME-26NOV27PHIIND
